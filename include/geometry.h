@@ -32,7 +32,8 @@ namespace Geometry
       Point(const Point& pt);
 
       //friend Point<T> operator + (Point& vec1, Point& vec2);
-
+      friend bool operator > (const Point& pt1, const Point& pt2);
+      friend bool operator < (const Point& pt1, const Point& pt2);
       T x;
       T y;
    };
@@ -403,6 +404,9 @@ namespace Geometry
                    cv::Mat* image,
                    const cv::Scalar& color,
                    int intence);
+
+   template <class T>
+   Point2f searchCenterCloud(const std::list< Point<T> >& cloud);
 
    struct Geometry_error
    {

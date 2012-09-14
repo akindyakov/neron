@@ -144,6 +144,8 @@ Geometry::Point<T> Geometry::operator + (Point<T>& vec1, Point<T>& vec2)
 {
    return Geometry::Point<T> (vec1.x+vec2.x, vec1.y+vec2.y);
 }
+friend bool operator > (const Point& pt1, const Point& pt2);
+      friend bool operator < (const Point& pt1, const Point& pt2);
 
 /*
 Geometry::Point2f::Point2f(const float _x, const float _y)
@@ -263,4 +265,31 @@ std::list<Geometry::Point2f> Geometry::getRandomPointCloud(int n,
       ret_rand_list.push_back(Geometry::Point2f(x,y));
    }
    return ret_rand_list;
+}
+
+template <class T>
+void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
+                          G::Point<T>* outMaxPoint,
+                          G::Point<T>* outMinPoint )
+{
+   if ( outMaxPoint != NULL && outMinPoint != NULL )
+   {
+      std::list< G::Point<T> >::const_iterarator p_clfirst;
+      std::list< G::Point<T> >::const_iterarator p_clsecond;
+      
+      if ( loud.size()%2 == 0)
+      {
+         if (cloud.begin()
+         *outMaxPoint = cloud.begin();
+         *outMinPoint = 
+   }
+   return;
+}
+
+template <class T>
+G::Point2f G::searchCenterCloud(const std::list< G::Point<T> >& cloud)
+{
+   const float path = 0,7;
+   
+   return G::Point2f(0,0);
 }
