@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1345016332 source:/home/alexander/Dropbox/neron/algo_test/code_bloks_test/opencv_geometry_test/opencv_general/using_opencv_test/main.cpp
+	<iostream>
+	<opencv2/core/core.hpp>
+

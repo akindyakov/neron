@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="626" topLine="23" />
+	</File>
+	<File name="../../../../include/geometry.h" open="1" top="1" tabpos="3">
+		<Cursor position="2478" topLine="75" />
+	</File>
+	<File name="../../../../src/util/geometry/2d_line_shape.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="1504" topLine="48" />
+	</File>
+	<File name="../../../../src/util/geometry/circle_shape.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="2328" topLine="80" />
+	</File>
+	<File name="../../../../src/util/geometry/contour_shape.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1294" topLine="45" />
+	</File>
+	<File name="../../../../src/util/geometry/convex_contour_shape.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="1875" topLine="61" />
+	</File>
+	<File name="../../../../src/util/geometry/geometry.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../../../../src/util/geometry/geometry_defines.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="511" topLine="0" />
+	</File>
+	<File name="../../../../src/util/geometry/intersection_shape.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="15514" topLine="452" />
+	</File>
+	<File name="../../../../src/util/geometry/interval_shape.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="1486" topLine="49" />
+	</File>
+	<File name="../../../../src/util/geometry/rectangle_shape.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="667" topLine="0" />
+	</File>
+	<File name="../../../../src/util/geometry/triangle_shape.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="713" topLine="0" />
+	</File>
+	<File name="../../../../src/util/geometry/util.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="5368" topLine="183" />
+	</File>
+	<File name="../../../../src/util/math_equal.cpp" open="0" top="0" tabpos="9">
+		<Cursor position="993" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>
