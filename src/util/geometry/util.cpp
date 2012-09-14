@@ -10,6 +10,7 @@
 #include <iterator>
 #include <cmath>
 #include <cfloat>
+//#include <climits>
 #include <cstdlib>
 #include <ctime>
 //=============================================================================
@@ -144,8 +145,6 @@ Geometry::Point<T> Geometry::operator + (Point<T>& vec1, Point<T>& vec2)
 {
    return Geometry::Point<T> (vec1.x+vec2.x, vec1.y+vec2.y);
 }
-friend bool operator > (const Point& pt1, const Point& pt2);
-      friend bool operator < (const Point& pt1, const Point& pt2);
 
 /*
 Geometry::Point2f::Point2f(const float _x, const float _y)
@@ -276,7 +275,9 @@ void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
    {
       std::list< G::Point<T> >::const_iterarator p_clfirst;
       std::list< G::Point<T> >::const_iterarator p_clsecond;
-      
+//      *outMaxPoint = G::Point<T>(INT_MIN,INT_MIN);
+//      *outMinPoint = G::Point<T>(INT_MAX,INT_MAX);
+      *outMaxPoint = 
       if ( loud.size()%2 == 0)
       {
          if (cloud.begin()
