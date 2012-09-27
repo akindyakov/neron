@@ -277,12 +277,12 @@ void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
       std::list< G::Point<T> >::const_iterarator p_clsecond;
 //      *outMaxPoint = G::Point<T>(INT_MIN,INT_MIN);
 //      *outMinPoint = G::Point<T>(INT_MAX,INT_MAX);
-      *outMaxPoint = 
+      *outMaxPoint =
       if ( loud.size()%2 == 0)
       {
          if (cloud.begin()
          *outMaxPoint = cloud.begin();
-         *outMinPoint = 
+         *outMinPoint =
    }
    return;
 }
@@ -290,7 +290,5 @@ void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
 template <class T>
 G::Point2f G::searchCenterCloud(const std::list< G::Point<T> >& cloud)
 {
-   const float path = 0,7;
-   
    return G::Point2f(0,0);
 }

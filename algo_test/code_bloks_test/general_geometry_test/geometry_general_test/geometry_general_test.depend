@@ -232,3 +232,79 @@
 	"include/geometry.h"
 	"include/math.h"
 
+1347657584 source:/media/general/src/neron/algo_test/code_bloks_test/general_geometry_test/geometry_general_test/main.cpp
+	<iostream>
+	<list>
+	"include/geometry.h"
+
+1348775711 /media/general/src/neron/include/geometry.h
+	<vector>
+	<list>
+	<opencv2/core/core.hpp>
+
+1347657585 source:/media/general/src/neron/src/util/geometry/2d_line_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 /media/general/src/neron/include/math.h
+
+1347657585 source:/media/general/src/neron/src/util/geometry/circle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/contour_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1348776737 source:/media/general/src/neron/src/util/geometry/convex_contour_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	<cfloat>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/geometry.cpp
+
+1348776755 source:/media/general/src/neron/src/util/geometry/geometry_defines.cpp
+	"include/geometry.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/intersection_shape.cpp
+	<iostream>
+	<typeinfo>
+	<iterator>
+	<cmath>
+	<algorithm>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/interval_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/rectangle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1347657585 source:/media/general/src/neron/src/util/geometry/triangle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iterator>
 #include <cmath>
+#include <cfloat>
 //=============================================================================
 #include "include/geometry.h"
 #include "include/math.h"
@@ -85,14 +86,14 @@ bool G::Convex_contour::belongingPoint(const G::Point2f& point)const
 float G::Convex_contour::getDistance(const G::Point2f& pt, Point2f* close_pt)const
 {
    std::list<G::Reduced_vector>::const_iterator vecIt = m_vec.begin();
-   float minDist = MAX_FLT;
+   float minDist = FLT_MAX;
    float dist = 0;
    std::vector<G::Point2f> closePt;
    // runing buffer for searching
       // init
    std::vector<G::Point2f> runPts(3,m_center);
    runPts[1] = m_center + *(vecIt);
-   
+
    std::vector<G::Point2f>::iterator runIt = runPts.begin();
    std::vector<G::Point2f>::iterator nextIt = runPts.begin();
    ++nextIt;
@@ -112,7 +113,7 @@ float G::Convex_contour::getDistance(const G::Point2f& pt, Point2f* close_pt)con
          runIt = runPts.begin();
       if ( nextIt == runPts.end() )
          nextIt = runPts.begin();
-      
+
       *(nextIt) = *runIt + *vecIt;
       float dist = G::distance(*runIt, pt);
       if ( dist < minDist )
@@ -122,12 +123,12 @@ float G::Convex_contour::getDistance(const G::Point2f& pt, Point2f* close_pt)con
             closePt[0] = runPts[0];
          else
             closePt[0] = *(nextIt + 1);
-         
+
          closePt[1] = *runIt;
          closePt[2] = *nextIt;
       }
    }
-   // and now are needed to check end point and m_center point because 
+   // and now are needed to check end point and m_center point because
    // we missed it in loop
    ++runIt;
    ++nextIt;
@@ -146,7 +147,7 @@ float G::Convex_contour::getDistance(const G::Point2f& pt, Point2f* close_pt)con
          closePt[0] = runPts[0];
       else
          closePt[0] = *(nextIt + 1);
-         
+
          closePt[1] = *runIt;
          closePt[2] = *nextIt;
    }
@@ -167,27 +168,27 @@ float G::Convex_contour::getDistance(const G::Point2f& pt, Point2f* close_pt)con
          closePt[0] = runPts[0];
       else
          closePt[0] = *(nextIt + 1);
-         
+
          closePt[1] = *runIt;
          closePt[2] = *nextIt;
    }
-   
+   // and then are needed to find close point in 2 intervals
    G::Interval inter1(closePt[0], closePt[1]);
    G::Interval inter2(closePt[1], closePt[2]);
    G::Point2f pt1;
    G::Point2f pt2;
-   dist = inter1.getDistance(pt, pt1);
-   minDist = inter2.getDistance(pt, pt2);
+   dist = inter1.getDistance(pt, &pt1);
+   minDist = inter2.getDistance(pt, &pt2);
    if ( dist < minDist )
    {
-      
-      return dist;
+      minDist = dist;
+      *close_pt = pt1;
    }
    else
    {
-      
-      return minDist;
+      *close_pt = pt2;
    }
+   return minDist;
 }
 
 void G::Convex_contour::getX(float y, std::vector<float>* x)const
