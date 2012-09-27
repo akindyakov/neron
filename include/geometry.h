@@ -84,8 +84,8 @@ namespace Geometry
       Point2f* getCenter();
    //private:
       Point2f m_center;
-   private:
-      static int m_type;
+   //private:
+   //   static int m_type;
    };
 
    class Circle : public I_Shape
