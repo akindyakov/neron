@@ -273,16 +273,40 @@ void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
 {
    if ( outMaxPoint != NULL && outMinPoint != NULL )
    {
-      std::list< G::Point<T> >::const_iterarator p_clfirst;
-      std::list< G::Point<T> >::const_iterarator p_clsecond;
+      std::list< G::Point<T> >::const_iterarator p_clfirst = cloud.begn();
+      std::list< G::Point<T> >::const_iterarator p_clsecond = cloud.begin();
 //      *outMaxPoint = G::Point<T>(INT_MIN,INT_MIN);
 //      *outMinPoint = G::Point<T>(INT_MAX,INT_MAX);
-      *outMaxPoint =
+//      *outMaxPoint =
       if ( loud.size()%2 == 0)
       {
-         if (cloud.begin()
+         //p_clfirst;
+         ++p_clsecond;
+         p_clfirst
+         if ( p_clfirst->x > p_clsecond->x )
+         {
+            
+         }
+         else
+         {
+            
+         }
+
+         if ( p_clfirst->x > p_clsecond->x )
+         {
+            
+         }
+         else
+         {
+            
+         }
+         *outMinPoint = 
+      }
+      else
+      {
          *outMaxPoint = cloud.begin();
-         *outMinPoint =
+         *outMinPoint = 
+      }
    }
    return;
 }
