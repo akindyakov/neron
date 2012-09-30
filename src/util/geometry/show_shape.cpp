@@ -35,8 +35,8 @@ cv::Point2f to_openCV_coord(const T& vector,
 }
 
 void G::drowCross(cv::Mat* image,
-                         const G::Point2f& center, int size,
-                         const cv::Scalar& color, int intence)
+                  const G::Point2f& center, int size,
+                  const cv::Scalar& color, int intence)
 {
 
    cv::Point2f leftpt = to_openCV_coord(
@@ -78,31 +78,30 @@ void G::drowVector(const G::Point<T>& center,
    if (intence > 1)
       intence /= 2;
    cv::Point2f pt1 = to_openCV_coord(center, *image);
-   cv::Point2f pt2 = to_opneCV_coord(vect, *image);
-   cv::line(*image,pt1,pt2,color,intence);
+   cv::Point2f pt2 = to_openCV_coord(vect, *image);
+   cv::line(*image, pt1, pt2, color, intence);
 }
-void G::drowShape(const Geometry::Circle& circ,
-                         cv::Mat* image,
-                         const cv::Scalar& first_color,
-                         int first_intence,
-                         const cv::Scalar& second_color,
-                         int second_intence)
+void G::drowShape(const G::Circle& circ,
+                  cv::Mat* image,
+                  const cv::Scalar& first_color,
+                  int first_intence,
+                  const cv::Scalar& second_color,
+                  int second_intence)
 {
    cv::Point2f center = to_openCV_coord(circ.m_center, *image);
-   cv::circle( *image,
-               cv::Point2f(circ.m_center.x,circ.m_center.y),
-               circ.m_radius, first_color, first_intence );
+   cv::circle( *image,center,circ.m_radius,
+               first_color, first_intence );
 
    Geometry::drowCross( image, circ.m_center, circ.m_radius/2,
                         second_color, second_intence);
 }
 
-void Geometry::drowShape(const Geometry::Line_2d& line,
-                         cv::Mat* image,
-                         const cv::Scalar& first_color,
-                         int first_intence,
-                         const cv::Scalar& second_color,
-                         int second_intence)
+void G::drowShape(const G::Line_2d& line,
+                  cv::Mat* image,
+                  const cv::Scalar& first_color,
+                  int first_intence,
+                  const cv::Scalar& second_color,
+                  int second_intence)
 {
    std::list<G::Interval> lineborders;
 
@@ -138,12 +137,12 @@ void Geometry::drowShape(const Geometry::Line_2d& line,
    }
 }
 
-void Geometry::drowShape(const Geometry::Interval& interval,
-                         cv::Mat* image,
-                         const cv::Scalar& first_color,
-                         int first_intence,
-                         const cv::Scalar& second_color,
-                         int second_intence)
+void G::drowShape(const G::Interval& interval,
+                  cv::Mat* image,
+                  cv::Scalar& first_color,
+                  int first_intence,
+                  const cv::Scalar& second_color,
+                  int second_intence)
 {
    cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
    cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);
@@ -152,9 +151,9 @@ void Geometry::drowShape(const Geometry::Interval& interval,
    if (second_intence != 0)
    {
       cv::circle(*image, pt1,
-                  second_intence, color, second_intence);
+                  second_intence, second_color, second_intence);
       cv::circle(*image, pt2,
-                  second_intence, color, second_intence);
+                  second_intence, second_color, second_intence);
    }
 
 }
@@ -167,16 +166,18 @@ void Geometry::drowShape(const Geometry::Convex_contour& conv_contour,
 {
    G::Point2f first_movePt;
    G::Point2f second_movePt = conv_contour.m_center;
-   for (std::list<G::Reduced_vector>::iterator vecIt = conv_contour.m_vec.begin();
+   for (std::list<G::Reduced_vector>::const_iterator vecIt = conv_contour.m_vec.begin();
          vecIt != conv_contour.m_vec.end(); ++vecIt)
    {
-      first_movePt = secondMovePt;
-      second_movePt += *vecIt;
+      first_movePt = second_movePt;
+      second_movePt = second_movePt + *vecIt;
       G::drowShape( G::Interval(first_movePt, second_movePt),
+                    image,
                     first_color, first_intence );
    }
 
    if (second_intence != 0)
+   {
       G::drowPoint( conv_contour.m_center,
                     image, second_color, second_intence);
 
@@ -193,11 +194,11 @@ void Geometry::drowShape(const Geometry::Contour& contour,
                          int second_intence)
 {
    for (std::list<G::Convex_contour>::const_iterator convIt =
-                                                contour.m_conturs.begin();
-         convIt != contour.m_conturs.end(); ++convIt)
+                                                contour.m_contours.begin();
+         convIt != contour.m_contours.end(); ++convIt)
    {
       G::drowShape(*convIt, image,
-                   first_color, frst_intence,
+                   first_color, first_intence,
                    second_color, second_intence);
    }
 }

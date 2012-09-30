@@ -65,7 +65,7 @@ namespace Geometry
       I_Shape(){};
       I_Shape(const Point2f& center) : m_center(center){};
 
-      virtual int get_type()const = 0;
+      //virtual int get_type()const = 0;
       // turning shape about m_center point
       virtual void turn(float angle)=0;
       // check point for belonging at borders shape
@@ -97,7 +97,7 @@ namespace Geometry
 
       virtual ~Circle(){};
 
-      int get_type()const;
+      //int get_type()const;
 
       void create(const Point2f& center, float radius);
       void create(const Point2f& center, const Point2f& circlePoint);
@@ -127,9 +127,9 @@ namespace Geometry
       Interval(const Point2f& pt1, const Point2f& pt2);
       Interval(const Point2f& pt, const Reduced_vector& relative_vec);
 
-      virtual ~Interval(){};
+      //virtual ~Interval(){};
 
-      int get_type()const;
+      //int get_type()const;
 
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
@@ -158,9 +158,9 @@ namespace Geometry
       Line_2d(const Reduced_vector& direct_vector,
               const Point2f& pt);
 
-      virtual ~Line_2d(){};
+      //virtual ~Line_2d(){};
 
-      int get_type()const;
+      //int get_type()const;
 
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
@@ -186,7 +186,7 @@ namespace Geometry
 
       virtual ~Convex_contour(){};
 
-      int get_type()const;
+      //int get_type()const;
 
       void push_back(const Reduced_vector& pt);
       void turn(float angle);
@@ -218,7 +218,7 @@ namespace Geometry
       // const Point2f& getCenter();
       // const std::list<Reduced_vector>& getVectorList();
 
-      int get_type()const;
+      //int get_type()const;
 
       void push_back(const Reduced_vector& pt);
       void turn(float angle);

@@ -15,20 +15,20 @@
 
 namespace G = Geometry;
 
-Geometry::Line_2d::Line_2d(const Geometry::Point2f& pt1,
-                           const Geometry::Point2f& pt2)
+G::Line_2d::Line_2d(const G::Point2f& pt1,
+                    const G::Point2f& pt2)
 {
    m_center= pt1;
    Geometry::Reduced_vector dir_vector(pt1.x - pt2.x, pt1.y - pt2.y);
    m_direct_vector = dir_vector;
 }
-Geometry::Line_2d::Line_2d(const Interval& inl)
+G::Line_2d::Line_2d(const G::Interval& inl)
             : m_direct_vector(inl.m_vector)
 {
    m_center = inl.m_center;
 }
-Geometry::Line_2d::Line_2d(const Geometry::Reduced_vector& direct_vector,
-                           const Geometry::Point2f& pt)
+Geometry::Line_2d::Line_2d(const G::Reduced_vector& direct_vector,
+                           const G::Point2f& pt)
             : m_direct_vector(direct_vector)
 {
    m_center = pt;

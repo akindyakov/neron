@@ -34,12 +34,31 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="/media/general/src/neron/" />
 		</Compiler>
 		<Linker>
 			<Add library="/usr/local/lib/libopencv_core.so" />
+			<Add library="/usr/local/lib/libopencv_highgui.so" />
 			<Add directory="/usr/local/lib/" />
+			<Add directory="/media/general/src/neron/" />
 		</Linker>
 		<Unit filename="main.cpp" />
+		<Unit filename="../../../../../include/geometry.h" />
+		<Unit filename="../../../../../include/math.h" />
+		<Unit filename="../../../../../include/smooth_signal.h" />
+		<Unit filename="../../../../../src/util/geometry/2d_line_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/circle_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/contour_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/convex_contour_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/intersection_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/interval_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/rectangle_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/show_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/triangle_shape.cpp" />
+		<Unit filename="../../../../../src/util/geometry/util.cpp" />
+		<Unit filename="../../../../../src/util/math_equal.cpp" />
+		<Unit filename="../../../../../src/util/math_sort.cpp" />
+		<Unit filename="../../../../../src/util/smooth_signal.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

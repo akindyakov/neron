@@ -10,6 +10,8 @@
 //==================================================================
 namespace Util
 {
-	int moving_average(int smooth_coef, int inputVal, int* oldVal);
+
+	void moving_average(int smooth_coef, int inputVal, int* oldVal);
+
 } // end Util
 #endif //SMOOTH_SIGNAL_H

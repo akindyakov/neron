@@ -9,5 +9,5 @@
 //==================================================================
 void Util::moving_average(int smooth_coef, int inputVal, int* oldVal)
 {
-	*oldVal = ((smooth_coef-1)*inputVal + oldVal)/smooth_coef;
+	*oldVal = ( (smooth_coef-1) * inputVal + *oldVal) / smooth_coef;
 }
