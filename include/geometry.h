@@ -406,6 +406,11 @@ namespace Geometry
    template <class T>
    Point2f searchCenterCloud(const std::list< Point<T> >& cloud);
 
+   template <class T>
+   void minMaxPointCloud( const std::list< Point<T> >& cloud,
+                          Point<T>* outMaxPoint,
+                          Point<T>* outMinPoint );
+
    struct Geometry_error
    {
       Geometry_error(const char* _name):name(_name){};

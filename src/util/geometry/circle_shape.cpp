@@ -28,10 +28,6 @@ G::Circle::Circle(const G::Point2f& center,
    m_center = center;
    m_radius = G::distance(center, circlePoint);
 }
-int G::Circle::get_type()const
-{
-   return m_type;
-}
 G::Circle::Circle(const G::Point2f& pt1,
                   const G::Point2f& pt2,
                   const G::Point2f& pt3)

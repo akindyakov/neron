@@ -31,10 +31,6 @@ Geometry::Interval::Interval(const Point2f& pt,
    m_center = pt;
 }
 
-int G::Interval::get_type()const
-{
-   return m_type;
-}
 
 void G::Interval::turn(float angle)
 {

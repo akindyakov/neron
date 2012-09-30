@@ -37,10 +37,6 @@ G::Convex_contour::Convex_contour(const std::list<G::Point2f>& polinom)
    }
 }
 
-int G::Convex_contour::get_type()const
-{
-   return m_type;
-}
 
 /*G::Convex_contour::Convex_contour(const G::Contour& cont)
                     : m_vec(cont.getVectorList())

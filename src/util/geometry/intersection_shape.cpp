@@ -465,90 +465,60 @@ int G::shapeIntersection(const G::Contour&,
 
 int G::shapeIntersection(const G::I_Shape& shape1,
                          const G::I_Shape& shape2,
-                         std::list<Point2f>* genPoinut)
+                         std::list<Point2f>* genPoint)
 {
-   switch ( shape1.get_type() )
-   {
-   case G::CIRCLE :
-   {
-      return G::shapeIntersection( dynamic_cast<const G::Circle&>( shape1 ), shape2, genPoinut);
-   }
-   break;
+   const G::Circle * circle = &dynamic_cast<const G::Circle&>( shape1 );
+   if ( circle )
+      return G::shapeIntersection( *circle, shape2, genPoint );
 
-   case G::LINE_2D :
-   {
-      return G::shapeIntersection( dynamic_cast<const G::Line_2d&>( shape1 ), shape2, genPoinut);
-   }
-   break;
+   const G::Line_2d * line = &dynamic_cast<const G::Line_2d&>( shape1 );
+   if ( line )
+      return G::shapeIntersection(*line, shape2, genPoint );
 
-   case G::INTERVAL :
-   {
-      return G::shapeIntersection( dynamic_cast<const G::Interval&>( shape1 ), shape2, genPoinut);
-   }
-   break;
+   const G::Interval * interval = &dynamic_cast<const G::Interval&>( shape1 );
+   if ( interval )
+      return G::shapeIntersection(*interval, shape2, genPoint);
 
-   case G::CONTOUR :
-   {
-      return G::shapeIntersection( dynamic_cast<const G::Contour&>( shape1 ), shape2, genPoinut);
-   }
-   break;
+   const G::Contour * cont = &dynamic_cast<const G::Contour&>( shape1 );
+   if (cont)
+      return G::shapeIntersection(*cont, shape2, genPoint);
 
-   case G::CONVEX_CONTOUR :
-   {
-      return G::shapeIntersection( dynamic_cast<const G::Convex_contour&>( shape1 ), shape2, genPoinut);
-   }
-   break;
+   const G::Convex_contour * conv_cont
+                        = &dynamic_cast<const G::Convex_contour&>( shape1 );
+   if (conv_cont)
+      return G::shapeIntersection(*conv_cont, shape2, genPoint);
 
-   default:
-      throw G::Geometry_error(
-         "Not defined type - was not reognized in dynamic intersection");
-   break;
-   }
-   return G::SHAPE_NOT_INTERSECTION;
+   throw Geometry::Geometry_error(
+      "Not defined type - was not reognized in dynamic intersection");
 }
 
 int G::shapeIntersection( const G::Circle& circ,
                           const G::I_Shape& shape,
                           std::list<G::Point2f>* genPoint )
 {
-   switch ( shape.get_type() )
-   {
-   case G::CIRCLE :
-   {
-      return shapeIntersection( circ, dynamic_cast<const G::Circle&>( shape ), genPoint);
-   }
-   break;
+   const G::Circle * circle = &dynamic_cast<const G::Circle&>( shape );
+   if ( circle )
+      return G::shapeIntersection( *circle, circ, genPoint );
 
-   case G::LINE_2D :
-   {
-      return shapeIntersection( circ, dynamic_cast<const G::Line_2d&>( shape ), genPoint);
-   }
-   break;
+   const G::Line_2d * line = &dynamic_cast<const G::Line_2d&>( shape );
+   if ( line )
+      return G::shapeIntersection( circ, *line, genPoint );
 
-   case G::INTERVAL :
-   {
-      return shapeIntersection( circ, dynamic_cast<const G::Interval&>( shape ), genPoint);
-   }
-   break;
+   const G::Interval * interval = &dynamic_cast<const G::Interval&>( shape );
+   if ( interval )
+      return G::shapeIntersection(circ, *interval, genPoint);
 
-   case G::CONTOUR :
-   {
-      return shapeIntersection( circ, dynamic_cast<const G::Contour&>( shape ), genPoint);
-   }
-   break;
+   const G::Contour * cont = &dynamic_cast<const G::Contour&>( shape );
+   if (cont)
+      return G::shapeIntersection(circ, *cont, genPoint);
 
-   case G::CONVEX_CONTOUR :
-   {
-      return shapeIntersection( circ, dynamic_cast<const G::Convex_contour&>( shape ), genPoint);
-   }
-   break;
+   const G::Convex_contour * conv_cont
+                        = &dynamic_cast<const G::Convex_contour&>( shape );
+   if (conv_cont)
+      return G::shapeIntersection(circ, *conv_cont, genPoint);
 
-   default:
-      throw Geometry::Geometry_error(
-         "Not defined type - was not reognized in dynamic intersection");
-   break;
-   }
-   return G::SHAPE_NOT_INTERSECTION;
+   throw Geometry::Geometry_error(
+      "Not defined type - was not reognized in dynamic intersection");
 }
 
 int G::shapeIntersection(const G::Line_2d& line,

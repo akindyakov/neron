@@ -21,10 +21,6 @@ G::Contour::Contour(const G::Point2f& center, const std::list<G::Reduced_vector>
 }
 G::Contour::Contour(const std::list<G::Point2f>& polinom)
 {}
-int G::Contour::get_type()const
-{
-   return m_type;
-}
 
 void G::Contour::push_back(const G::Reduced_vector& pt)
 {

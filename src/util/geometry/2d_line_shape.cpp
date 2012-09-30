@@ -33,10 +33,7 @@ Geometry::Line_2d::Line_2d(const Geometry::Reduced_vector& direct_vector,
 {
    m_center = pt;
 }
-int G::Line_2d::get_type()const
-{
-   return m_type;
-}
+
 void Geometry::Line_2d::turn(float angle)
 {
    m_direct_vector.turn(angle);
