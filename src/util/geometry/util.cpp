@@ -265,7 +265,37 @@ std::list<Geometry::Point2f> Geometry::getRandomPointCloud(int n,
    }
    return ret_rand_list;
 }
-
+template <class T>
+void pairElementSort(const T& first, const T& second,
+                     T* max, T* min)
+{
+   if ( first > second )
+   {
+      if ( *max < first ) *max = first;
+      if ( *min > second ) *min = second;
+   }
+   else
+   {
+      if ( *max < second ) *max = second;
+      if ( *min > first ) *min = first;
+   }
+}
+template <class T>
+void maxMin( const T& first, const T& second,
+             T* max, T* min)
+{
+   if ( first > second )
+   {
+      *max = first;
+      *min = second;
+   }
+   else
+   {
+      *max = second;
+      *min = first;
+   }
+   return;
+}
 template <class T>
 void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
                           G::Point<T>* outMaxPoint,
@@ -275,37 +305,29 @@ void G::minMaxPointCloud( const std::list< G::Point<T> >& cloud,
    {
       std::list< G::Point<T> >::const_iterarator p_clfirst = cloud.begn();
       std::list< G::Point<T> >::const_iterarator p_clsecond = cloud.begin();
-//      *outMaxPoint = G::Point<T>(INT_MIN,INT_MIN);
-//      *outMinPoint = G::Point<T>(INT_MAX,INT_MAX);
-//      *outMaxPoint =
       if ( loud.size()%2 == 0)
       {
-         //p_clfirst;
          ++p_clsecond;
-         p_clfirst
-         if ( p_clfirst->x > p_clsecond->x )
-         {
-            
-         }
-         else
-         {
-            
-         }
-
-         if ( p_clfirst->x > p_clsecond->x )
-         {
-            
-         }
-         else
-         {
-            
-         }
-         *outMinPoint = 
+         maxMin( p_clfirst->x, p_clfirst->x,
+                 &(outMaxPoint->x), &(outMinPoint->x));
+         maxMin( p_clfirst->y, p_clfirst->y,
+                 &(outMaxPoint->y), &(outMinPoint->y));
+         p_clsecond += 2;
+         p_clfirst += 2;
       }
       else
       {
-         *outMaxPoint = cloud.begin();
-         *outMinPoint = 
+         *outMaxPoint = *p_clfirst;
+         *outMinPoint = *p_clfirst;
+         p_clsecond += 2;
+         p_clfirst += 1;
+      }
+      for ( ; p_clsecond != cloud.end(); p_clsecond += 2, p_clfirst += 2 )
+      {
+         pairElementSort(p_clfirst->x, p_clsecond->x,
+                         &(outMaxPoint->x), &(outMinPoint->x));
+         pairElementSort(p_clfirst->y, p_clsecond->y,
+                         &(outMaxPoint->y), &(outMinPoint->y));
       }
    }
    return;

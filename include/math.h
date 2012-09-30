@@ -17,5 +17,13 @@ namespace Math
    bool equal(double a, double b, int maxulps=2);
 
    bool equal(long double a, long double b, int maxulps=2);
+   
+   template <class T>
+   void pairElementSort(const T& first, const T& second,
+                              T* max,         T* min);
+   template <class T>
+   void maxMin( const T& first, const T& second,
+                      T* max,         T* min);
+
 } //end Math
 #endif //MATH_H
