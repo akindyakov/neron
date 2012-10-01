@@ -34,13 +34,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="/media/general/src/neron/" />
+			<Add directory="../../../../../include" />
+			<Add directory="../../../../../src" />
 		</Compiler>
 		<Linker>
 			<Add library="/usr/local/lib/libopencv_core.so" />
 			<Add library="/usr/local/lib/libopencv_highgui.so" />
 			<Add directory="/usr/local/lib/" />
-			<Add directory="/media/general/src/neron/" />
+			<Add directory="../../../../../include" />
+			<Add directory="../../../../../src" />
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Unit filename="../../../../../include/geometry.h" />
