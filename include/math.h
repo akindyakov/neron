@@ -21,9 +21,11 @@ namespace Math
    template <class T>
    void pairElementSort(const T& first, const T& second,
                               T* max,         T* min);
-   template <class T>
-   void maxMin( const T& first, const T& second,
-                      T* max,         T* min);
+   template <class N>
+   void maxMin( const N& first, const N& second,
+                      N* max,         N* min);
+   /*void maxMin( const float& first, const float& second,
+                      float* max,         float* min);*/
 
 } //end Math
 #endif //MATH_H

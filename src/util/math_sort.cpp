@@ -25,9 +25,9 @@ void M::pairElementSort(const T& first, const T& second,
       if ( *min > first ) *min = first;
    }
 }
-template <class T>
-void M::maxMin( const T& first, const T& second,
-                      T* max,         T* min)
+template <class N>
+void M::maxMin( const N& first, const N& second,
+                      N* max,         N* min)
 {
    if ( first > second )
    {
@@ -41,3 +41,19 @@ void M::maxMin( const T& first, const T& second,
    }
    return;
 }
+/*
+void M::maxMin( const float& first, const float& second,
+                      float* max,         float* min)
+{
+   if ( first > second )
+   {
+      *max = first;
+      *min = second;
+   }
+   else
+   {
+      *max = second;
+      *min = first;
+   }
+   return;
+}*/

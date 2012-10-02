@@ -15,23 +15,12 @@
 
 namespace Geometry
 {
-   enum
-   {
-      SHAPE          = 0,
-      CIRCLE         = 1,
-      LINE_2D        = 2,
-      INTERVAL       = 3,
-      CONVEX_CONTOUR = 4,
-      CONTOUR        = 5
-   };
-
    template<class T> struct Point
    {
       Point();
       Point(T _x, T _y);
       Point(const Point& pt);
 
-      //friend Point<T> operator + (Point& vec1, Point& vec2);
       T x;
       T y;
    };

@@ -16,16 +16,16 @@
 
 namespace G = Geometry;
 namespace M = Math;
-Geometry::Interval::Interval(const Geometry::Point2f& pt1,
-                             const Geometry::Point2f& pt2)
+G::Interval::Interval(const G::Point2f& pt1,
+                      const G::Point2f& pt2)
 {
    m_center= pt1;
-   Geometry::Reduced_vector dir_vector(pt2.x-pt1.x, pt2.y-pt1.y);
+   G::Reduced_vector dir_vector(pt2.x-pt1.x, pt2.y-pt1.y);
    m_vector = dir_vector;
 }
 
-Geometry::Interval::Interval(const Point2f& pt,
-                             const Reduced_vector& relative_vec)
+G::Interval::Interval(const G::Point2f& pt,
+                      const G::Reduced_vector& relative_vec)
             : m_vector(relative_vec)
 {
    m_center = pt;
@@ -37,19 +37,19 @@ void G::Interval::turn(float angle)
    m_vector.turn(angle);
 }
 
-bool Geometry::Interval::belongingPoint(const Geometry::Point2f& point)const
+bool G::Interval::belongingPoint(const Geometry::Point2f& point)const
 {
    //float point.x
    return false;
 }
 
-bool Geometry::Interval::shapeIntersection(const Geometry::I_Shape& inputShape,
-                                        std::list<Geometry::Point2f>* genPoint)
+bool G::Interval::shapeIntersection(const G::I_Shape& inputShape,
+                                    std::list<G::Point2f>* genPoint)
 {
    return G::shapeIntersection(*this, inputShape, genPoint);
 }
 
-void Geometry::Interval::getX(float y, std::vector<float>* x)const
+void G::Interval::getX(float y, std::vector<float>* x)const
 {
    if ( (y > getFirst().y && y < getSecond().y)
       || (y < getFirst().y && y > getSecond().x) )
@@ -59,7 +59,7 @@ void Geometry::Interval::getX(float y, std::vector<float>* x)const
    }
 }
 
-void Geometry::Interval::getY(float x, std::vector<float>* y)const
+void G::Interval::getY(float x, std::vector<float>* y)const
 {
    if ( (x > getFirst().x && x < getSecond().x)
       || (x < getFirst().x && x > getSecond().x) )
@@ -107,7 +107,7 @@ float G::Interval::getDistance(const G::Point2f& pt, G::Point2f* close_pt)const
    return lineDist;
 }
 
-bool G::Interval::belongRectangleArea(const Point2f& pt)const
+bool G::Interval::belongRectangleArea(const G::Point2f& pt)const
 {
    G::Point2f first = getFirst();
    G::Point2f second = getSecond();
@@ -117,10 +117,10 @@ bool G::Interval::belongRectangleArea(const Point2f& pt)const
    M::maxMin(first.x, second.x, &(up.x), &(low.x));
    M::maxMin(first.y, second.y, &(up.y), &(low.y));
 
-   if (  (pt.x < up.x  || Math::equal(pt.x, up.x))
-      && (pt.y < up.y  || Math::equal(pt.x, up.x))
-      && (pt.x > low.x || Math::equal(pt.x, up.x))
-      && (pt.y > low.y || Math::equal(pt.x, up.x)) )
+   if (  (pt.x < up.x  || M::equal(pt.x, up.x))
+      && (pt.y < up.y  || M::equal(pt.x, up.x))
+      && (pt.x > low.x || M::equal(pt.x, up.x))
+      && (pt.y > low.y || M::equal(pt.x, up.x)) )
    {
       return true;
    }
