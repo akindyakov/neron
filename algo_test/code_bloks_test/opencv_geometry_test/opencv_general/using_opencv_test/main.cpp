@@ -2,7 +2,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "include/geometry.h"
-using namespace std;
+
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
     Geometry::Line_2d line2(pt2, pt3);
     Geometry::Circle circ(pt1, 100);
     cv::Mat res(300, 300, CV_8UC1);
-    drowShape(circ, &res, cv::Scalar(133), 1, cv::Scalar(255), 1);
+    //drowShape(circ, &res, cv::Scalar(133), 1, cv::Scalar(255), 1);
     //drowShape(line1,&res,cv::Scalar(133),2,cv::Scalar(133),2);
     //drowShape(line2,&res,cv::Scalar(133),2,cv::Scalar(133),2);
     cv::namedWindow("show", 0);
@@ -26,6 +26,6 @@ int main()
       if (c == 27) break; // if was key "Esc" break;
    }
    cv::destroyWindow("show");
-    cout << "Hello world!" << endl;
+    std::cout << "Hello world!" << std::endl;
     return 0;
 }

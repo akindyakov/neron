@@ -10,7 +10,6 @@
 #include <iterator>
 #include <cmath>
 #include <cfloat>
-//#include <climits>
 #include <cstdlib>
 #include <ctime>
 //=============================================================================

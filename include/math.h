@@ -1,7 +1,7 @@
 /**
  ** autor   Alexander K
  ** date    30.06.2012.21.56
- ** BRIEF   GEOMETRY UTIL        
+ ** BRIEF   GEOMETRY UTIL
 */
 
 #ifndef MATH_H
@@ -17,7 +17,7 @@ namespace Math
    bool equal(double a, double b, int maxulps=2);
 
    bool equal(long double a, long double b, int maxulps=2);
-   
+
    template <class T>
    void pairElementSort(const T& first, const T& second,
                               T* max,         T* min);

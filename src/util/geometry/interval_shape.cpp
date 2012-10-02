@@ -15,7 +15,7 @@
 //=============================================================================
 
 namespace G = Geometry;
-
+namespace M = Math;
 Geometry::Interval::Interval(const Geometry::Point2f& pt1,
                              const Geometry::Point2f& pt2)
 {
@@ -111,11 +111,16 @@ bool G::Interval::belongRectangleArea(const Point2f& pt)const
 {
    G::Point2f first = getFirst();
    G::Point2f second = getSecond();
+   G::Point2f low;
+   G::Point2f up;
 
-   if (  pt.x < std::min(first.x, second.x)
-      && pt.y < std::min(first.y, second.y)
-      && pt.x > std::max(first.x, second.x)
-      && pt.y > std::max(first.y, second.y) )
+   M::maxMin(first.x, second.x, &(up.x), &(low.x));
+   M::maxMin(first.y, second.y, &(up.y), &(low.y));
+
+   if (  (pt.x < up.x  || Math::equal(pt.x, up.x))
+      && (pt.y < up.y  || Math::equal(pt.x, up.x))
+      && (pt.x > low.x || Math::equal(pt.x, up.x))
+      && (pt.y > low.y || Math::equal(pt.x, up.x)) )
    {
       return true;
    }
