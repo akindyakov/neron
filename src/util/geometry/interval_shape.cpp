@@ -114,19 +114,24 @@ bool G::Interval::belongRectangleArea(const G::Point2f& pt)const
    G::Point2f second = getSecond();
    G::Point2f low;
    G::Point2f up;
-   int m1 =1, m2 = 0, m3 = 3, m4 = 5;
-   M::pairElementSort(m1, m2, &m3, &m4);
-   float f1 =1, f2 = 0, f3 = 3, f4 = 5;
-   M::pairElementSort(f1, f2, &f3, &f4);
    M::maxMin(first.x, second.x, &(up.x), &(low.x));
    M::maxMin(first.y, second.y, &(up.y), &(low.y));
-
+   std::cout << "up_x: "    << up.x
+             << "; low.x: " << low.x
+             << "; up_y: "  << up.y
+             << "; low_y: " << low.y
+             << std::endl;
+   std::cout << first.x  << " " << first.y  << std::endl;
+   std::cout << second.x  << " " << second.y  << std::endl;
+   std::cout << pt.x  << " " << pt.y  << std::endl;
    if (  (pt.x < up.x  || M::equal(pt.x, up.x))
-      && (pt.y < up.y  || M::equal(pt.x, up.x))
-      && (pt.x > low.x || M::equal(pt.x, up.x))
-      && (pt.y > low.y || M::equal(pt.x, up.x)) )
+      && (pt.y < up.y  || M::equal(pt.y, up.y))
+      && (pt.x > low.x || M::equal(pt.x, low.x))
+      && (pt.y > low.y || M::equal(pt.y, low.y)) )
    {
+      std::cout << "true\n";
       return true;
    }
+   std::cout << "false\n";
    return false;
 }

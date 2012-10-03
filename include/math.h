@@ -50,8 +50,6 @@ namespace Math
       }
       return;
    }
-   /*void maxMin( const float& first, const float& second,
-                      float* max,         float* min);*/
 
 } //end Math
 #endif //MATH_H
