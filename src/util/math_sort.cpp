@@ -7,9 +7,9 @@
 //=============================================================================
 #include <cmath>
 //=============================================================================
-#include "include/math.h"
+//#include "include/math.h"
 //=============================================================================
-namespace M = Math;
+/*namespace M = Math;
 template <class T>
 void M::pairElementSort(const T& first, const T& second,
                               T* max,         T* min)
@@ -40,10 +40,26 @@ void M::maxMin( const N& first, const N& second,
       *min = first;
    }
    return;
-}
+}*/
 /*
 void M::maxMin( const float& first, const float& second,
                       float* max,         float* min)
+{
+   if ( first > second )
+   {
+      *max = first;
+      *min = second;
+   }
+   else
+   {
+      *max = second;
+      *min = first;
+   }
+   return;
+}
+
+void M::maxMin( const int& first, const int& second,
+                      int* max,         int* min)
 {
    if ( first > second )
    {

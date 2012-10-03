@@ -16,6 +16,7 @@
 
 namespace G = Geometry;
 namespace M = Math;
+
 G::Interval::Interval(const G::Point2f& pt1,
                       const G::Point2f& pt2)
 {
@@ -37,7 +38,7 @@ void G::Interval::turn(float angle)
    m_vector.turn(angle);
 }
 
-bool G::Interval::belongingPoint(const Geometry::Point2f& point)const
+bool G::Interval::belongingPoint(const G::Point2f& point)const
 {
    //float point.x
    return false;
@@ -68,14 +69,14 @@ void G::Interval::getY(float x, std::vector<float>* y)const
    }
 }
 
-Geometry::Point2f Geometry::Interval::getFirst()const
+G::Point2f G::Interval::getFirst()const
 {
    return m_center;
 }
 
-Geometry::Point2f Geometry::Interval::getSecond()const
+G::Point2f G::Interval::getSecond()const
 {
-   return Geometry::Point2f(m_center.x+m_vector.x, m_center.y+m_vector.y);
+   return G::Point2f(m_center.x+m_vector.x, m_center.y+m_vector.y);
 }
 
 float G::Interval::getDistance(const G::Point2f& pt, G::Point2f* close_pt)const
@@ -113,7 +114,10 @@ bool G::Interval::belongRectangleArea(const G::Point2f& pt)const
    G::Point2f second = getSecond();
    G::Point2f low;
    G::Point2f up;
-
+   int m1 =1, m2 = 0, m3 = 3, m4 = 5;
+   M::pairElementSort(m1, m2, &m3, &m4);
+   float f1 =1, f2 = 0, f3 = 3, f4 = 5;
+   M::pairElementSort(f1, f2, &f3, &f4);
    M::maxMin(first.x, second.x, &(up.x), &(low.x));
    M::maxMin(first.y, second.y, &(up.y), &(low.y));
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="111" topLine="0" />
+	<File name="main.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="93" topLine="0" />
 	</File>
-	<File name="../../../../../include/geometry.h" open="0" top="0" tabpos="2">
-		<Cursor position="10620" topLine="69" />
+	<File name="../../../../../include/geometry.h" open="1" top="0" tabpos="4">
+		<Cursor position="563" topLine="0" />
 	</File>
-	<File name="../../../../../include/math.h" open="0" top="0" tabpos="0">
-		<Cursor position="829" topLine="0" />
+	<File name="../../../../../include/math.h" open="1" top="0" tabpos="1">
+		<Cursor position="793" topLine="0" />
 	</File>
 	<File name="../../../../../include/smooth_signal.h" open="0" top="0" tabpos="0">
 		<Cursor position="334" topLine="0" />
@@ -22,8 +22,14 @@
 	<File name="../../../../../src/util/geometry/intersection_shape.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="19545" topLine="539" />
 	</File>
+	<File name="../../../../../src/util/geometry/interval_shape.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="2626" topLine="94" />
+	</File>
 	<File name="../../../../../src/util/geometry/show_shape.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="3446" topLine="111" />
+	</File>
+	<File name="../../../../../src/util/math_sort.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="801" topLine="19" />
 	</File>
 	<File name="../../../../../src/util/smooth_signal.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="416" topLine="0" />
