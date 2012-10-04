@@ -307,3 +307,22 @@ G::Point2f G::searchCenterCloud(const std::list< G::Point<T> >& cloud)
 {
    return G::Point2f(0,0);
 }
+
+template <class T>
+void G::uniqPoint( std::list< G::Point<T> >* cloud )
+{
+   typename std::list< G::Point<T> >::iterator endit = cloud->end() - 1;
+   for ( typename std::list< Point<T> >::iterator it1 = cloud->begin();
+         it1 != endit; ++it1)
+      for ( typename std::list< Point<T> >::iterator it2 = it1+1;
+            it2 != endit; ++it2)
+      {
+         if ( Math::equal(it1->x, it2->x) && Math::equal(it1->x, it2->x) )
+         {
+            std::swap(endit, it2);
+            --endit;
+            --it2;
+         }
+      }
+   cloud->erase(endit, cloud->end());
+}

@@ -400,6 +400,9 @@ namespace Geometry
                           Point<T>* outMaxPoint,
                           Point<T>* outMinPoint );
 
+   template <class T>
+   void uniqPoint( std::list< Point<T> >* cloud );
+
    struct Geometry_error
    {
       Geometry_error(const char* _name):name(_name){};
