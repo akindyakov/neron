@@ -103,6 +103,10 @@ int main()
    for_sort.push_back(pt2);
    for_sort.push_back(pt3);
    for_sort.push_back(pt4);
+   for_sort.push_back(pt4);
+   for_sort.push_back(pt4);
+   for_sort.push_back(pt4);
+   for_sort.push_back(pt4);
    std::cout << "prev uniq data - > \n";
    showPoints(for_sort);
    Geometry::uniqPoint(&for_sort);

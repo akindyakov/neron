@@ -352,22 +352,27 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
 {
    std::list< G::Point2f >::iterator endit = cloud->end();
    --endit;
+   
    for ( std::list< G::Point2f >::iterator it1 = cloud->begin();
-         it1 != cloud->end(); ++it1)
+         it1 != endit; ++it1)
    {
       std::list< G::Point2f >::iterator it2 = it1;
       ++it2;
+      //std::cout << "for :" <<  it1->x << " " << it1->y << std::endl;
       for ( ; it2 != endit; ++it2)
       {
          if ( Math::equal(it1->x, it2->x) && Math::equal(it1->y, it2->y) )
          {
-            float temp = it1->x;
-            it1->x = it2->x;
+            //std::cout << "swap it : " << it2->x << " " << it2->y << std::endl;
+            //std::cout << "       because   : " << it1->x << " " << it1->y << std::endl;
+            //std::cout << "       swap with : " << endit->x << " " << endit->y << std::endl;
+
+            float temp = endit->x;
+            endit->x = it2->x;
             it2->x = temp;
-            temp = it1->y;
-            it1->y = it2->y;
+            temp = endit->y;
+            endit->y = it2->y;
             it2->y = temp;
-            std::cout << endit->x << " " << endit->y << std::endl;
             --endit;
             --it2;
          }
@@ -375,6 +380,9 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
       if (it1 == endit)
          break;
    }
-
+   /*for (std::list< G::Point2f >::iterator it = cloud->begin();
+         it != cloud->end(); ++it)
+      std::cout << it->x << " " << it->y << std::endl;
+   std::cout << "end it:" <<  endit->x << " " << endit->y << std::endl;*/
    cloud->erase(endit, cloud->end());
 }
