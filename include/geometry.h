@@ -400,8 +400,11 @@ namespace Geometry
                           Point<T>* outMaxPoint,
                           Point<T>* outMinPoint );
 
-   template <class T>
-   void uniqPoint( std::list< Point<T> >* cloud );
+    void uniq_point_copy( const std::list< Point2f >& cloud,
+                               std::list< Point2f >* p_unic_cloud );
+
+   //template <class T>
+   void uniqPoint( std::list< Point2f >* cloud );
 
    struct Geometry_error
    {

@@ -308,7 +308,7 @@ G::Point2f G::searchCenterCloud(const std::list< G::Point<T> >& cloud)
    return G::Point2f(0,0);
 }
 
-template <class T>
+/*template <class T>
 void G::uniqPoint( std::list< G::Point<T> >* cloud )
 {
    typename std::list< G::Point<T> >::iterator endit = cloud->end() - 1;
@@ -324,5 +324,57 @@ void G::uniqPoint( std::list< G::Point<T> >* cloud )
             --it2;
          }
       }
+   cloud->erase(endit, cloud->end());
+}*/
+void G::uniq_point_copy( const std::list< G::Point2f >& cloud,
+                               std::list< G::Point2f >* p_uniq_cloud )
+{
+   if (p_uniq_cloud == NULL)
+      throw G::Geometry_error("p_unic_cloud must not be null");
+
+   for ( std::list< Point2f >::const_iterator it_cloud = cloud.begin();
+         it_cloud != cloud.end(); ++it_cloud)
+   {
+      bool uniq = true;
+      for ( std::list< G::Point2f >::iterator it_uniq = p_uniq_cloud->begin();
+            it_uniq != p_uniq_cloud->end(); ++it_uniq )
+      {
+         if ( Math::equal(it_cloud->x, it_uniq->x)
+              && Math::equal(it_cloud->x, it_uniq->x) )
+            uniq = false;
+      }
+
+      if (uniq)
+         p_uniq_cloud->push_back(*it_cloud);
+   }
+}
+void G::uniqPoint( std::list< G::Point2f >* cloud )
+{
+   std::list< G::Point2f >::iterator endit = cloud->end();
+   --endit;
+   for ( std::list< G::Point2f >::iterator it1 = cloud->begin();
+         it1 != cloud->end(); ++it1)
+   {
+      std::list< G::Point2f >::iterator it2 = it1;
+      ++it2;
+      for ( ; it2 != endit; ++it2)
+      {
+         if ( Math::equal(it1->x, it2->x) && Math::equal(it1->y, it2->y) )
+         {
+            float temp = it1->x;
+            it1->x = it2->x;
+            it2->x = temp;
+            temp = it1->y;
+            it1->y = it2->y;
+            it2->y = temp;
+            std::cout << endit->x << " " << endit->y << std::endl;
+            --endit;
+            --it2;
+         }
+      }
+      if (it1 == endit)
+         break;
+   }
+
    cloud->erase(endit, cloud->end());
 }

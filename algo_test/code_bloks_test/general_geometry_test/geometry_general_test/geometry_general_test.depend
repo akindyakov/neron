@@ -308,3 +308,94 @@
 	"include/geometry.h"
 	"include/math.h"
 
+1349297951 source:/media/general/src/neron_src/src/util/geometry/2d_line_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1349379761 /media/general/src/neron_src//include/geometry.h
+	<vector>
+	<list>
+	<opencv2/core/core.hpp>
+
+1349297951 /media/general/src/neron_src//include/math.h
+
+1349067167 source:/media/general/src/neron_src/src/util/geometry/circle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1349067167 source:/media/general/src/neron_src/src/util/geometry/contour_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1349067167 source:/media/general/src/neron_src/src/util/geometry/convex_contour_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	<cfloat>
+	"include/geometry.h"
+	"include/math.h"
+
+1348722061 source:/media/general/src/neron_src/src/util/geometry/geometry.cpp
+
+1348866948 source:/media/general/src/neron_src/src/util/geometry/geometry_defines.cpp
+	"include/geometry.h"
+
+1349154953 source:/media/general/src/neron_src/src/util/geometry/intersection_shape.cpp
+	<iostream>
+	<typeinfo>
+	<iterator>
+	<cmath>
+	<algorithm>
+	"include/geometry.h"
+	"include/math.h"
+
+1349297951 source:/media/general/src/neron_src/src/util/geometry/interval_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1348722061 source:/media/general/src/neron_src/src/util/geometry/rectangle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1348722061 source:/media/general/src/neron_src/src/util/geometry/triangle_shape.cpp
+	<iostream>
+	<iterator>
+	<cmath>
+	"include/geometry.h"
+	"include/math.h"
+
+1349380531 source:/media/general/src/neron_src/src/util/geometry/util.cpp
+	<iostream>
+	<vector>
+	<iterator>
+	<cmath>
+	<cfloat>
+	<cstdlib>
+	<ctime>
+	"include/geometry.h"
+	"include/math.h"
+
+1348722061 source:/media/general/src/neron_src/src/util/math_equal.cpp
+	<cmath>
+	"include/math.h"
+
+1349380128 source:/media/general/src/neron_src/algo_test/code_bloks_test/general_geometry_test/geometry_general_test/main.cpp
+	<iostream>
+	<list>
+	"include/geometry.h"
+

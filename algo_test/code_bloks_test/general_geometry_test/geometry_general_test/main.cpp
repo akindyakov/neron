@@ -8,7 +8,7 @@ void showPoints(const std::list<Geometry::Point2f>& pts)
 {
    if ( pts.empty() )
    {
-      std::cout << "   " << "match!\n";
+      std::cout << "list of point is empty\n";
       return;
    }
    for (std::list<Geometry::Point2f>::const_iterator vecIt = pts.begin();
@@ -91,7 +91,22 @@ int main()
    {
       std::cout << "x: " << it->x << ";   y: " << it->y << std::endl;
    }
-   cout << "Hello world!" << endl;
-   Geometry::Circle(Geometry::Point2f(0,0), 4);
+
+   std::list< Geometry::Point2f > for_sort;
+   for_sort.push_back(pt0);
+   for_sort.push_back(pt1);
+   for_sort.push_back(pt2);
+   for_sort.push_back(pt3);
+   for_sort.push_back(pt4);
+   for_sort.push_back(pt0);
+   for_sort.push_back(pt1);
+   for_sort.push_back(pt2);
+   for_sort.push_back(pt3);
+   for_sort.push_back(pt4);
+   std::cout << "prev uniq data - > \n";
+   showPoints(for_sort);
+   Geometry::uniqPoint(&for_sort);
+   std::cout << "uniq rezult - > \n";
+   showPoints(for_sort);
    return 0;
 }
