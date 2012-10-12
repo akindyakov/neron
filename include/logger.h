@@ -10,6 +10,7 @@
 //=============================================================================
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <list>
 //=============================================================================
@@ -17,6 +18,19 @@
 
 namespace Log
 {
-   
+   class log
+   {
+   public:
+      log(const std::string& filename);
+      //friend operator << 
+   private:
+      print_logname();
+      print_time();
+      
+      std::string m_logname;
+      std::string m_filename;
+      int m_max_file_size;
+      int m_max_string_lenght;
+   };
 }
 #endif // LOGGER_G_H

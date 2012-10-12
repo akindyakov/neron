@@ -351,7 +351,7 @@ void G::uniq_point_copy( const std::list< G::Point2f >& cloud,
 void G::uniqPoint( std::list< G::Point2f >* cloud )
 {
    std::list< G::Point2f >::iterator endit = cloud->end();
-   --endit;
+
    
    for ( std::list< G::Point2f >::iterator it1 = cloud->begin();
          it1 != endit; ++it1)
@@ -366,7 +366,7 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
             //std::cout << "swap it : " << it2->x << " " << it2->y << std::endl;
             //std::cout << "       because   : " << it1->x << " " << it1->y << std::endl;
             //std::cout << "       swap with : " << endit->x << " " << endit->y << std::endl;
-
+            --endit;
             float temp = endit->x;
             endit->x = it2->x;
             it2->x = temp;

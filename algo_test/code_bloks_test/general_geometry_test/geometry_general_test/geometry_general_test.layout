@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="37" topLine="0" />
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="2508" topLine="102" />
 	</File>
-	<File name="../../../../include/geometry.h" open="1" top="0" tabpos="3">
-		<Cursor position="13591" topLine="388" />
+	<File name="../../../../include/geometry.h" open="1" top="1" tabpos="3">
+		<Cursor position="1499" topLine="37" />
 	</File>
 	<File name="../../../../src/util/geometry/2d_line_shape.cpp" open="1" top="0" tabpos="5">
 		<Cursor position="1069" topLine="2" />
@@ -38,7 +38,7 @@
 		<Cursor position="713" topLine="0" />
 	</File>
 	<File name="../../../../src/util/geometry/util.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="7999" topLine="267" />
+		<Cursor position="7999" topLine="265" />
 	</File>
 	<File name="../../../../src/util/math_equal.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="993" topLine="0" />

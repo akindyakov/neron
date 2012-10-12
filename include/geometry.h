@@ -73,8 +73,6 @@ namespace Geometry
       Point2f* getCenter();
    //private:
       Point2f m_center;
-   //private:
-   //   static int m_type;
    };
 
    class Circle : public I_Shape
@@ -83,10 +81,6 @@ namespace Geometry
       Circle(const Point2f& center, float radius);
       Circle(const Point2f& center, const Point2f& circlePoint);
       Circle(const Point2f& pt1, const Point2f& pt2, const Point2f& pt3);
-
-      virtual ~Circle(){};
-
-      //int get_type()const;
 
       void create(const Point2f& center, float radius);
       void create(const Point2f& center, const Point2f& circlePoint);
@@ -115,10 +109,6 @@ namespace Geometry
    public:
       Interval(const Point2f& pt1, const Point2f& pt2);
       Interval(const Point2f& pt, const Reduced_vector& relative_vec);
-
-      //virtual ~Interval(){};
-
-      //int get_type()const;
 
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
@@ -347,16 +337,16 @@ namespace Geometry
                   const cv::Scalar& second_color = cv::Scalar(0),
                   int second_intence = 0);
 
-   void drowShape(const Line_2d&,
+/*   void drowShape(const Line_2d&,
                   cv::Mat* image,
                   const cv::Scalar& first_color,
                   int first_intence,
                   const cv::Scalar& second_color = cv::Scalar(0),
                   int second_intence = 0);
-
+*/
    void drowShape(const Interval&,
                   cv::Mat* image,
-                  cv::Scalar& first_color,
+                  const cv::Scalar& first_color,
                   int first_intence,
                   const cv::Scalar& second_color = cv::Scalar(0),
                   int second_intence = 0);
@@ -379,31 +369,42 @@ namespace Geometry
                  const Point2f& center, int size,
                  const cv::Scalar& color, int intence);
 
-   template <class T>
-   void drowPoint(const Geometry::Point<T> pt,
+   void drowPoint(const Point2i pt,
                   cv::Mat* image,
                   const cv::Scalar& color,
                   int intence );
 
-   template <class T>
-   void drowVector(const Point<T>& center,
+   void drowPoint(const Point2f pt,
+                  cv::Mat* image,
+                  const cv::Scalar& color,
+                  int intence );
+
+   void drowVector(const Point2i& center,
+                   const Reduced_vector& vector,
+                   cv::Mat* image,
+                   const cv::Scalar& color,
+                   int intence);
+   void drowVector(const Point2f& center,
                    const Reduced_vector& vector,
                    cv::Mat* image,
                    const cv::Scalar& color,
                    int intence);
 
-   template <class T>
-   Point2f searchCenterCloud(const std::list< Point<T> >& cloud);
+   Point2f searchCenterCloud(const std::list< Point2i >& cloud);
+   Point2f searchCenterCloud(const std::list< Point2f >& cloud);
 
-   template <class T>
-   void minMaxPointCloud( const std::list< Point<T> >& cloud,
-                          Point<T>* outMaxPoint,
-                          Point<T>* outMinPoint );
+   void minMaxPointCloud( const std::list< Point2i >& cloud,
+                          Point2i* outMaxPoint,
+                          Point2i* outMinPoint );
 
-    void uniq_point_copy( const std::list< Point2f >& cloud,
-                               std::list< Point2f >* p_unic_cloud );
+   void minMaxPointCloud( const std::list< Point2f >& cloud,
+                          Point2f* outMaxPoint,
+                          Point2f* outMinPoint );
 
-   //template <class T>
+
+   void uniq_point_copy( const std::list< Point2f >& cloud,
+                                std::list< Point2f >* p_unic_cloud );
+
    void uniqPoint( std::list< Point2f >* cloud );
 
    struct Geometry_error

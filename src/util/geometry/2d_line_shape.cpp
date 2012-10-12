@@ -21,8 +21,8 @@ G::Line_2d::Line_2d(const G::Point2f& pt1,
    m_center= pt1;
    Geometry::Reduced_vector dir_vector(pt1.x - pt2.x, pt1.y - pt2.y);
    m_direct_vector = dir_vector;
-   std::cout << "center" << m_center.x   << " " << m_center.y << std::endl
-             << "vector" << dir_vector.x << " " << dir_vector.y << std::endl;
+   //std::cout << "center" << m_center.x   << " " << m_center.y << std::endl
+   //          << "vector" << dir_vector.x << " " << dir_vector.y << std::endl;
 }
 G::Line_2d::Line_2d(const G::Interval& inl)
             : m_direct_vector(inl.m_vector)

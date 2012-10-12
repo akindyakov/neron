@@ -23,6 +23,9 @@ G::Interval::Interval(const G::Point2f& pt1,
    m_center= pt1;
    G::Reduced_vector dir_vector(pt2.x-pt1.x, pt2.y-pt1.y);
    m_vector = dir_vector;
+   std::cout << "Interval create :"
+             << "\n       center: " << pt1.x << " " << pt1.y
+             << "\n       vector: " << m_vector.x << " " << m_vector.y << std::endl;
 }
 
 G::Interval::Interval(const G::Point2f& pt,
