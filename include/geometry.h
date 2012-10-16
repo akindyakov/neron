@@ -9,7 +9,7 @@
 //=============================================================================
 #include <vector>
 #include <list>
-#include <opencv2/core/core.hpp>
+//#include <opencv2/core/core.hpp>
 //=============================================================================
 //=============================================================================
 
@@ -329,66 +329,6 @@ namespace Geometry
    int shapeIntersection(const Contour&,
                          const Convex_contour&,
                          std::list<Point2f>* genPoint=NULL);
-
-   void drowShape(const Circle&,
-                  cv::Mat* image,
-                  const cv::Scalar& first_color,
-                  int first_intence,
-                  const cv::Scalar& second_color = cv::Scalar(0),
-                  int second_intence = 0);
-
-/*   void drowShape(const Line_2d&,
-                  cv::Mat* image,
-                  const cv::Scalar& first_color,
-                  int first_intence,
-                  const cv::Scalar& second_color = cv::Scalar(0),
-                  int second_intence = 0);
-*/
-   void drowShape(const Interval&,
-                  cv::Mat* image,
-                  const cv::Scalar& first_color,
-                  int first_intence,
-                  const cv::Scalar& second_color = cv::Scalar(0),
-                  int second_intence = 0);
-
-   void drowShape(const Convex_contour&,
-                  cv::Mat* image,
-                  const cv::Scalar& first_color,
-                  int first_intence,
-                  const cv::Scalar& second_color = cv::Scalar(0),
-                  int second_intence = 0);
-
-   void drowShape(const Contour&,
-                  cv::Mat* image,
-                  const cv::Scalar& first_color,
-                  int first_intence,
-                  const cv::Scalar& second_color = cv::Scalar(0),
-                  int second_intence = 0);
-
-   void drowCross(cv::Mat* image,
-                 const Point2f& center, int size,
-                 const cv::Scalar& color, int intence);
-
-   void drowPoint(const Point2i pt,
-                  cv::Mat* image,
-                  const cv::Scalar& color,
-                  int intence );
-
-   void drowPoint(const Point2f pt,
-                  cv::Mat* image,
-                  const cv::Scalar& color,
-                  int intence );
-
-   void drowVector(const Point2i& center,
-                   const Reduced_vector& vector,
-                   cv::Mat* image,
-                   const cv::Scalar& color,
-                   int intence);
-   void drowVector(const Point2f& center,
-                   const Reduced_vector& vector,
-                   cv::Mat* image,
-                   const cv::Scalar& color,
-                   int intence);
 
    Point2f searchCenterCloud(const std::list< Point2i >& cloud);
    Point2f searchCenterCloud(const std::list< Point2f >& cloud);
