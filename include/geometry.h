@@ -124,9 +124,6 @@ namespace Geometry
       bool belongRectangleArea(const Point2f& pt)const;
       // --- data ---
       Reduced_vector m_vector;
-
-      private:
-         static int m_type;
    };
 
    class Line_2d : public I_Shape
@@ -151,14 +148,12 @@ namespace Geometry
       void getY(float x, std::vector<float>* y)const;
 
       Reduced_vector m_direct_vector;
-
-      private:
-         static int m_type;
    };
 
    class Convex_contour : public I_Shape
    {
    public:
+      Convex_contour(const Point2f& center);
       Convex_contour(const Point2f& center,
                      const std::list<Reduced_vector>& polinom);
       Convex_contour(const std::list<Point2f>& polinom);
@@ -180,9 +175,6 @@ namespace Geometry
 
       // --- data ---
       std::list<Reduced_vector> m_vec;
-
-      private:
-         static int m_type;
    };
 
    class Contour : public I_Shape
@@ -197,25 +189,22 @@ namespace Geometry
       // const Point2f& getCenter();
       // const std::list<Reduced_vector>& getVectorList();
 
-      //int get_type()const;
-
       void push_back(const Reduced_vector& pt);
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
       bool shapeIntersection(const I_Shape& inputShape,
                              std::list<Point2f>* genPoint=NULL);
 
-      float getDistance(const Point2f& pt, Point2f* close_pt = NULL)const;
+      float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
-
+      
+      int convertToContour();
+      bool id_converted();
       // --- data ---
       std::list<Reduced_vector> m_vec;
       std::list<Convex_contour> m_contours;
       int status;
-
-      private:
-         static int m_type;
    };
 
    void getBorder( const std::list<Point2f>& points,
@@ -340,7 +329,6 @@ namespace Geometry
    void minMaxPointCloud( const std::list< Point2f >& cloud,
                           Point2f* outMaxPoint,
                           Point2f* outMinPoint );
-
 
    void uniq_point_copy( const std::list< Point2f >& cloud,
                                 std::list< Point2f >* p_unic_cloud );

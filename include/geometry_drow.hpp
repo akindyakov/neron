@@ -63,6 +63,9 @@ namespace Geometry
          || image.cols < vector.x )
          throw Geometry_error("border overflow in to_openCV_coord()");
 
+      std::cout << " show int : opencv pt2 :" 
+                << vector.x << " " 
+                << image.rows-vector.y << std::endl;
       return cv::Point2f(vector.x, image.rows-vector.y);
    }
 

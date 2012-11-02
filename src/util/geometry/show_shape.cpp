@@ -14,6 +14,37 @@
 //=============================================================================
 namespace G = Geometry;
 
+void findBorderPoints( const G::Line_2d& line,
+                       cv::Mat* image,
+                       std::list<G::Point2f>* borderPt)
+{
+   std::list<G::Interval> lineborders;
+
+   lineborders.push_back( G::Interval(G::Point2f(0, 0),
+                                      G::Point2f(image->cols, 0)) );
+
+   lineborders.push_back( G::Interval(G::Point2f(0,image->rows),
+                                     G::Point2f(image->cols,image->rows)) );
+
+   lineborders.push_back( G::Interval(G::Point2f(0,0),
+                                      G::Point2f(0,image->rows)) );
+
+   lineborders.push_back( G::Interval(G::Point2f(image->cols,0),
+                                      G::Point2f(image->cols,image->rows)) );
+
+   for(std::list<G::Interval>::const_iterator lnIt = lineborders.begin();
+         lnIt != lineborders.end(); ++lnIt)
+   {
+      G::shapeIntersection(line, *lnIt, borderPt);
+   }
+   //   here we need to delete double point
+   // which appear when line crossing angles of images
+   G::uniqPoint(borderPt);
+   //for (std::list<G::Point2f>::const_iterator it = borderPt.begin();
+   //      it != borderPt.end(); ++it)
+   //   std::cout << "after uniq : " << it->x << " " << it->y << std::endl;
+}
+
 void G::drowCross(cv::Mat* image,
                   const G::Point2f& center, int size,
                   const cv::Scalar& color, int intence)
@@ -61,34 +92,10 @@ void G::drowShape(const G::Line_2d& line,
                   const cv::Scalar& second_color,
                   int second_intence)
 {
-   std::cout << "drow line\n";
-   std::list<G::Interval> lineborders;
-
-   lineborders.push_back( G::Interval(G::Point2f(0, 0),
-                                      G::Point2f(image->cols, 0)) );
-
-   lineborders.push_back( G::Interval(G::Point2f(0,image->rows),
-                                     G::Point2f(image->cols,image->rows)) );
-
-   lineborders.push_back( G::Interval(G::Point2f(0,0),
-                                      G::Point2f(0,image->rows)) );
-
-   lineborders.push_back( G::Interval(G::Point2f(image->cols,0),
-                                      G::Point2f(image->cols,image->rows)) );
-
-   std::list<G::Point2f> borderPt;
-   for(std::list<G::Interval>::const_iterator lnIt = lineborders.begin();
-         lnIt != lineborders.end(); ++lnIt)
-   {
-      G::shapeIntersection(line, *lnIt, &borderPt);
-   }
-   //   here we need to delete double point
-   // which appear when line crossing angles of images
-   G::uniqPoint(&borderPt);
-   //for (std::list<G::Point2f>::const_iterator it = borderPt.begin();
-   //      it != borderPt.end(); ++it)
-   //   std::cout << "after uniq : " << it->x << " " << it->y << std::endl;
-
+   std::cout << "drow line \n";
+   std::list< G::Point2f > borderPt;
+   findBorderPoints(line, image, &borderPt);
+   
    if (borderPt.size() != 2)
       throw G::Geometry_error("not correct border - showLine function");
    cv::Point2f pt1  = to_openCV_coord(borderPt.front(), *image);
@@ -110,10 +117,11 @@ void G::drowShape(const G::Interval& interval,
                   const cv::Scalar& second_color,
                   int second_intence)
 {
+   std::cout << "drow Line_2d\n";
+
    cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
    cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);
-    std::cout << " show int : opencv pt1 :" << pt1.x << "" << pt1.y << std::endl;
-    std::cout << " show int : opencv pt2 :" << pt2.x << "" << pt2.y << std::endl;
+
    cv::line(*image, pt1, pt2, first_color, first_intence);
    if (second_intence != 0)
    {
