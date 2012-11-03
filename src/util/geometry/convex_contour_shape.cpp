@@ -33,7 +33,7 @@ G::Convex_contour::Convex_contour(const std::list<G::Point2f>& polinom)
    std::list<G::Point2f>::const_iterator polIt = polinom.begin();
    m_center = *polIt;
    ++polIt;
-   std::cout << "create convex contour:\n   " 
+   std::cout << "create convex contour:\n   "
              << m_center.x << " " << m_center.y << std::endl;
    for (std::list<G::Point2f>::const_iterator prevPolIt = polinom.begin();
                    polIt != polinom.end(); ++polIt, ++prevPolIt)
@@ -70,6 +70,17 @@ void G::Convex_contour::turn(float angle)
       vecIt->x = x;
       vecIt->y = y;
    }
+}
+
+G::Point2f G::Convex_contour::getEnd()
+{
+   G::Point2f endPt(m_center);
+   for (std::list<G::Reduced_vector>::iterator vecIt = m_vec.begin();
+            vecIt != m_vec.end(); ++vecIt)
+   {
+      endPt = endPt + *vecIt;
+   }
+   return endPt;
 }
 
 bool G::Convex_contour::shapeIntersection(const G::I_Shape& inputShape,

@@ -59,6 +59,8 @@
 		<Unit filename="../../../../../src/util/math_equal.cpp" />
 		<Unit filename="../../../../../src/util/math_sort.cpp" />
 		<Unit filename="../../../../../src/util/smooth_signal.cpp" />
+		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.cpp" />
+		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

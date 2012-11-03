@@ -2,7 +2,8 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "include/geometry.h"
-#include "include/geometry_drow.hpp"
+#include "include/geometry_drow.h"
+#include "tests/geometry/contour/drowAndTurn.h"
 
 int main()
 {
@@ -29,6 +30,7 @@ int main()
     polinom.push_back( pt0 );
 
     Geometry::Convex_contour conv_cont(polinom);
+    Geometry::Contour cont(polinom);
     Geometry::Line_2d line1(pt0, pt1);
     Geometry::Line_2d line2(pt2, pt3);
 
@@ -47,7 +49,9 @@ int main()
     //drowShape(interval1, &res, cv::Scalar(233), 1, cv::Scalar(233), 1);
     std::cout << "drow interval2\n";
     //drowShape(interval2,&res,cv::Scalar(233), 1,cv::Scalar(233), 1);
-    drowShape(conv_cont,&res,cv::Scalar(233), 1,cv::Scalar(233), 1);
+    drowShape(cont,&res,cv::Scalar(233), 1,cv::Scalar(233), 3);
+    //conv_cont.turn(-0.1);
+    //drowShape(conv_cont,&res,cv::Scalar(233), 1,cv::Scalar(233), 3);
     cv::namedWindow("show", 0);
 
    while (1)

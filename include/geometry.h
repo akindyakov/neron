@@ -146,7 +146,7 @@ namespace Geometry
       float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
-
+   
       Reduced_vector m_direct_vector;
    };
 
@@ -157,22 +157,23 @@ namespace Geometry
       Convex_contour(const Point2f& center,
                      const std::list<Reduced_vector>& polinom);
       Convex_contour(const std::list<Point2f>& polinom);
-
+      
       virtual ~Convex_contour(){};
-
-      //int get_type()const;
-
+      
       void push_back(const Reduced_vector& pt);
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
       bool insidePoint(const Point2f& point)const;
       bool shapeIntersection(const I_Shape& inputShape,
                              std::list<Point2f>* genPoins=NULL);
-
+      
       float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
+      
+      Point2f getEnd();
+      
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
-
+      
       // --- data ---
       std::list<Reduced_vector> m_vec;
    };
@@ -182,13 +183,12 @@ namespace Geometry
    public:
       Contour(const Point2f& center, const std::list<Reduced_vector>& polinom);
       Contour(const std::list<Point2f>& polinom);
-      //Contour(const Contour& cont);
-
+      
       virtual ~Contour(){};
-
+      
       // const Point2f& getCenter();
       // const std::list<Reduced_vector>& getVectorList();
-
+      
       void push_back(const Reduced_vector& pt);
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;

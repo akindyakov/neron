@@ -17,8 +17,10 @@ namespace G = Geometry;
 
 G::Contour::Contour(const G::Point2f& center,
                     const std::list<G::Reduced_vector>& polinom)
+   : m_vec(polinom)
 {
-
+   m_center = center;
+   this->convertToContour();
 }
 
 G::Contour::Contour(const std::list<G::Point2f>& polinom)
@@ -41,12 +43,20 @@ G::Contour::Contour(const std::list<G::Point2f>& polinom)
 
 void G::Contour::push_back(const G::Reduced_vector& pt)
 {
-
+   m_vec.push_back(pt);
 }
 
 void G::Contour::turn(float angle)
 {
-
+   G::Point2f prevEnd = m_contours.front().m_center;
+   for ( std::list< G::Convex_contour >::iterator contIt
+                                                   = m_contours.begin();
+         contIt != m_contours.end(); ++contIt )
+   {
+      contIt->turn(angle);
+      contIt->m_center = prevEnd;
+      prevEnd = contIt->getEnd();
+   }
 }
 
 bool G::Contour::belongingPoint(const G::Point2f& point)const
