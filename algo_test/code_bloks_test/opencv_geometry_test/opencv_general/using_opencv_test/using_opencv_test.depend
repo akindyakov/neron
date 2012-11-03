@@ -105,16 +105,16 @@
 
 1349037222 /media/general/src/neron//include/smooth_signal.h
 
-1349902110 source:/media/general/src/neron_src/algo_test/code_bloks_test/opencv_geometry_test/opencv_general/using_opencv_test/main.cpp
+1351838796 source:/media/general/src/neron_src/algo_test/code_bloks_test/opencv_geometry_test/opencv_general/using_opencv_test/main.cpp
 	<iostream>
 	<opencv2/core/core.hpp>
 	<opencv2/highgui/highgui.hpp>
 	"include/geometry.h"
+	"include/geometry_drow.hpp"
 
-1349956897 /media/general/src/neron_src//include/geometry.h
+1351882465 /media/general/src/neron_src//include/geometry.h
 	<vector>
 	<list>
-	<opencv2/core/core.hpp>
 
 1349420803 source:/media/general/src/neron_src/src/util/geometry/2d_line_shape.cpp
 	<iostream>
@@ -132,14 +132,14 @@
 	"include/geometry.h"
 	"include/math.h"
 
-1349067167 source:/media/general/src/neron_src/src/util/geometry/contour_shape.cpp
+1351882444 source:/media/general/src/neron_src/src/util/geometry/contour_shape.cpp
 	<iostream>
 	<iterator>
 	<cmath>
 	"include/geometry.h"
 	"include/math.h"
 
-1349067167 source:/media/general/src/neron_src/src/util/geometry/convex_contour_shape.cpp
+1351882131 source:/media/general/src/neron_src/src/util/geometry/convex_contour_shape.cpp
 	<iostream>
 	<iterator>
 	<cmath>
@@ -193,16 +193,21 @@
 
 1349067167 /media/general/src/neron_src//include/smooth_signal.h
 
-1349931237 source:/media/general/src/neron_src/src/util/geometry/show_shape.cpp
+1350744962 source:/media/general/src/neron_src/src/util/geometry/show_shape.cpp
 	<iostream>
 	<iterator>
 	<opencv2/core/core.hpp>
 	"include/geometry.h"
+	"include/geometry_drow.hpp"
 
-1349422700 source:/media/general/src/neron_src/src/util/geometry/interval_shape.cpp
+1351882329 source:/media/general/src/neron_src/src/util/geometry/interval_shape.cpp
 	<iostream>
 	<iterator>
 	<cmath>
 	"include/geometry.h"
 	"include/math.h"
+
+1351882622 /media/general/src/neron_src//include/geometry_drow.hpp
+	<opencv2/core/core.hpp>
+	"include/geometry.h"
 

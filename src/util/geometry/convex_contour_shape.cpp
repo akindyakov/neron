@@ -15,6 +15,10 @@
 //=============================================================================
 
 namespace G = Geometry;
+G::Convex_contour::Convex_contour(const G::Point2f& center)
+{
+   m_center = center;
+}
 
 G::Convex_contour::Convex_contour(const G::Point2f& center,
                                   const std::list<G::Reduced_vector>& polinom)
@@ -28,12 +32,16 @@ G::Convex_contour::Convex_contour(const std::list<G::Point2f>& polinom)
 {
    std::list<G::Point2f>::const_iterator polIt = polinom.begin();
    m_center = *polIt;
-
+   ++polIt;
+   std::cout << "create convex contour:\n   " 
+             << m_center.x << " " << m_center.y << std::endl;
    for (std::list<G::Point2f>::const_iterator prevPolIt = polinom.begin();
                    polIt != polinom.end(); ++polIt, ++prevPolIt)
    {
       m_vec.push_back(Geometry::Reduced_vector( polIt->x - prevPolIt->x,
                                                 polIt->y - prevPolIt->y) );
+      std::cout << "pt: " << polIt->x - prevPolIt->x << " "
+                          << polIt->y - prevPolIt->y << std::endl;
    }
 }
 
