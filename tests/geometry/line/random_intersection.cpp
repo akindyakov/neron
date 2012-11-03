@@ -1,6 +1,7 @@
 /**
- **autor   alexander k
- **date    03.11.2012.15.40
+ ** autor   alexander k
+ ** email   akindyakov@gmail.com
+ ** date    03.11.2012.15.40
 */
 
 //=============================================================================
@@ -9,4 +10,4 @@
 #include "include/geometry.h"
 //=============================================================================
 
-geometry::Contour createStarContour(const cv::Mat& image);
+

@@ -9,4 +9,4 @@
 #include "include/geometry.h"
 //=============================================================================
 
-geometry::Contour createStarContour(const cv::Mat& image);
+
