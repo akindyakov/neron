@@ -23,9 +23,11 @@ G::Interval::Interval(const G::Point2f& pt1,
    m_center= pt1;
    G::Reduced_vector dir_vector(pt2.x-pt1.x, pt2.y-pt1.y);
    m_vector = dir_vector;
+   /*
    std::cout << "Interval create :"
              << "\n       center: " << pt1.x << " " << pt1.y
              << "\n       vector: " << m_vector.x << " " << m_vector.y << std::endl;
+   */
 }
 
 G::Interval::Interval(const G::Point2f& pt,
@@ -119,6 +121,7 @@ bool G::Interval::belongRectangleArea(const G::Point2f& pt)const
    G::Point2f up;
    M::maxMin(first.x, second.x, &(up.x), &(low.x));
    M::maxMin(first.y, second.y, &(up.y), &(low.y));
+   /*
    std::cout << "up_x: "    << up.x
              << "; low.x: " << low.x
              << "; up_y: "  << up.y
@@ -127,14 +130,15 @@ bool G::Interval::belongRectangleArea(const G::Point2f& pt)const
    std::cout << first.x  << " " << first.y  << std::endl;
    std::cout << second.x  << " " << second.y  << std::endl;
    std::cout << pt.x  << " " << pt.y  << std::endl;
+   */
    if (  (pt.x < up.x  || M::equal(pt.x, up.x))
       && (pt.y < up.y  || M::equal(pt.y, up.y))
       && (pt.x > low.x || M::equal(pt.x, low.x))
       && (pt.y > low.y || M::equal(pt.y, low.y)) )
    {
-      std::cout << "true\n";
+      //std::cout << "true\n";
       return true;
    }
-   std::cout << "false\n";
+   //std::cout << "false\n";
    return false;
 }

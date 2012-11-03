@@ -92,7 +92,7 @@ void G::drowShape(const G::Line_2d& line,
                   const cv::Scalar& second_color,
                   int second_intence)
 {
-   std::cout << "drow line \n";
+   //std::cout << "drow line \n";
    std::list< G::Point2f > borderPt;
    findBorderPoints(line, image, &borderPt);
    
@@ -117,7 +117,7 @@ void G::drowShape(const G::Interval& interval,
                   const cv::Scalar& second_color,
                   int second_intence)
 {
-   std::cout << "drow Line_2d\n";
+   //std::cout << "drow Line_2d\n";
 
    cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
    cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);

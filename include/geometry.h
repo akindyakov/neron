@@ -199,12 +199,12 @@ namespace Geometry
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
       
-      int convertToContour();
-      bool id_converted();
+      void convertToContour();
+      int  is_converted();
       // --- data ---
       std::list<Reduced_vector> m_vec;
       std::list<Convex_contour> m_contours;
-      int status;
+      int m_status;
    };
 
    void getBorder( const std::list<Point2f>& points,

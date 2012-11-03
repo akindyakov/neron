@@ -15,6 +15,10 @@
 //=============================================================================
 
 namespace G = Geometry;
+G::Convex_contour::Convex_contour(const G::Point2f& center)
+{
+   m_center = center;
+}
 
 G::Convex_contour::Convex_contour(const G::Point2f& center,
                                   const std::list<G::Reduced_vector>& polinom)
