@@ -7,6 +7,7 @@
 
 int main()
 {
+   cv::Mat res(300, 300, CV_8UC1, cv::Scalar(1));
     Geometry::Point2f pt0(0,0);
     Geometry::Point2f pt1(150,150);
     Geometry::Point2f pt2(0,150);
@@ -30,7 +31,7 @@ int main()
     polinom.push_back( pt0 );
 
     Geometry::Convex_contour conv_cont(polinom);
-    Geometry::Contour cont(polinom);
+    Geometry::Contour cont = createStarContour(res);
     Geometry::Line_2d line1(pt0, pt1);
     Geometry::Line_2d line2(pt2, pt3);
 
@@ -38,7 +39,7 @@ int main()
 
     Geometry::Interval interval1(pt4, pt5);
     Geometry::Interval interval2(outpt, pt5);
-    cv::Mat res(300, 300, CV_8UC1, cv::Scalar(1));
+
 
     //drowShape(circ, &res, cv::Scalar(233),1, cv::Scalar(255),1);
     std::cout << "drow line 1\n";

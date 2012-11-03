@@ -111,10 +111,10 @@ void G::Contour::convertToContour()
    for ( ; secondIt != m_vec.end(); ++firstIt, ++secondIt )
    {
       now_vector_proud = firstIt->vector_proud(*secondIt);
-      if ( now_vector_proud * last_vector_proud > 0)
+      if ( now_vector_proud * last_vector_proud >= 0)
       {
          curr_cont.push_back(*secondIt);
-
+         last_vector_proud = now_vector_proud;
       }
       else /* sign have been changed */
       {
@@ -122,9 +122,10 @@ void G::Contour::convertToContour()
          curr_cont.m_vec.resize(0);
          curr_cont.m_center = runingStartPt;
          curr_cont.push_back(*secondIt);
+         last_vector_proud = 0;
       }
       runingStartPt = runingStartPt + *secondIt;
-      last_vector_proud = now_vector_proud;
+
    }
    m_contours.push_back(curr_cont); // write last convex_contour
 }
