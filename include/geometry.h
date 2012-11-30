@@ -44,6 +44,7 @@ namespace Geometry
       friend Reduced_vector operator * (const Reduced_vector&, float);
       friend Reduced_vector operator * (float, const Reduced_vector&);
       friend Reduced_vector operator + (const Reduced_vector& vec1, const Reduced_vector& vec2);
+      //friend Reduced_vector operator - (const Reduced_vector& vec1, const Reduced_vector& vec2);
       friend Point2f        operator + (const Point2f& pt, const Reduced_vector& vec);
       Reduced_vector operator - ();
    };
@@ -334,7 +335,10 @@ namespace Geometry
                                 std::list< Point2f >* p_unic_cloud );
 
    void uniqPoint( std::list< Point2f >* cloud );
-
+   
+   void turnShape( I_Shape* shape, float angle, Point2f basePt);
+   //void turnShape( I_Shape* src, I_Shape* dst, Point2f basePt);
+   
    struct Geometry_error
    {
       Geometry_error(const char* _name):name(_name){};
