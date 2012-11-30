@@ -3,7 +3,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "include/geometry.h"
 #include "include/geometry_drow.h"
-#include "tests/geometry/contour/createSamples.h"
+#include "tests/geometry/contour/contour_drow_test.h"
+#include "tests/geometry/contour/contour_drow_test.h"
+#include "tests/geometry/contour/contour_drow_test.h"
 
 int main()
 {

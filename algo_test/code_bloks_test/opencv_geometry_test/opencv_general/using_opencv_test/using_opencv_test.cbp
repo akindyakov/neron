@@ -44,6 +44,7 @@
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Unit filename="../../../../../include/geometry.h" />
+		<Unit filename="../../../../../include/geometry_drow.h" />
 		<Unit filename="../../../../../include/math.h" />
 		<Unit filename="../../../../../include/smooth_signal.h" />
 		<Unit filename="../../../../../src/util/geometry/2d_line_shape.cpp" />
@@ -52,13 +53,13 @@
 		<Unit filename="../../../../../src/util/geometry/convex_contour_shape.cpp" />
 		<Unit filename="../../../../../src/util/geometry/intersection_shape.cpp" />
 		<Unit filename="../../../../../src/util/geometry/interval_shape.cpp" />
-		<Unit filename="../../../../../src/util/geometry/rectangle_shape.cpp" />
 		<Unit filename="../../../../../src/util/geometry/show_shape.cpp" />
-		<Unit filename="../../../../../src/util/geometry/triangle_shape.cpp" />
 		<Unit filename="../../../../../src/util/geometry/util.cpp" />
 		<Unit filename="../../../../../src/util/math_equal.cpp" />
 		<Unit filename="../../../../../src/util/math_sort.cpp" />
 		<Unit filename="../../../../../src/util/smooth_signal.cpp" />
+		<Unit filename="../../../../../tests/geometry/circle/circle_drow_test.cpp" />
+		<Unit filename="../../../../../tests/geometry/circle/circle_drow_test.h" />
 		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.cpp" />
 		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.h" />
 		<Extensions>

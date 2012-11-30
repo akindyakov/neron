@@ -26,6 +26,7 @@ Geometry::Contour createStarContour(const cv::Mat& image)
    polinom.push_back(Geometry::Point2f(len/3, len/2 + len/6));
    polinom.push_back(Geometry::Point2f(0 , len/2));
    polinom.push_back(Geometry::Point2f(len/3 , len/3));
-
+   polinom.push_back(Geometry::Point2f(len/2 , 0));
+   
    return Geometry::Contour(polinom);
 }

@@ -232,25 +232,25 @@ Geometry::Reduced_vector Geometry::operator + (const Geometry::Reduced_vector& v
    return Geometry::Reduced_vector(vec1.x+vec2.x, vec1.y+vec2.y);
 }
 
-Geometry::Point2f Geometry::operator + (const Geometry::Point2f& pt,
-                                        const Geometry::Reduced_vector& vec)
+G::Point2f G::operator + (const G::Point2f& pt,
+                          const G::Reduced_vector& vec)
 {
-   return Geometry::Point2f(pt.x+vec.x, pt.y+vec.y);
+   return G::Point2f(pt.x+vec.x, pt.y+vec.y);
 }
 
-Geometry::Reduced_vector Geometry::Reduced_vector::operator - ()
+G::Reduced_vector G::Reduced_vector::operator - ()
 {
    return Geometry::Reduced_vector(-this->x,-this->y);
 }
 
 //  --- auxiliary functions ---
-std::list<Geometry::Point2f> Geometry::getRandomPointCloud(int n,
-                                                           Point2f lowBorder,
-                                                           Point2f upBorder)
+std::list<G::Point2f> G::getRandomPointCloud(int n,
+                                                    G::Point2f lowBorder,
+                                                    G::Point2f upBorder)
 {
    if ((lowBorder.x > upBorder.x)
        || (lowBorder.y > lowBorder.y))
-      throw Geometry::Geometry_error("up must be larger then low");
+      throw G::Geometry_error("up must be larger then low");
 
    std::srand(std::time(NULL));
    int interval_for_x =static_cast<int>(upBorder.x - lowBorder.x);
@@ -352,7 +352,7 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
 {
    std::list< G::Point2f >::iterator endit = cloud->end();
 
-   
+
    for ( std::list< G::Point2f >::iterator it1 = cloud->begin();
          it1 != endit; ++it1)
    {
@@ -386,3 +386,21 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
    std::cout << "end it:" <<  endit->x << " " << endit->y << std::endl;*/
    cloud->erase(endit, cloud->end());
 }
+
+void G::turnShape( G::I_Shape* shape, float angle, G::Point2f basePt)
+{
+   shape->turn(angle);
+   G::Reduced_vector turn_move_vec(basePt, shape->m_center);
+   G::Reduced_vector old_base_vec(turn_move_vec);
+   turn_move_vec.turn(angle);
+   turn_move_vec = turn_move_vec + -old_base_vec;
+
+   shape->m_center = shape->m_center + turn_move_vec;
+}
+
+//G::I_Shape* G::turnShape(const G::I_Shape& src, float angle, G::I_Shape* dst, G::Point2f basePt)
+//{
+//   G::I_Shape* dst = src.copy();
+//   turnShape( dst, angle, basePt);
+//   return dst;
+//}
