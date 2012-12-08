@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="250" topLine="2" />
+	<File name="main.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="521" topLine="12" />
 	</File>
 	<File name="../../../../../include/geometry.h" open="1" top="0" tabpos="2">
 		<Cursor position="10936" topLine="315" />
 	</File>
-	<File name="../../../../../include/geometry_drow.h" open="1" top="1" tabpos="11">
+	<File name="../../../../../include/geometry_drow.h" open="1" top="0" tabpos="9">
 		<Cursor position="2358" topLine="67" />
 	</File>
 	<File name="../../../../../include/math.h" open="0" top="0" tabpos="4">
@@ -49,10 +49,13 @@
 	<File name="../../../../../src/util/smooth_signal.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="416" topLine="0" />
 	</File>
-	<File name="../../../../../tests/geometry/circle/circle_drow_test.cpp" open="1" top="0" tabpos="10">
+	<File name="../../../../../tests/geometry/circle/circle_drow_test.cpp" open="1" top="0" tabpos="8">
 		<Cursor position="556" topLine="2" />
 	</File>
 	<File name="../../../../../tests/geometry/contour/drowAndTurn.cpp" open="1" top="0" tabpos="6">
 		<Cursor position="1078" topLine="16" />
+	</File>
+	<File name="../../../../../tests/geometry/line/line_drow_test.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="453" topLine="7" />
 	</File>
 </CodeBlocks_layout_file>

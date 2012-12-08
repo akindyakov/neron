@@ -8,6 +8,7 @@
 #ifndef GEOMETRY_DROW_H
 #define GEOMETRY_DROW_H
 //=============================================================================
+#include <iostream>
 #include <opencv2/core/core.hpp>
 //=============================================================================
 #include "include/geometry.h"
@@ -59,14 +60,9 @@ namespace Geometry
    cv::Point2f to_openCV_coord(const T& vector,
                                const cv::Mat& image)
    {
-      if (  image.rows < vector.y
-         || image.cols < vector.x )
-         throw Geometry_error("border overflow in to_openCV_coord()");
-      /*
-      std::cout << " show int : opencv pt2 :" 
-                << vector.x << " " 
-                << image.rows-vector.y << std::endl;
-      */
+     // std::cout << " show int : opencv pt2 :" 
+     //           << vector.x << " " 
+     //           << image.rows-vector.y << std::endl;
       return cv::Point2f(vector.x, image.rows-vector.y);
    }
 
@@ -80,16 +76,16 @@ namespace Geometry
 
    template<class T>
    void drowVector(const Point<T>& center,
-                      const Reduced_vector& vect,
-                      cv::Mat* image,
-                      const cv::Scalar& color,
-                      int intence)
+                   const Reduced_vector& vect,
+                   cv::Mat* image,
+                   const cv::Scalar& color,
+                   int intence)
    {
       drowPoint(center, image, color, intence);
       if (intence > 1)
          intence /= 2;
       cv::Point2f pt1 = to_openCV_coord(center, *image);
-      cv::Point2f pt2 = to_openCV_coord(vect, *image);
+      cv::Point2f pt2 = to_openCV_coord(center+vect, *image);
       cv::line(*image, pt1, pt2, color, intence);
    }
   } // end of namespace geometry

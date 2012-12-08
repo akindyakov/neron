@@ -95,7 +95,6 @@ void G::drowShape(const G::Line_2d& line,
    //std::cout << "drow line \n";
    std::list< G::Point2f > borderPt;
    findBorderPoints(line, image, &borderPt);
-
    if (borderPt.size() != 2)
       throw G::Geometry_error("not correct border - showLine function");
    cv::Point2f pt1  = to_openCV_coord(borderPt.front(), *image);

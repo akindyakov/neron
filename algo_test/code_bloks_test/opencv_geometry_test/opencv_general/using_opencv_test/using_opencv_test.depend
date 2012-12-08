@@ -105,15 +105,14 @@
 
 1349037222 /media/general/src/neron//include/smooth_signal.h
 
-1353403514 source:/media/general/src/neron_src/algo_test/code_bloks_test/opencv_geometry_test/opencv_general/using_opencv_test/main.cpp
+1354952529 source:/media/general/src/neron_src/algo_test/code_bloks_test/opencv_geometry_test/opencv_general/using_opencv_test/main.cpp
 	<iostream>
 	<opencv2/core/core.hpp>
 	<opencv2/highgui/highgui.hpp>
 	"include/geometry.h"
 	"include/geometry_drow.h"
-	"tests/geometry/contour/contour_drow_test.h"
-	"tests/geometry/contour/contour_drow_test.h"
-	"tests/geometry/contour/contour_drow_test.h"
+	"tests/geometry/circle/circle_drow_test.h"
+	"tests/geometry/line/line_drow_test.h"
 
 1354267876 /media/general/src/neron_src//include/geometry.h
 	<vector>
@@ -196,7 +195,7 @@
 
 1349067167 /media/general/src/neron_src//include/smooth_signal.h
 
-1352099303 source:/media/general/src/neron_src/src/util/geometry/show_shape.cpp
+1354986481 source:/media/general/src/neron_src/src/util/geometry/show_shape.cpp
 	<iostream>
 	<iterator>
 	<opencv2/core/core.hpp>
@@ -214,7 +213,8 @@
 	<opencv2/core/core.hpp>
 	"include/geometry.h"
 
-1352099303 /media/general/src/neron_src//include/geometry_drow.h
+1354986631 /media/general/src/neron_src//include/geometry_drow.h
+	<iostream>
 	<opencv2/core/core.hpp>
 	"include/geometry.h"
 
@@ -236,4 +236,22 @@
 1353347696 /media/general/src/neron_src//tests/geometry/contour/contour_drow_test.h
 	<opencv2/core/core.hpp>
 	"include/geometry.h"
+
+1354910897 source:/media/general/src/neron_src/tests/geometry/circle/circle_drow_test.cpp
+	<list>
+	<opencv2/core/core.hpp>
+	"include/geometry.h"
+	"include/geometry_drow.h"
+	"tests/geometry/contour/drowAndTurn.h"
+
+1354910448 /media/general/src/neron_src//tests/geometry/circle/circle_drow_test.h
+	<opencv2/core/core.hpp>
+
+1354911841 /media/general/src/neron_src//tests/geometry/line/line_drow_test.h
+	<opencv2/core/core.hpp>
+
+1354951848 source:/media/general/src/neron_src/tests/geometry/line/line_drow_test.cpp
+	<opencv2/core/core.hpp>
+	"include/geometry.h"
+	"include/geometry_drow.h"
 

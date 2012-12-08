@@ -62,6 +62,8 @@
 		<Unit filename="../../../../../tests/geometry/circle/circle_drow_test.h" />
 		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.cpp" />
 		<Unit filename="../../../../../tests/geometry/contour/drowAndTurn.h" />
+		<Unit filename="../../../../../tests/geometry/line/line_drow_test.cpp" />
+		<Unit filename="../../../../../tests/geometry/line/line_drow_test.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
