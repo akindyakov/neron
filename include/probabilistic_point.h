@@ -11,6 +11,11 @@
 //=============================================================================
 namespace ProbPoint
 {
-   
+   class I_ProbPoint : public Geometry::Point2f
+   {
+   public:
+   private:
+      
+   };
 }
 #endif //_PROBABILISTIC_POIT_H_
