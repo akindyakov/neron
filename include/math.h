@@ -50,6 +50,18 @@ namespace Math
       }
       return;
    }
-
+   
+   template <class T>
+   class Polinom
+   {
+   pablic:
+      Polinom();
+      Polinom(const std::vector<T>& _coeff);
+      
+      compute(T arg);
+      
+   private;
+      std::vector<T> m_coeff;
+   };
 } //end Math
 #endif //MATH_H

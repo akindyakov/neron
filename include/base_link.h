@@ -12,28 +12,28 @@
 //=============================================================================
 namespace SimpleLink
 {
-	using boost::shared_ptr;
+   using boost::shared_ptr;
 
-	class I_AgentLink
-	{
+   class I_AgentLink
+   {
    public:
-   	I_AgentLink(){};
-   	//!default destruct
-    	virtual ~I_AgentLink(){};
+      I_AgentLink(){};
+      //!default destruct
+      virtual ~I_AgentLink(){};
 
-    	//!return id conected agent
-    //	virtual unsigned long int get_id();
+      //!return id conected agent
+    //   virtual unsigned long int get_id();
 
-    	//!methods for coonect agent
-		virtual unsigned long int setPurpose(shared_ptr<I_BaseAgent> outAgent);
+      //!methods for coonect agent
+      virtual unsigned long int setPurpose(shared_ptr<I_BaseAgent> outAgent);
 
-		//!methods for transmitting
-		virtual void transmite(int val);
+      //!methods for transmitting
+      virtual void transmite(int val);
 
-		//!methods for link learning
-		//virtual void learn(int globalFeeling);
-		virtual int* getCurrentKoeff();
-		virtual int getOutAgentState();
-	};
+      //!methods for link learning
+      //virtual void learn(int globalFeeling);
+      virtual int* getCurrentKoeff();
+      virtual int getOutAgentState();
+   };
 } //endnamespace SimpleLink
 #endif //BASE_LINK_H
