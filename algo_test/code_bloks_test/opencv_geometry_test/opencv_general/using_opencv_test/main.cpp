@@ -9,7 +9,7 @@
 
 int main()
 {
-   cv::Mat res(300, 300, CV_8UC1, cv::Scalar(255));
+   cv::Mat res(600, 600, CV_8UC1, cv::Scalar(255));
 
    // Geometry::Contour cont = createStarContour(res);
 

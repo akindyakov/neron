@@ -21,13 +21,13 @@ void turningDrowLine(cv::Mat * image)
 
    Geometry::Point2f turn_center(len/2,len/2);
 
-   int n = 35;
+   int n = 75;
 
    for (int i =0; i < n; ++i)
    {
       Geometry::Line_2d dr_line(b_line);
       Geometry::turnShape(&dr_line, 2*M_PI*i/n, turn_center);
       Geometry::drowShape(dr_line, image, cv::Scalar(0), 1,
-                cv::Scalar(0), 2);
+                cv::Scalar(0), 0);
    }
 }
