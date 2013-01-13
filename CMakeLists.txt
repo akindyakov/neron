@@ -8,4 +8,5 @@ project(Neron CXX)
 
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
 
+set(SOURCE_LIB )
 set(SOURCE_EXE main.cpp)
