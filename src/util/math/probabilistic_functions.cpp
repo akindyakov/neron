@@ -43,7 +43,10 @@ M::Solid_probabilistic_law::Solid_probabilistic_law (Vt diviation, Vt expectatio
 template class Vt
 Vt M::Solid_probabilistic_law::getDencity(Vt arg)
 {
-   return 1/(2*m_width);
+   if ( abs(arg-m_expectation) < m_width )
+      return 1/(2*m_width);
+   else
+      return 0;
 }
 
 template class Vt
@@ -57,13 +60,21 @@ Vt M::Solid_probabilistic_law::getIntegral(Vt start, Vt finish)
 template class Vt
 M::Triangle_probabilistic_law::Triangle_probabilistic_law (Vt diviation, Vt expectation)
 {
-   
+   m_width = 3*diviation;
 }
 
 template class Vt
 Vt M::Triangle_probabilistic_law::getDencity(Vt arg)
 {
-   
+   Vt local_coord = arg - m_expectation;
+   if ( abs(local_coord) < m_width )
+   {
+      Vt hight = 1/m_width;
+      return (m_width - abs(local_coord))*hight/m_width;
+   }
+   else
+      return 0;
+
 }
 
 template class Vt
