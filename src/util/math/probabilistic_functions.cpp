@@ -35,21 +35,23 @@ Vt M::Normal_distrib::getIntegral(Vt start, Vt finish)
 }
 
 template class Vt
-Solid_probabilistic_law (Vt diviation, Vt expectation)
+M::Solid_probabilistic_law::Solid_probabilistic_law (Vt diviation, Vt expectation)
 {
-   
+   m_width = 3*diviation;
 }
   
 template class Vt
-Vt M::::getDencity(Vt arg)
+Vt M::Solid_probabilistic_law::getDencity(Vt arg)
 {
-   
+   return 1/(2*m_width);
 }
 
 template class Vt
-Vt M::::getIntegral(Vt start, Vt finish)
+Vt M::Solid_probabilistic_law::getIntegral(Vt start, Vt finish)
 {
-   
+   if ( finish < start ) 
+      throw (M::Math_error("(Solid_probabilistic_law::getIntegral) probabilistic must not be negative"));
+   return (finish - start)/(2*m_width);
 }
 
 template class Vt
@@ -57,7 +59,7 @@ M::Triangle_probabilistic_law::Triangle_probabilistic_law (Vt diviation, Vt expe
 {
    
 }
-  
+
 template class Vt
 Vt M::Triangle_probabilistic_law::getDencity(Vt arg)
 {
