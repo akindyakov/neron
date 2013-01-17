@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(turn_shape_test)
 
-add_subdirectory(${MAP_GEOMETRY_LIB})
+include_directories(${MAP_GEOMETRY_LIB_DIR})
 
 include_directories(headers)
 
