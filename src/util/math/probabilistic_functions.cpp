@@ -55,37 +55,37 @@ float M::Triangle_probabilistic_law::getIntegral(float start, float finish)
 {
    if ( finish < start )
       throw (M::Math_error("(Trianle_probabilistic_law::getIntegral) probabilistic must not be negative"));
-   
+
    if ( finish < m_expectation - m_width )
       return 0;
-   
-   if ( start > m_exprctation + m_width )
+
+   if ( start > m_expectation + m_width )
       return 0;
-   
+
    if ( finish > m_expectation + m_width )
-   {
       finish = m_expectation + m_width;
-      
+
    if ( start < m_expectation - m_width )
       start = m_expectation - m_width;
-   
+
    if ( start > m_expectation )
    {
       float osnov_f = (m_width - (finish-m_expectation));
       float osnov_s = (m_width - (start-m_expectation));
-      return (finish - start) * osnov_f * osnov_f / 2;
+      return (finish - start) * osnov_s * osnov_f / 2;
    }
+
    if ( finish < m_expectation )
    {
       float osnov_f = (m_width - (m_expectation-finish));
       float osnov_s = (m_width - (m_expectation-start));
-      return (finish - start) * osnov_f * osnov_f / 2;
+      return (finish - start) * osnov_s * osnov_f / 2;
    }
-   
+
    float osnov_f = (m_width - (finish-m_expectation));
    float osnov_s = (m_width - (m_expectation-start));
-   
-   float sq_s = (m_expectation - start) * (osnov_s + m_expeactation) / 2;
+
+   float sq_s = (m_expectation - start) * (osnov_s + m_expectation) / 2;
    float sq_f = (finish - m_expectation) * (osnov_f + m_expectation) / 2;
    return sq_s + sq_f;
 }
