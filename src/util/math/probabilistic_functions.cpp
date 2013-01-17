@@ -6,6 +6,7 @@
 
 //=============================================================================
 //=============================================================================
+#include "include/util/math/probabilistic_functions.h"
 //=============================================================================
 
 namespace M = Math;
@@ -13,14 +14,14 @@ namespace M = Math;
 // TODO carry out this constants to math header
 double const InverseSqrtTwoPi = 0.39894228040143; // 1/(sqrt(2*pi))
 
-template class Vt
+template <class Vt>
 M::Normal_distrib(Vt diviation, Vt expectation)
    :  m_diviation(diviation)
 {
    m_expectation(expectation);
 }
 
-template class Vt
+template <class Vt>
 Vt M::Normal_distrib::getDencity(Vt arg)
 {
    Vt cmp_temp = (arg - m_expectation) / m_diviation;
@@ -28,19 +29,19 @@ Vt M::Normal_distrib::getDencity(Vt arg)
    return ( InverseTwoPi/(m_deviation) ) * exp( -cmp_temp);
 }
 
-template class Vt
+template <class Vt>
 Vt M::Normal_distrib::getIntegral(Vt start, Vt finish)
 {
-  //think about it 
+  //think about it
 }
 
-template class Vt
+template <class Vt>
 M::Solid_probabilistic_law::Solid_probabilistic_law (Vt diviation, Vt expectation)
 {
    m_width = 3*diviation;
 }
-  
-template class Vt
+
+template <class Vt>
 Vt M::Solid_probabilistic_law::getDencity(Vt arg)
 {
    if ( abs(arg-m_expectation) < m_width )
@@ -49,21 +50,21 @@ Vt M::Solid_probabilistic_law::getDencity(Vt arg)
       return 0;
 }
 
-template class Vt
+template <class Vt>
 Vt M::Solid_probabilistic_law::getIntegral(Vt start, Vt finish)
 {
-   if ( finish < start ) 
+   if ( finish < start )
       throw (M::Math_error("(Solid_probabilistic_law::getIntegral) probabilistic must not be negative"));
    return (finish - start)/(2*m_width);
 }
 
-template class Vt
+template <class Vt>
 M::Triangle_probabilistic_law::Triangle_probabilistic_law (Vt diviation, Vt expectation)
 {
    m_width = 3*diviation;
 }
 
-template class Vt
+template <class Vt>
 Vt M::Triangle_probabilistic_law::getDencity(Vt arg)
 {
    Vt local_coord = arg - m_expectation;
@@ -80,24 +81,24 @@ Vt M::Triangle_probabilistic_law::getDencity(Vt arg)
 template class Vt
 Vt M::Triangle_probabilistic_law::getIntegral(Vt start, Vt finish)
 {
-   
+
 }
 
 template class Vt
 M::Trapezoid_probabilistic_law::Trapezoid_probabilistic_law (Vt diviation, Vt expectation)
 {
-   
+
 }
 
 template class Vt
 Vt M::Trapezoid_probabilistic_law::getDencity(Vt arg)
 {
-   
+
 }
 
 template class Vt
 Vt M::Trapezoid_probabilistic_law::getIntegral(Vt start, Vt finish)
 {
-   
+
 }
 
