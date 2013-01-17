@@ -13,57 +13,59 @@
 
 namespace Math
 {
-   template class Vt
    class I_Prob_distrib
    {
    public:
-      virtual Vt getIntencity(Vt arg);
-      virtual Vt getIntegral(Vt start, Vt finish);
-      
-      Vt m_expectation;
+      virtual float getDencity(float arg)=0;
+      virtual float getIntegral(float start, float finish)=0;
+
+      float m_expectation;
    };
-   
-   template class Vt
-   class Normal_probabilistic_law: public I_Prob_distribution<Vt>
+
+   class Normal_probabilistic_law: public I_Prob_distrib
    {
    public:
-      Normal_probabilistic_law(Vt diviation, Vt expectation);
-      
-      Vt getDencity(Vt arg);
-      Vt getIntegral(Vt start, Vt finish);
+      Normal_probabilistic_law(float diviation, float expectation);
+
+      float getDencity(float arg);
+      float getIntegral(float start, float finish);
    private:
-      Vt m_deviation;
+      float m_deviation;
    };
-   
-   template class Vt
-   class Solid_probabilistic_law: public I_Prob_distribution<Vt>
+
+   class Solid_probabilistic_law: public I_Prob_distrib
    {
    public:
-      Solid_probabilistic_law (Vt diviation, Vt expectation);
-      
+      Solid_probabilistic_law (float diviation, float expectation);
+
+      float getDencity(float arg);
+      float getIntegral(float start, float finish);
    private:
-      Vt m_width;
+      float m_width;
    };
-   
-   template class Vt
-   class Triangle_probabilistic_law: public I_Prob_distribution<Vt>
+
+   class Triangle_probabilistic_law: public I_Prob_distrib
    {
    public:
-      Solid_probabilistic_law (Vt diviation, Vt expectation);
-      
+      Triangle_probabilistic_law (float diviation, float expectation);
+
+      float getDencity(float arg);
+      float getIntegral(float start, float finish);
    private:
-      Vt m_width;
+      float m_width;
    };
-   
-   template class Vt
-   class Trapezoid_probabilistic_law: public I_Prob_distribution<Vt>
+
+   class Trapezoid_probabilistic_law: public I_Prob_distrib
    {
    public:
-      Solid_probabilistic_law (Vt diviation, Vt expectation);
-      
+      Trapezoid_probabilistic_law (float diviation, float expectation);
+
+      float getDencity(float arg);
+      float getIntegral(float start, float finish);
+
    private:
-      Vt m_low_width;
-      Vt m_hi_width;
+      float m_low_width;
+      float m_hi_width;
    };
 } //end namespace Math
 
