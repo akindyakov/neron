@@ -1,11 +1,17 @@
+/**
+ ** autor   Alexander K
+ ** date    06.12.2012.23.18
+ ** BRIEF   simple turn test for general geometry shapes
+*/
+
+//=============================================================================
 #include <iostream>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+//=============================================================================
 #include "include/geometry.h"
 #include "include/geometry_drow.h"
-#include "tests/geometry/circle/circle_drow_test.h"
-//#include "tests/geometry/contour/contour_drow_test.h"
-#include "tests/geometry/line/line_drow_test.h"
+//=============================================================================
 
 int main()
 {
