@@ -18,12 +18,24 @@ foreach(LIBRARY${LIBRARIES})
    endif()
 endforeach()
 
-project(Neron CXX)
+project(Neron)
 
-set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+set( REQUIRED_LIBRARIES 
+      my_addition_lib
+      boost_thread 
+      boost_system )
 
-set(SOURCE_LIB )
-set(SOURCE_EXE main.cpp)
+set(BIN_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+
+set(SOURCE_ROOT "${CMAKE_SOURCE_DIR}/src")
+
+aux_source_directory( ${SOURCE_ROOT} SOURCES )
+
+link_directories()
+add_library(Neron SHARED ${SOURCES})
+target_link_libraries( Neron ${REQUIRED_LIBRARIES} )
 
 add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
 add_subdirectory(tests/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH)
+add_subdirectory(tests/map/create_map_test/ EXECUTABLE_OUTPUT_PATH)
+add_subdirectory(tests/util/math/probabilistic_law_build/ EXECUTABLE_OUTPUT_PATH)
