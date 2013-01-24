@@ -24,3 +24,6 @@ set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
 
 set(SOURCE_LIB )
 set(SOURCE_EXE main.cpp)
+
+add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
+add_subdirectory(tests/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH)
