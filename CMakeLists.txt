@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 include(cmake/proj_dependings.cmake)
-set(CMAKE_MODULE_PATH cmake/FindOpenCV.cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} cmake/)
 project(Neron)
 
 set(LIBRARIES)
@@ -17,7 +17,7 @@ set(HEADERS ${CMAKE_SOURCE_DIR})
 
 find_package(OpenCV REQUIRED)
 message(STATUS ${OpenCV_FOUND})
-set( REQUIRED_LIBRARIES OpenCV_LIBS ) 
+set( REQUIRED_LIBRARIES ${OpenCV_LIBS} ) 
 
 include_directories(${HEADERS})
 
