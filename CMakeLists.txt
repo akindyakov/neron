@@ -21,21 +21,25 @@ endforeach()
 project(Neron)
 
 set( REQUIRED_LIBRARIES 
-      my_addition_lib
-      boost_thread 
-      boost_system )
+      boost_shared_ptr )
 
-set(BIN_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+set(BIN_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-set(SOURCE_ROOT "${CMAKE_SOURCE_DIR}/src")
+set(SOURCE_ROOT ${CMAKE_SOURCE_DIR}/src)
+set(HEADERS ${CMAKE_SOURCE_DIR})
 
-aux_source_directory( ${SOURCE_ROOT} SOURCES )
+include_directories(${HEADERS})
 
-link_directories()
+#aux_source_directory( ${SOURCE_ROOT}/agents SOURCES )
+#aux_source_directory( ${SOURCE_ROOT}/links SOURCES )
+aux_source_directory( ${SOURCE_ROOT}/map SOURCES )
+aux_source_directory( ${SOURCE_ROOT}/util/geometry SOURCES )
+aux_source_directory( ${SOURCE_ROOT}/util/math SOURCES )
+
 add_library(Neron SHARED ${SOURCES})
 target_link_libraries( Neron ${REQUIRED_LIBRARIES} )
 
-add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
-add_subdirectory(tests/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH)
-add_subdirectory(tests/map/create_map_test/ EXECUTABLE_OUTPUT_PATH)
-add_subdirectory(tests/util/math/probabilistic_law_build/ EXECUTABLE_OUTPUT_PATH)
+#add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
+#add_subdirectory(tests/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH)
+#add_subdirectory(tests/map/create_map_test/ EXECUTABLE_OUTPUT_PATH)
+#add_subdirectory(tests/util/math/probabilistic_law_build/ EXECUTABLE_OUTPUT_PATH)

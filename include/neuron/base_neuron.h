@@ -25,9 +25,9 @@ namespace SimpleAgent
       virtual int checkActivate()const=0;
 
       virtual void createLink(shared_ptr<I_BaseAgent>){};
-		
-		virtual int getTreshold()const;
-		virtual int getStateValue()const;
+      
+      virtual int getTreshold()const;
+      virtual int getStateValue()const;
 
    private:
       unsigned long int id;

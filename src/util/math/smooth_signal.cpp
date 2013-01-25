@@ -5,7 +5,7 @@
 
 //==================================================================
 //==================================================================
-#include "include/smooth_signal.h"
+#include "include/util/math/smooth_signal.h"
 //==================================================================
 void Util::moving_average(int smooth_coef, int inputVal, int* oldVal)
 {

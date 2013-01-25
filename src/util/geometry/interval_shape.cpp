@@ -10,8 +10,8 @@
 #include <iterator>
 #include <cmath>
 //=============================================================================
-#include "include/geometry.h"
-#include "include/math.h"
+#include "include/util/geometry/geometry.h"
+#include "include/util/math/math.h"
 //=============================================================================
 
 namespace G = Geometry;
