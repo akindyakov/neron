@@ -5,28 +5,19 @@
 cmake_minimum_required(VERSION 2.8)
 
 include(cmake/proj_dependings.cmake)
-
-set(LIBRARIES)
-
-foreach(LIBRARY${LIBRARIES})
-   message(STATUS "Check the ${LIBRARY} is instaled: " ${${LIBRARY}_FOUND})
-   find_library("${LIBRARY}_FOUND"${LIBRARY})
-   
-   if ("${${LIBRARY}_FOUND}" STREQUAL "${LIBRARY}_FOUND-NOTFOUND")
-      message(STATUS "Add library sources")
-      add_subdirectory(../${LIBRARY} lib/${LIBRARY})
-   endif()
-endforeach()
-
+set(CMAKE_MODULE_PATH cmake/FindOpenCV.cmake)
 project(Neron)
 
-set( REQUIRED_LIBRARIES 
-      boost_shared_ptr )
+set(LIBRARIES)
 
 set(BIN_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 set(SOURCE_ROOT ${CMAKE_SOURCE_DIR}/src)
 set(HEADERS ${CMAKE_SOURCE_DIR})
+
+find_package(OpenCV REQUIRED)
+message(STATUS ${OpenCV_FOUND})
+set( REQUIRED_LIBRARIES OpenCV_LIBS ) 
 
 include_directories(${HEADERS})
 
