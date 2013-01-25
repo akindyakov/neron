@@ -1,2 +1,2 @@
-echo removing old directories
-rm -f -r build/
+echo remove product directiry
+rm -f -r product/
