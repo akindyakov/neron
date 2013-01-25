@@ -10,7 +10,7 @@ project(Neron)
 
 set(LIBRARIES)
 
-set(BIN_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 set(SOURCE_ROOT ${CMAKE_SOURCE_DIR}/src)
 set(HEADERS ${CMAKE_SOURCE_DIR})
@@ -29,6 +29,8 @@ aux_source_directory( ${SOURCE_ROOT}/util/math SOURCES )
 
 add_library(Neron SHARED ${SOURCES})
 target_link_libraries( Neron ${REQUIRED_LIBRARIES} )
+
+file( COPY ${HEADERS}/include DESTINATION ${CMAKE_BINARY_DIR} )
 
 #add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
 #add_subdirectory(tests/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH)
