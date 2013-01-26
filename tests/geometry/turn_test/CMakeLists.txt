@@ -2,16 +2,14 @@ cmake_minimum_required(VERSION 2.8)
 
 project(turn_shape_test)
 
-include_directories(${MAP_GEOMETRY_LIB_DIR})
+set(TURN_SHAPE_TEST_SRC_ROOT ${TESTS}/geometry/turn_test/)
 
-include_directories(headers)
+include_directories(${HEADERS})
+include_directories(${TURN_SHAPE_TEST_SRC_ROOT})
 
-set(SOURCE_LIB circle_drow_test.cpp
-               contout_drow_test.cpp
-               line_drow_test.cpp      )
+aux_source_directory( ${TURN_SHAPE_TEST_SRC_ROOT}  TURN_SHAPE_TEST_SRC )
+aux_source_directory( ${TURN_SHAPE_TEST_SRC_ROOT}/src TURN_SHAPE_TEST_SRC )
 
-add_library(drow_sample_lib STATIC ${SOURCE_LIB})
+add_executable(turn_shape_test ${TURN_SHAPE_TEST_SRC})
 
-add_executable(turn_shape_test turn_shape_main.cpp)
-
-target_link_libraries(turn_shape_test drow_sample_lib)
+target_link_libraries(turn_shape_test ${REQUIRED_LIBRARIES})

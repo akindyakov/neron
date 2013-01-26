@@ -9,8 +9,13 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 //=============================================================================
-#include "include/geometry.h"
-#include "include/geometry_drow.h"
+#include "include/util/geometry/geometry.h"
+#include "include/util/geometry/geometry_drow.h"
+
+#include "circle_drow_test.h*
+contout_drow_test.h*
+interval_drow_test.h*
+line_drow_test.h*
 //=============================================================================
 
 int main()
@@ -41,6 +46,5 @@ int main()
       if (c == 27) break; // if was key "Esc" break;
    }
    cv::destroyWindow("show");
-   std::cout << "Hello world!" << std::endl;
    return 0;
 }
