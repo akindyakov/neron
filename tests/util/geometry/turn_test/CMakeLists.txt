@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(turn_shape_test)
 
-set(TURN_SHAPE_TEST_SRC_ROOT ${TESTS}/geometry/turn_test/)
+message(STATUS ${TESTS})
+set(TURN_SHAPE_TEST_SRC_ROOT ${TESTS}/util/geometry/turn_test/)
 
 include_directories(${HEADERS})
 include_directories(${TURN_SHAPE_TEST_SRC_ROOT})
