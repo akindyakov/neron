@@ -7,10 +7,10 @@
 #include <list>
 #include <opencv2/core/core.hpp>
 //=============================================================================
-#include "include/geometry.h"
-#include "include/geometry_drow.h"
+#include "include/util/geometry/geometry.h"
+#include "include/util/geometry/geometry_drow.h"
 
-#include "tests/geometry/contour/drowAndTurn.h"
+#include "src/circle_drow_test.h"
 //=============================================================================
 
 void turningDrow(cv::Mat* image)

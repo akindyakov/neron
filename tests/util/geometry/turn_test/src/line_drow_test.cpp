@@ -7,8 +7,10 @@
 //=============================================================================
 #include <opencv2/core/core.hpp>
 //=============================================================================
-#include "include/geometry.h"
-#include "include/geometry_drow.h"
+#include "include/util/geometry/geometry.h"
+#include "include/util/geometry/geometry_drow.h"
+
+#include "src/line_drow_test.h"
 //=============================================================================
 
 void turningDrowLine(cv::Mat * image)

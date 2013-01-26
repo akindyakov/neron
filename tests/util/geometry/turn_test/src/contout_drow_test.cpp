@@ -7,8 +7,8 @@
 #include <list>
 #include <opencv2/core/core.hpp>
 //=============================================================================
-#include "include/geometry.h"
-#include "tests/geometry/contour/drowAndTurn.h"
+#include "include/util/geometry/geometry.h"
+#include "src/contour_drow_test.h"
 //=============================================================================
 
 Geometry::Contour createStarContour(const cv::Mat& image)

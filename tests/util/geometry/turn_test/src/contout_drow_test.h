@@ -6,7 +6,7 @@
 //=============================================================================
 #include <opencv2/core/core.hpp>
 //=============================================================================
-#include "include/geometry.h"
+#include "include/util/geometry/geometry.h"
 //=============================================================================
 
 Geometry::Contour createStarContour(const cv::Mat& image);

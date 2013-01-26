@@ -12,10 +12,10 @@
 #include "include/util/geometry/geometry.h"
 #include "include/util/geometry/geometry_drow.h"
 
-#include "circle_drow_test.h*
-contout_drow_test.h*
-interval_drow_test.h*
-line_drow_test.h*
+#include "src/circle_drow_test.h"
+#include "src/contout_drow_test.h"
+#include "src/interval_drow_test.h"
+#include "src/line_drow_test.h"
 //=============================================================================
 
 int main()
