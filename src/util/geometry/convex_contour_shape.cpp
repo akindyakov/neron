@@ -52,6 +52,11 @@ G::Convex_contour::Convex_contour(const std::list<G::Point2f>& polinom)
     m_center = cont.getCenter();
 }*/
 
+void G::Convex_contour::push_back(float x, float y)
+{
+   m_vec.push_back(G::Reduced_vector(x,y));
+}
+
 void G::Convex_contour::push_back(const G::Reduced_vector& pt)
 {
    m_vec.push_back(pt);
