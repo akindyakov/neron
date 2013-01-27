@@ -50,10 +50,6 @@ void G::Contour::push_back(const G::Reduced_vector& pt)
    m_vec.push_back(pt);
 }
 
-void G::Contour::push_back(float x, float y)
-{
-   m_vec.push_back(G::Point2f(x,y));
-}
 void G::Contour::turn(float angle)
 {
    G::Point2f prevEnd = m_contours.front().m_center;
