@@ -41,6 +41,10 @@ G::Contour::Contour(const std::list<G::Point2f>& polinom)
    this->convertToContour();
 }
 
+void G::Contour::push_back(float x, float y)
+{
+   m_vec.push_back(G::Reduced_vector(x,y));
+}
 void G::Contour::push_back(const G::Reduced_vector& pt)
 {
    m_vec.push_back(pt);
