@@ -19,15 +19,15 @@ Geometry::Contour createStarContour(const cv::Mat& image)
    Geometry::Point2f center(len/2 , 0);
    
    std::list< Geometry::Point2f > polinom;
-   polinom.push_back( Geometry::Point2f(len/4+l/16, len/4+l/16));
-   polinom.push_back( Geometry::Point2f(len/2 , l/4));
-   polinom.push_back( Geometry::Point2f(len/2 + len/16, len/4+l*3/16));
-   polinom.push_back( Geometry::Point2f(len,len/2));
-   polinom.push_back( Geometry::Point2f(len/2 + len/6 , len/2 + len/6));
-   polinom.push_back( Geometry::Point2f(len/2 , len));
-   polinom.push_back( Geometry::Point2f(len/3, len/2 + len/6));
-   polinom.push_back( Geometry::Point2f(0 , len/2));
-   polinom.push_back( Geometry::Point2f(len/3 , len/3));
+   polinom.push_back( Geometry::Point2f( len/4+len*3/16  , len/4+len*3/16 ));
+   polinom.push_back( Geometry::Point2f( len/2           , len/4          ));
+   polinom.push_back( Geometry::Point2f( len/2 + len/16  , len/4+len*3/16 ));
+   polinom.push_back( Geometry::Point2f( 3*len/4         , len/2          ));
+   polinom.push_back( Geometry::Point2f( len/2 + len/16  , len/2 + len/16 ));
+   polinom.push_back( Geometry::Point2f( len/2           , 3*len/4        ));
+   polinom.push_back( Geometry::Point2f( len/4+len*3/16  , len/2 + len/16 ));
+   polinom.push_back( Geometry::Point2f( len/4           , len/2          ));
+   polinom.push_back( Geometry::Point2f( len/4+len*3/16  , len/4+len*3/16 ));
    
    return Geometry::Contour(polinom);
 }
