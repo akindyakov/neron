@@ -8,6 +8,7 @@ set(TURN_SHAPE_TEST_SRC_ROOT ${TESTS}/util/geometry/turn_test/)
 
 include_directories(${HEADERS})
 include_directories(${TURN_SHAPE_TEST_SRC_ROOT})
+include_directories(${OpenCV_INCLUDE_DIR})
 
 aux_source_directory( ${TURN_SHAPE_TEST_SRC_ROOT}  TURN_SHAPE_TEST_SRC )
 aux_source_directory( ${TURN_SHAPE_TEST_SRC_ROOT}/src TURN_SHAPE_TEST_SRC )

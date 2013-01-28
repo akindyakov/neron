@@ -15,7 +15,6 @@
 
 namespace Map
 {
-
    class I_MapCell
    {
    public:

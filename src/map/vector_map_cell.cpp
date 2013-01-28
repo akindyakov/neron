@@ -12,5 +12,3 @@
 #include "include/util/geometry/geometry.h"
 
 namespace M = Map;
-
-

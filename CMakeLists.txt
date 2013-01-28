@@ -17,7 +17,12 @@ set(HEADERS ${CMAKE_SOURCE_DIR})
 set(TESTS ${CMAKE_SOURCE_DIR}/tests)
 
 find_package(OpenCV REQUIRED)
-set( REQUIRED_LIBRARIES ${OpenCV_LIBS} ) 
+list( APPEND HEADERS ${OpenCV_INCLUDE_DIR} )
+list( APPEND REQUIRED_LIBRARIES ${OpenCV_LIBS} ) 
+
+find_package(Boost REQUIRED)
+list( APPEND HEADERS ${Boost_LIBRARY_DIRS} )
+list( APPEND REQUIRED_LIBRARIES ${boost_smart_ptr} )
 
 include_directories(${HEADERS})
 
@@ -30,7 +35,7 @@ aux_source_directory( ${SOURCE_ROOT}/util/math SOURCES )
 add_library( Neron SHARED ${SOURCES} )
 target_link_libraries( Neron ${REQUIRED_LIBRARIES} )
 
-file( COPY ${HEADERS}/include DESTINATION ${CMAKE_BINARY_DIR} )
+file( COPY ${CMAKE_SOURCE_DIR}/include DESTINATION ${CMAKE_BINARY_DIR} )
 
 #add_subdirectory(tests/geometry/intersection_test/ EXECUTABLE_OUTPUT_PATH)
 add_subdirectory( tests/util/geometry/turn_test/ EXECUTABLE_OUTPUT_PATH )
