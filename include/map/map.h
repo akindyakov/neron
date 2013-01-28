@@ -8,7 +8,9 @@
 #define MAP_H
 //=============================================================================
 #include <vector>
+#include <boost/shared_ptr.hpp>
 //=============================================================================
+#include "include/util/geometry/geometry.h"
 //=============================================================================
 
 namespace Map
@@ -22,11 +24,21 @@ namespace Map
       int m_width;
       int m_lenght;
    };
+   class Portal_gate
+   {
+   public:
+      
+   private:
+      boost::shared_ptr<I_MapCell> m_out;
+      boost::shared_ptr<Geometry::I_Shape> m_firstDoorPost;
+      boost::shared_ptr<Geometry::I_Shape> m_secondDoorPost;
+   };
    
    class Cell_portal
    {
    public:
    private:
+      std::list< Portal_gate > m_gates;
    };  
    
    class VectorMapCell: public I_MapCell
@@ -39,7 +51,6 @@ namespace Map
    private:
       std::vector<Map::Cell_portal> m_input_output;
       std::vector<Geometry::I_Shape*> m_obstacles;
-      Geometry::I_Shape
    };
    
    class RasterMapCell: public I_MapCell
@@ -53,6 +64,15 @@ namespace Map
       std::vector<Map::Cell_portal> m_input_output;
       int m_width;
       int m_lenght;
+   };
+
+
+   class MapContainer: public I_MapCell
+   {
+   public:
+      
+   private:
+      std::vector< boost::shared_ptr<I_MapCell> > m_parts;
    };
 }
 
