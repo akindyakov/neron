@@ -1,11 +1,16 @@
 /**
- **autor   Alexander K
- **date    06.12.2012.23.18
+ ** autor   Alexander K
+ ** date    28.01.2013.00.34
+ ** BRIEF   vector map cell implementation
 */
 
 //=============================================================================
-#include <opencv2/core/core.hpp>
+#include <vector>
 //=============================================================================
 //=============================================================================
+#include "include/map/map.h"
+#include "include/util/geometry/geometry.h"
 
-void turningDrowCircle(cv::Mat* image);
+namespace M = Map;
+
+

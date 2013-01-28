@@ -38,8 +38,7 @@ namespace Map
       
    private:
       std::vector<Map::Cell_portal> m_input_output;
-      std::vector<Geometry::I_Shape*> m_obstacles;
-      Geometry::I_Shape
+      std::vector<Geometry::I_Shape> m_obstacles;
    };
    
    class RasterMapCell: public I_MapCell
@@ -51,8 +50,6 @@ namespace Map
    private:
       std::vector< std::vector< int > > m_map;
       std::vector<Map::Cell_portal> m_input_output;
-      int m_width;
-      int m_lenght;
    };
 }
 

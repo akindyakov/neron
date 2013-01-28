@@ -23,7 +23,7 @@ void turningDrowLine(cv::Mat * image)
 
    Geometry::Point2f turn_center(len/2,len/2);
 
-   int n = 75;
+   int n = 11;
 
    for (int i =0; i < n; ++i)
    {

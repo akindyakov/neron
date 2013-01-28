@@ -20,25 +20,25 @@
 
 int main()
 {
-   cv::Mat res(600, 600, CV_8UC1, cv::Scalar(255));
+   cv::Mat res(1200, 1200, CV_8UC1, cv::Scalar(255));
 
-   // Geometry::Contour cont = createStarContour(res);
-
-   // drowShape(cont,&res,cv::Scalar(233), 1,cv::Scalar(233), 3);
    try
    {
       turningDrowLine(&res);
-      cv::namedWindow("show", 0);
+      //turningDrowInterval(&res);
+      turningDrowContour(&res);
+      turningDrowCircle(&res);
    }
    catch(const Geometry::Geometry_error& exept)
    {
       std::cout << exept.name;
    }
-    catch(...)
-    {
+   catch(...)
+   {
         std::cout << "other error\n";
-    }
+   }
 
+   cv::namedWindow("show", 0);
    while (1)
    {
       cv::imshow("show", res);

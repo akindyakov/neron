@@ -10,3 +10,5 @@
 //=============================================================================
 
 Geometry::Contour createStarContour(const cv::Mat& image);
+
+void turningDrowContour(cv::Mat* image);

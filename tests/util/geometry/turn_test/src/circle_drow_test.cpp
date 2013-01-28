@@ -13,7 +13,7 @@
 #include "src/circle_drow_test.h"
 //=============================================================================
 
-void turningDrow(cv::Mat* image)
+void turningDrowCircle(cv::Mat* image)
 {
    if ( image == NULL )
       return;
@@ -21,7 +21,7 @@ void turningDrow(cv::Mat* image)
    Geometry::Circle bcirc(Geometry::Point2f(len/2, len/2+len/4), len/8);
    
    Geometry::Point2f turn_center(len/2,len/2);
-   int n = 5;
+   int n = 11;
    
    for (int i =0; i < n; ++i)
    {

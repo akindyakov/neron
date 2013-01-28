@@ -162,7 +162,6 @@ namespace Geometry
       virtual ~Convex_contour(){};
       
       void push_back(const Reduced_vector& pt);
-      void push_back(float x, float y);
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
       bool insidePoint(const Point2f& point)const;
@@ -191,9 +190,7 @@ namespace Geometry
       // const Point2f& getCenter();
       // const std::list<Reduced_vector>& getVectorList();
       
-      void push_back(float x, float y);
       void push_back(const Reduced_vector& pt);
-      void push_back(float x, float y);
       void turn(float angle);
       bool belongingPoint(const Point2f& point)const;
       bool shapeIntersection(const I_Shape& inputShape,
