@@ -1,2 +1,0 @@
-/media/general/src/neron_src/builds/product/debug/CMakeFiles/Neron.dir
-/media/general/src/neron_src/builds/product/debug/EXECUTABLE_OUTPUT_PATH/CMakeFiles/turn_shape_test.dir
