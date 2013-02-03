@@ -243,15 +243,37 @@ G::Reduced_vector G::Reduced_vector::operator - ()
    return Geometry::Reduced_vector(-this->x,-this->y);
 }
 
+Reduced_vector getBisector( const Reduced_vector& vect1,
+                            const Reduced_vector& vect2 )
+{
+   /* a = vect1, b = vect2
+    * cos(alpha) = cos(betta)
+    * throut scalar product
+    * r - bisector vector
+    * (ax*rx + ay*ry)/|a| = (bx*rx + by*ry)/|b|
+    *
+    *      /  ax     bx \        /  ay     by \
+    * rx * | ---- - ----| + ry * | ---- - ----|  = 0
+    *      \ |a|    |b| /        \ |a|    |b| /
+    *
+    */
+   
+   float modA = vect1.get_lenght();
+   float modB = vect2.get_lenght();
+   float A = (vect1.x/modA - vect2.x/modB);
+   float B = (vect1.y/modA - vect2.y/modB);
+   return Reduced_vector(-B, A);
+}
+
 //  --- auxiliary functions ---
 std::list<G::Point2f> G::getRandomPointCloud(int n,
-                                                    G::Point2f lowBorder,
-                                                    G::Point2f upBorder)
+                                             G::Point2f lowBorder,
+                                             G::Point2f upBorder)
 {
    if ((lowBorder.x > upBorder.x)
        || (lowBorder.y > lowBorder.y))
       throw G::Geometry_error("up must be larger then low");
-
+   
    std::srand(std::time(NULL));
    int interval_for_x =static_cast<int>(upBorder.x - lowBorder.x);
    int interval_for_y =static_cast<int>(upBorder.y - lowBorder.y);

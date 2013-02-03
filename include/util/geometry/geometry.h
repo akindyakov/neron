@@ -210,6 +210,9 @@ namespace Geometry
       int m_status;
    };
 
+   Reduced_vector getBisector( const Reduced_vector& vect1,
+                               const Reduced_vector& vect2 );
+   
    void getBorder( const std::list<Point2f>& points,
                    Point2f* minPt, Point2f* maxPt );
 
