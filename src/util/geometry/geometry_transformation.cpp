@@ -15,9 +15,9 @@
 
 namespace G = Geometry;
 
-void G::createOneSideShadow  ( const Convex_contour& src_contour, 
-                               std::vector< Convex_contour >* out_contour,
-                               const std::vector< Reduced_vector >& start_points )
+void G::createShadow  ( const Convex_contour& src_contour, 
+                        std::vector< Convex_contour >* out_contour,
+                        const std::vector< Reduced_vector >& start_points )
 {
    using namespace std;
    using namespace Geometry;
