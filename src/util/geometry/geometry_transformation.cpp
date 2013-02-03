@@ -9,7 +9,7 @@
 #include <iterator>
 #include <cmath>
 //=============================================================================
-#include "include/util/geometry/geometry.h"
+#include "include/util/geometry/geometry_transformation.h"
 #include "include/util/math/math.h"
 //=============================================================================
 
@@ -19,17 +19,17 @@ void G::createShadow  ( const Convex_contour& src_contour,
                         std::vector< Convex_contour >* out_contour,
                         const std::vector< Reduced_vector >& start_points )
 {
-   using namespace std;
-   using namespace Geometry;
+  // using namespace std;
+  // using namespace Geometry;
    
-   size_type out_size = start_point.size();
+  // size_type out_size = start_point.size();
    out_contour->resize(0); // correct me if it will be need !
-   vector< float > distance;
+   //vector< float > distance;
    
    float prev_vect_proud;
    float curr_vect_proud;
    // it are neded to create start points for out contours
-   for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
+/*   for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
          start_pts_it != start_points.end();
          ++start_pts_it)
    {
@@ -47,5 +47,5 @@ void G::createShadow  ( const Convex_contour& src_contour,
       {
          
       }
-   }
+   } */
 }

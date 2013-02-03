@@ -9,7 +9,6 @@
 //=============================================================================
 #include <vector>
 #include <list>
-//#include <opencv2/core/core.hpp>
 //=============================================================================
 //=============================================================================
 
@@ -38,7 +37,7 @@ namespace Geometry
       void turn(float angle);
       Reduced_vector get_perpendicular()const;
       void set_lenght(float len);
-      float get_lenght();
+      float get_lenght()const;
       friend float operator * (const Reduced_vector& vec1, const Reduced_vector& vec2);
       float vector_proud(const Reduced_vector& vec)const;
       friend Reduced_vector operator * (const Reduced_vector&, float);
@@ -154,6 +153,7 @@ namespace Geometry
    class Convex_contour : public I_Shape
    {
    public:
+      Convex_contour(){};
       Convex_contour(const Point2f& center);
       Convex_contour(const Point2f& center,
                      const std::list<Reduced_vector>& polinom);

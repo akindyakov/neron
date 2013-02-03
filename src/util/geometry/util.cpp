@@ -200,7 +200,7 @@ void G::Reduced_vector::set_lenght(float len)
    *(this)*(len/old_len);
 }
 
-float G::Reduced_vector::get_lenght()
+float G::Reduced_vector::get_lenght()const
 {
    return G::distance(G::Point2f(x,y),G::Point2f(0,0));
 }
@@ -243,8 +243,8 @@ G::Reduced_vector G::Reduced_vector::operator - ()
    return Geometry::Reduced_vector(-this->x,-this->y);
 }
 
-Reduced_vector getBisector( const Reduced_vector& vect1,
-                            const Reduced_vector& vect2 )
+G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
+                                  const Reduced_vector& vect2 )
 {
    /* a = vect1, b = vect2
     * cos(alpha) = cos(betta)
