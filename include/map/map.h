@@ -23,6 +23,7 @@ namespace Map
       int m_width;
       int m_lenght;
    };
+   
    class Portal_gate
    {
    public:

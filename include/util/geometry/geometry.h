@@ -213,6 +213,11 @@ namespace Geometry
    Reduced_vector getBisector( const Reduced_vector& vect1,
                                const Reduced_vector& vect2 );
    
+   Reduced_vector getBisector( const Reduced_vector& vect1,
+                               const Reduced_vector& vect2,
+                               float vect1_lenght,
+                               float vect2_lenght );
+   
    void getBorder( const std::list<Point2f>& points,
                    Point2f* minPt, Point2f* maxPt );
 

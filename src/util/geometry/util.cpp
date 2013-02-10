@@ -129,11 +129,6 @@ Geometry::Point<T>::Point()
    : x(0), y(0)
 {}
 
-//template <class T>
-//Geometry::Point<T>::Point(T _x, T _y)
-//   : x(_x), y(_y)
-//{}
-
 template <class T>
 Geometry::Point<T>::Point(const Point<T>& pt)
    : x(pt.x), y(pt.y)
@@ -147,19 +142,13 @@ Geometry::Point<T> Geometry::operator + (Point<T>& vec1, Point<T>& vec2)
 
 /*
 Geometry::Point2f::Point2f(const float _x, const float _y)
-                    : x(_x),
-                      y(_y)
-{}
+                    : x(_x), y(_y) {}
 
 Geometry::Point2f::Point2f()
-                    : x(0),
-                      y(0)
-{}
+                    : x(0), y(0) {}
 
 Geometry::Point2f::Point2f(const Geometry::Point2f& pt)
-                    : x(pt.x),
-                      y(pt.y)
-{}
+                    : x(pt.x), y(pt.y) {}
 */
 Geometry::Reduced_vector::Reduced_vector()
 {
@@ -244,7 +233,28 @@ G::Reduced_vector G::Reduced_vector::operator - ()
 }
 
 G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
-                                  const Reduced_vector& vect2 )
+                                  const Reduced_vector& vect2)
+{
+   /* a = vect1, b = vect2
+    * cos(alpha) = cos(betta)
+    * throut scalar product
+    * r - bisector vector
+    * (ax*rx + ay*ry)/|a| = (bx*rx + by*ry)/|b|
+    *
+    *      /  ax     bx \        /  ay     by \
+    * rx * | ---- - ----| + ry * | ---- - ----|  = 0
+    *      \ |a|    |b| /        \ |a|    |b| /
+    *
+    */
+   return getBisector(  vect1, vect2,
+                        vect1.get_lenght(),
+                        vect2.get_lenght() );
+}
+
+G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
+                                  const Reduced_vector& vect2,
+                                  float vect1_lenght,
+                                  float vect2_lenght )
 {
    /* a = vect1, b = vect2
     * cos(alpha) = cos(betta)
@@ -258,10 +268,8 @@ G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
     *
     */
    
-   float modA = vect1.get_lenght();
-   float modB = vect2.get_lenght();
-   float A = (vect1.x/modA - vect2.x/modB);
-   float B = (vect1.y/modA - vect2.y/modB);
+   float A = (vect1.x/vect1_lenght - vect2.x/vect2_lenght);
+   float B = (vect1.y/vect1_lenght - vect2.y/vect2_lenght);
    return Reduced_vector(-B, A);
 }
 
@@ -353,7 +361,7 @@ void G::uniq_point_copy( const std::list< G::Point2f >& cloud,
 {
    if (p_uniq_cloud == NULL)
       throw G::Geometry_error("p_unic_cloud must not be null");
-
+   
    for ( std::list< Point2f >::const_iterator it_cloud = cloud.begin();
          it_cloud != cloud.end(); ++it_cloud)
    {
@@ -370,6 +378,7 @@ void G::uniq_point_copy( const std::list< G::Point2f >& cloud,
          p_uniq_cloud->push_back(*it_cloud);
    }
 }
+
 void G::uniqPoint( std::list< G::Point2f >* cloud )
 {
    std::list< G::Point2f >::iterator endit = cloud->end();
@@ -380,14 +389,11 @@ void G::uniqPoint( std::list< G::Point2f >* cloud )
    {
       std::list< G::Point2f >::iterator it2 = it1;
       ++it2;
-      //std::cout << "for :" <<  it1->x << " " << it1->y << std::endl;
+      
       for ( ; it2 != endit; ++it2)
       {
          if ( Math::equal(it1->x, it2->x) && Math::equal(it1->y, it2->y) )
          {
-            //std::cout << "swap it : " << it2->x << " " << it2->y << std::endl;
-            //std::cout << "       because   : " << it1->x << " " << it1->y << std::endl;
-            //std::cout << "       swap with : " << endit->x << " " << endit->y << std::endl;
             --endit;
             float temp = endit->x;
             endit->x = it2->x;
