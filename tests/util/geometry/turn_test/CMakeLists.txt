@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(turn_shape_test)
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests)
+#set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin/tests)
 
 set(TURN_SHAPE_TEST_SRC_ROOT ${TESTS}/util/geometry/turn_test/)
 

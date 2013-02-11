@@ -102,19 +102,14 @@ void G::createShadow  ( const Convex_contour& src_contour,
       for ( ; startShiftIt != startShadowShift.end(); 
             ++startShiftIt, ++nextShiftIt, ++outContIt )
       {
+         // I think it is so bad...
          Reduced_vector shadow_vec;
          Reduced_vector test;
-         //createParalelVectorShadow( *currVectIt,
-         //                           *startShiftIt,
-         //                           bisector,
-         //                           &shadow_vec,
-         //                           nextShiftIt );
-         
-         createParalelVectorShadow( test,
-                                    test,
-                                    test,
+         createParalelVectorShadow( *currVectIt,
+                                    *startShiftIt,
+                                    bisector,
                                     &shadow_vec,
-                                    nextShiftIt );
+                                    &*nextShiftIt );
          
          outContIt->m_vec.push_back(shadow_vec);
       }
