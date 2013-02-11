@@ -6,10 +6,13 @@
 
 //=============================================================================
 #include <iostream>
+#include <vector>
+#include <list>
 #include <iterator>
 #include <cmath>
 //=============================================================================
 #include "include/util/geometry/geometry_transformation.h"
+#include "include/util/geometry/geometry.h"
 #include "include/util/math/math.h"
 //=============================================================================
 
@@ -62,32 +65,60 @@ void G::createShadow  ( const Convex_contour& src_contour,
    using namespace Geometry;
    
    out_contour->resize(0); // correct me if it will be need !
-      
-   //vector< float > distance;
    
-   float prev_vect_proud;
-   float curr_vect_proud;
-   
-   vector< Reduced_vector > prevShadowShifts(start_points);
-   vector< Reduced_vector > nextBisector(start_points.size());
+   size_t srcContourSize = src_contour.m_vec.size();
+   size_t outSize;
    
    // it are neded to create start points for out contours
    for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
          start_pts_it != start_points.end();
          ++start_pts_it)
    {
-      out_contour->push_back( src_contour.m_center + *start_pts_it );
+      out_contour->push_back( Convex_contour(src_contour.m_center+*start_pts_it) );
    }
    
-   //for ( vector< Reduced_vector >::const_iterator src_it = src_contour.m_vec.begin();
-   //      src_it != src_contour.m_vec.end();
-   //      ++src_it )
-   //{
-   //   for ( vector< Convex_contour >::iterator out_cont_it = start_points.begin();
-   //         start_pts_it != start_points.end();
-   //         ++start_pts_it)
-   //   {
-   //      //Reduced_vecotor bisector = createBisector();
-   //   }
-   //}
+   float currLenght = src_contour.m_vec.front().get_lenght();
+   float nextLenght = 0;
+   
+   vector< Reduced_vector > startShadowShift(start_points);
+   vector< Reduced_vector > nextShift(start_points.size());
+   
+   list< Reduced_vector >::const_iterator nextVectIt = src_contour.m_vec.begin();
+   list< Reduced_vector >::const_iterator currVectIt = nextVectIt++;
+   
+   for ( ; nextVectIt != src_contour.m_vec.end();
+         ++currVectIt, ++nextVectIt             )
+   {
+      nextLenght = nextVectIt->get_lenght();
+      
+      Reduced_vector bisector = getBisector( *currVectIt, *nextVectIt,
+                                             currLenght,
+                                             nextLenght );
+      
+      vector< Reduced_vector >::const_iterator startShiftIt = startShadowShift.begin();
+      vector< Reduced_vector >::iterator nextShiftIt = nextShift.begin();
+      vector< Convex_contour >::iterator outContIt = out_contour->begin();
+      
+      for ( ; startShiftIt != startShadowShift.end(); 
+            ++startShiftIt, ++nextShiftIt, ++outContIt )
+      {
+         Reduced_vector shadow_vec;
+         Reduced_vector test;
+         //createParalelVectorShadow( *currVectIt,
+         //                           *startShiftIt,
+         //                           bisector,
+         //                           &shadow_vec,
+         //                           nextShiftIt );
+         
+         createParalelVectorShadow( test,
+                                    test,
+                                    test,
+                                    &shadow_vec,
+                                    nextShiftIt );
+         
+         outContIt->m_vec.push_back(shadow_vec);
+      }
+      swap( startShadowShift, nextShift );
+      swap( currLenght, nextLenght );
+   }
 }
