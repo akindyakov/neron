@@ -9,6 +9,7 @@
 #include <iterator>
 #include <opencv2/core/core.hpp>
 //=============================================================================
+#include "include/util/math/math.h"
 #include "include/util/geometry/geometry.h"
 #include "include/util/geometry/geometry_drow.h"
 //=============================================================================
@@ -45,6 +46,13 @@ void findBorderPoints( const G::Line_2d& line,
    //   std::cout << "after uniq : " << it->x << " " << it->y << std::endl;
 }
 
+void G::drowPoint(cv::Mat* image,
+                  const Point2f& center, int size,
+                  const cv::Scalar& color, int intence)
+{
+   cv::Point2f pt1 = to_openCV_coord(center, *image);
+   cv::circle(*image, pt1, size, color, intence);
+}
 void G::drowCross(cv::Mat* image,
                   const G::Point2f& center, int size,
                   const cv::Scalar& color, int intence)
@@ -70,19 +78,38 @@ void G::drowCross(cv::Mat* image,
    cv::line(*image, uppt, downpt, color, intence);
 }
 
-void G::drowVector ( const Reduced_vector& circ,
-                     const Poinr2f& basePt,
-                     cv::Mat* image,
-                     const cv::Scalar& first_color,
-                     int first_intence,
-                     const cv::Scalar& second_color,
-                     int second_intence   )
+void G::drowGear( cv::Mat* image,
+                  const Point2f& center, int size,
+                  const cv::Scalar& color, int intence )
 {
-   
-   cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
-   cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);
 
-   cv::line(*image, pt1, pt2, first_color, first_intence);
+   drowCross(image, center, size, color, intence);
+   
+   float diagSize = size/Math::SQRT_2;
+   cv::Point2f leftUpPt =    to_openCV_coord( Point2f(center.x - diagSize, center.y + diagSize), *image );
+   
+   cv::Point2f rightUpPt =   to_openCV_coord( Point2f(center.x + diagSize, center.y + diagSize), *image );
+   
+   cv::Point2f leftDownPt =  to_openCV_coord( Point2f(center.x - diagSize, center.y - diagSize), *image );
+   
+   cv::Point2f rightDownPt = to_openCV_coord( Point2f(center.x + diagSize, center.y - diagSize), *image );
+   
+   cv::line(*image, leftUpPt, rightDownPt, color, intence);
+   cv::line(*image, leftDownPt, rightUpPt, color, intence);
+}
+
+void G::drowVector ( const Reduced_vector& vect,
+                     const Point2f& basePt,
+                     cv::Mat* image,
+                     const cv::Scalar& color,
+                     int intence )
+{
+   cv::Point2f pt1 = to_openCV_coord(basePt, *image);
+   cv::Point2f pt2 = to_openCV_coord(basePt + vect, *image);
+   float size = vect.get_lenght()/16;
+   cv::line(*image, pt1, pt2, color, intence);
+   drowPoint(image, basePt, size, color, intence);
+   drowGear(image, basePt + vect, size, color, intence);
 }
 
 void G::drowShape(const G::Circle& circ,
@@ -119,7 +146,7 @@ void G::drowShape(const G::Line_2d& line,
    {
       G::drowPoint(line.m_center, image,
                    second_color, second_intence);
-      G::drowVector(line.m_center, line.m_direct_vector, image,
+      G::drowVector(line.m_direct_vector, line.m_center, image,
                     second_color, second_intence);
    }
 }

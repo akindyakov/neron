@@ -12,6 +12,7 @@
 
 namespace Math
 {
+   const float SQRT_2 = 1.4142136f;
    bool equal(float A, float b, int maxulps=2);
 
    bool equal(double a, double b, int maxulps=2);

@@ -55,7 +55,21 @@ namespace Geometry
    void drowCross(cv::Mat* image,
                  const Point2f& center, int size,
                  const cv::Scalar& color, int intence);
-
+   
+   void drowVector ( const Reduced_vector& vect,
+                     const Point2f& basePt,
+                     cv::Mat* image,
+                     const cv::Scalar& color,
+                     int intence );
+   
+   void drowGear( cv::Mat* image,
+                  const Point2f& center, int size,
+                  const cv::Scalar& color, int intence );
+   
+   void drowPoint(cv::Mat* image,
+                  const Point2f& center, int size,
+                  const cv::Scalar& color, int intence);
+   
    template <class T>
    cv::Point2f to_openCV_coord(const T& vector,
                                const cv::Mat& image)
