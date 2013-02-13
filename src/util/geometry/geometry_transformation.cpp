@@ -24,6 +24,10 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
                                 G::Reduced_vector* shadow_v,
                                 G::Reduced_vector* result_finite_vector )
 {
+   std::cout << " ----------------------------------------------------\n";
+   std::cout << " src_v    ( " << src_v.x << "  ;  " << src_v.y << " )\n";
+   std::cout << " start_v  ( " << start_v.x << "  ;  " << start_v.y << " )\n";
+   std::cout << " finite_v ( " << finite_v.x << "  ;  " << finite_v.y << " )\n";
    /*      {  start.x + shadow.x - k*B = src.x
     *     {   start.y + shadow.y - k*A = src.y
     *      {  shadow.x * src.y = shadow.y * src.x
@@ -44,14 +48,19 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
     *
     */
    
-   float denominator = src_v.y * finite_v.x - src_v.x * finite_v.y;
-   float commonPartOfNumerator = (start_v.y - src_v.y)*finite_v.x - finite_v.y*(start_v.x + src_v.x);
+   float denominator = src_v.x * finite_v.y - src_v.y * finite_v.x;
+   
+   float commonPartOfNumerator = finite_v.x*(start_v.y - src_v.y) - finite_v.y*(start_v.x - src_v.x);
+   
    float k = src_v.y * start_v.x - src_v.x * start_v.y;
    if ( denominator == 0 )
       throw(G::Geometry_error("in get paralel finite vector and src vector must not be paralel\n"));
    
    shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
-   shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
+   shadow_v->y = src_v.y * commonPartOfNumerator / denominator;
+   
+   std::cout << "         k  = " << k << "\n";
+   std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
    
    result_finite_vector->x = finite_v.x * k / denominator;
    result_finite_vector->y = finite_v.y * k / denominator;

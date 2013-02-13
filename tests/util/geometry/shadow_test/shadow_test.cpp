@@ -7,6 +7,7 @@
 //=============================================================================
 #include <iostream>
 #include <vector>
+#include <iterator>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 //=============================================================================
@@ -24,25 +25,34 @@ int main()
    cv::Mat image(side, side, CV_8UC1, cv::Scalar(255));
    //Geometry::Convex_contour circle = createCircleContour( Geometry::Point2f(500,500),
    //                                             100, 14);
-   Geometry::Convex_contour circle = createAngleContour( Geometry::Point2f(200,200), 450);
+   Geometry::Convex_contour circle = createAngleContour( Geometry::Point2f(200,200), 400);
 
    Geometry::drowShape(circle, &image, cv::Scalar(0), 1,cv::Scalar(0), 0);
+   
+   std::vector< Geometry::Convex_contour > out_contour;
+   std::vector< Geometry::Reduced_vector > start_points;
+   
+   start_points.push_back(Geometry::Reduced_vector(100,-70));
+   start_points.push_back(Geometry::Reduced_vector(-70,100));
+  
+   for(std::vector< Geometry::Reduced_vector >::iterator it = start_points.begin();
+         it != start_points.end(); ++it)
+   {
+      drowVector ( *it, Geometry::Point2f(200,200), &image, cv::Scalar(50), 1 );
+   }
+   
    try
    {
-      std::vector< Geometry::Convex_contour > out_contour;
-      std::vector< Geometry::Reduced_vector > start_points;
-      start_points.push_back(Geometry::Reduced_vector(100,100));
-      start_points.push_back(Geometry::Reduced_vector(-100,100));
       Geometry::createShadow  ( circle, &out_contour, start_points );
       
       for (int i=0; i < out_contour.size(); ++i)
       {
-         Geometry::drowShape(out_contour.at(i), &image, cv::Scalar(0), 1, cv::Scalar(0), 2);
+         Geometry::drowShape(out_contour.at(i), &image, cv::Scalar(0), 1, cv::Scalar(0), 0);
       }
    }
    catch (const Geometry::Geometry_error& exept)
    {
-      std::cout << exept.name;
+      std::cout << "Geometry error :" << exept.name <<std::endl;
    }
    catch(...)
    {
