@@ -32,3 +32,11 @@ Geometry::Convex_contour createCircleContour( const Geometry::Point2f& center,
    return ret;
 }
 
+Geometry::Convex_contour createAngleContour( const Geometry::Point2f& m_start,
+                                             float lenght   )
+{
+   Geometry::Convex_contour ret(m_start);
+   ret.push_back(Geometry::Reduced_vector(lenght, lenght));
+   ret.push_back(Geometry::Reduced_vector(-lenght, lenght));
+   return ret;
+}

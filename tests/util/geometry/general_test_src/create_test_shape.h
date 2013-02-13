@@ -10,5 +10,7 @@
 //=============================================================================
 
 Geometry::Convex_contour createCircleContour( const Geometry::Point2f& center,
-                                              float radius,
-                                              int detalisation);
+                                              float radius, int detalisation);
+
+Geometry::Convex_contour createAngleContour( const Geometry::Point2f& m_start,
+                                             float lenght   );

@@ -48,7 +48,7 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
    float commonPartOfNumerator = (start_v.y - src_v.y)*finite_v.x - finite_v.y*(start_v.x + src_v.x);
    float k = src_v.y * start_v.x - src_v.x * start_v.y;
    if ( denominator == 0 )
-      throw(G::Geometry_error("in get paralel finite vector and src vector must not be paralel"));
+      throw(G::Geometry_error("in get paralel finite vector and src vector must not be paralel\n"));
    
    shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
    shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
@@ -94,7 +94,7 @@ void G::createShadow  ( const Convex_contour& src_contour,
       Reduced_vector bisector = getBisector( *currVectIt, *nextVectIt,
                                              currLenght,
                                              nextLenght );
-      
+      //cout << "bisector : x = " << bisector.x << "  y = " << bisector.y << " ;\n";
       vector< Reduced_vector >::const_iterator startShiftIt = startShadowShift.begin();
       vector< Reduced_vector >::iterator nextShiftIt = nextShift.begin();
       vector< Convex_contour >::iterator outContIt = out_contour->begin();
@@ -104,7 +104,6 @@ void G::createShadow  ( const Convex_contour& src_contour,
       {
          // I think it is so bad...
          Reduced_vector shadow_vec;
-         Reduced_vector test;
          createParalelVectorShadow( *currVectIt,
                                     *startShiftIt,
                                     bisector,
@@ -116,4 +115,25 @@ void G::createShadow  ( const Convex_contour& src_contour,
       swap( startShadowShift, nextShift );
       swap( currLenght, nextLenght );
    }
+   
+   Reduced_vector bisector = src_contour.m_vec.back().get_perpendicular();
+   
+   vector< Reduced_vector >::const_iterator startShiftIt = startShadowShift.begin();
+   vector< Reduced_vector >::iterator nextShiftIt = nextShift.begin();
+   vector< Convex_contour >::iterator outContIt = out_contour->begin();
+      
+   for ( ; startShiftIt != startShadowShift.end(); 
+         ++startShiftIt, ++nextShiftIt, ++outContIt )
+   {
+      // I think it is so bad...
+      Reduced_vector shadow_vec;
+      createParalelVectorShadow( *currVectIt,
+                                 *startShiftIt,
+                                 bisector,
+                                 &shadow_vec,
+                                 &*nextShiftIt );
+         
+      outContIt->m_vec.push_back(shadow_vec);
+   }
+
 }

@@ -70,6 +70,21 @@ void G::drowCross(cv::Mat* image,
    cv::line(*image, uppt, downpt, color, intence);
 }
 
+void G::drowVector ( const Reduced_vector& circ,
+                     const Poinr2f& basePt,
+                     cv::Mat* image,
+                     const cv::Scalar& first_color,
+                     int first_intence,
+                     const cv::Scalar& second_color,
+                     int second_intence   )
+{
+   
+   cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
+   cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);
+
+   cv::line(*image, pt1, pt2, first_color, first_intence);
+}
+
 void G::drowShape(const G::Circle& circ,
                   cv::Mat* image,
                   const cv::Scalar& first_color,
@@ -116,8 +131,6 @@ void G::drowShape(const G::Interval& interval,
                   const cv::Scalar& second_color,
                   int second_intence)
 {
-   //std::cout << "drow Line_2d\n";
-
    cv::Point2f pt1 = to_openCV_coord(interval.getFirst(), *image);
    cv::Point2f pt2 = to_openCV_coord(interval.getSecond(), *image);
 

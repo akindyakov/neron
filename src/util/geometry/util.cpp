@@ -270,7 +270,15 @@ G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
    
    float A = (vect1.x/vect1_lenght - vect2.x/vect2_lenght);
    float B = (vect1.y/vect1_lenght - vect2.y/vect2_lenght);
-   return Reduced_vector(-B, A);
+   
+   std::cout << " get bisector -> vec1.x " << vect1.x 
+                                 <<" y: "  << vect1.y 
+                                 <<" len: "<< vect1_lenght << "\n";
+   std::cout << "                 vec2.x " << vect2.x 
+                                 <<" y: "  << vect2.y 
+                                 <<" len :"<< vect2_lenght << "\n";
+   std::cout << "            bisector.x: " << A <<" y: " << -B << "\n";
+   return Reduced_vector(A, -B);
 }
 
 //  --- auxiliary functions ---
