@@ -59,11 +59,15 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
    shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
    shadow_v->y = src_v.y * commonPartOfNumerator / denominator;
    
-   std::cout << "         k  = " << k << "\n";
+   std::cout << "         k  = " << k/denominator << "\n";
    std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
    
    result_finite_vector->x = finite_v.x * k / denominator;
    result_finite_vector->y = finite_v.y * k / denominator;
+   std::cout << "finite    ( " << result_finite_vector->x << "  ;  " << result_finite_vector->y << " )\n";
+   
+   std::cout << " x: " << start_v.x-result_finite_vector->x+start_v.x << "\n";
+   std::cout << " y: " << start_v.y-result_finite_vector->y+start_v.y << "\n";
 }
 
 void G::createShadow  ( const Convex_contour& src_contour, 
@@ -75,8 +79,7 @@ void G::createShadow  ( const Convex_contour& src_contour,
    
    out_contour->resize(0); // correct me if it will be need !
    
-   size_t srcContourSize = src_contour.m_vec.size();
-   size_t outSize;
+   size_t outSize = start_points.size();
    
    // it are neded to create start points for out contours
    for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
@@ -92,6 +95,9 @@ void G::createShadow  ( const Convex_contour& src_contour,
    vector< Reduced_vector > startShadowShift(start_points);
    vector< Reduced_vector > nextShift(start_points.size());
    
+   vector< Reduced_vector >* p_firstShift = &startShadowShift;
+   vector< Reduced_vector >* p_secondShift = &nextShift;
+   
    list< Reduced_vector >::const_iterator nextVectIt = src_contour.m_vec.begin();
    list< Reduced_vector >::const_iterator currVectIt = nextVectIt++;
    
@@ -103,45 +109,33 @@ void G::createShadow  ( const Convex_contour& src_contour,
       Reduced_vector bisector = getBisector( *currVectIt, *nextVectIt,
                                              currLenght,
                                              nextLenght );
-      //cout << "bisector : x = " << bisector.x << "  y = " << bisector.y << " ;\n";
-      vector< Reduced_vector >::const_iterator startShiftIt = startShadowShift.begin();
-      vector< Reduced_vector >::iterator nextShiftIt = nextShift.begin();
-      vector< Convex_contour >::iterator outContIt = out_contour->begin();
       
-      for ( ; startShiftIt != startShadowShift.end(); 
-            ++startShiftIt, ++nextShiftIt, ++outContIt )
+      for (size_t t=0; t < outSize; ++t) 
       {
-         // I think it is so bad...
          Reduced_vector shadow_vec;
          createParalelVectorShadow( *currVectIt,
-                                    *startShiftIt,
-                                    bisector,
-                                    &shadow_vec,
-                                    &*nextShiftIt );
+                                     p_firstShift->at(t),
+                                     bisector,
+                                     &shadow_vec,
+                                     &p_secondShift->at(t) );
          
-         outContIt->m_vec.push_back(shadow_vec);
+         out_contour->at(t).m_vec.push_back(shadow_vec);
       }
-      swap( startShadowShift, nextShift );
+      swap( p_secondShift, p_firstShift );
       swap( currLenght, nextLenght );
    }
    
    Reduced_vector bisector = src_contour.m_vec.back().get_perpendicular();
    
-   vector< Reduced_vector >::const_iterator startShiftIt = startShadowShift.begin();
-   vector< Reduced_vector >::iterator nextShiftIt = nextShift.begin();
-   vector< Convex_contour >::iterator outContIt = out_contour->begin();
-      
-   for ( ; startShiftIt != startShadowShift.end(); 
-         ++startShiftIt, ++nextShiftIt, ++outContIt )
+   for (size_t t=0; t < outSize; ++t) 
    {
-      // I think it is so bad...
       Reduced_vector shadow_vec;
       createParalelVectorShadow( *currVectIt,
-                                 *startShiftIt,
+                                 p_firstShift->at(t),
                                  bisector,
                                  &shadow_vec,
-                                 &*nextShiftIt );
-         
+                                 &p_secondShift->at(t) );
+     #warning carry out it to separate part 
       outContIt->m_vec.push_back(shadow_vec);
    }
 
