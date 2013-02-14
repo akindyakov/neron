@@ -227,7 +227,7 @@ G::Point2f G::operator + (const G::Point2f& pt,
    return G::Point2f(pt.x+vec.x, pt.y+vec.y);
 }
 
-G::Reduced_vector G::Reduced_vector::operator - ()
+G::Reduced_vector G::Reduced_vector::operator - ()const
 {
    return Geometry::Reduced_vector(-this->x,-this->y);
 }
@@ -235,17 +235,6 @@ G::Reduced_vector G::Reduced_vector::operator - ()
 G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
                                   const Reduced_vector& vect2)
 {
-   /* a = vect1, b = vect2
-    * cos(alpha) = cos(betta)
-    * throut scalar product
-    * r - bisector vector
-    * (ax*rx + ay*ry)/|a| = (bx*rx + by*ry)/|b|
-    *
-    *      /  ax     bx \        /  ay     by \
-    * rx * | ---- - ----| + ry * | ---- - ----|  = 0
-    *      \ |a|    |b| /        \ |a|    |b| /
-    *
-    */
    return getBisector(  vect1, vect2,
                         vect1.get_lenght(),
                         vect2.get_lenght() );
@@ -278,7 +267,7 @@ G::Reduced_vector G::getBisector( const Reduced_vector& vect1,
                                  <<" y: "  << vect2.y 
                                  <<" len :"<< vect2_lenght << "\n";
    std::cout << "            bisector.x: " << A <<" y: " << -B << "\n";
-   return Reduced_vector(A, -B);
+   return Reduced_vector(-B, A);
 }
 
 //  --- auxiliary functions ---

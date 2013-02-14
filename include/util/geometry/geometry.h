@@ -45,7 +45,7 @@ namespace Geometry
       friend Reduced_vector operator + (const Reduced_vector& vec1, const Reduced_vector& vec2);
       //friend Reduced_vector operator - (const Reduced_vector& vec1, const Reduced_vector& vec2);
       friend Point2f        operator + (const Point2f& pt, const Reduced_vector& vec);
-      Reduced_vector operator - ();
+      Reduced_vector operator - ()const;
    };
 
    class I_Shape
