@@ -21,24 +21,26 @@ using namespace Geometry;
 
 int main()
 {
-   int side = 1200;
+   int side = 800;
    cv::Mat image(side, side, CV_8UC1, cv::Scalar(255));
-   //Geometry::Convex_contour circle = createCircleContour( Geometry::Point2f(500,500),
-   //                                             100, 14);
-   Geometry::Convex_contour circle = createAngleContour( Geometry::Point2f(200,200), 400);
+   Geometry::Convex_contour circle = createCircleContour( Geometry::Point2f(300,250),
+                                                          200, 100);
+   //Geometry::Convex_contour circle = createAngleContour( Geometry::Point2f(200,200), 400);
 
    Geometry::drowShape(circle, &image, cv::Scalar(0), 1,cv::Scalar(0), 0);
    
    std::vector< Geometry::Convex_contour > out_contour;
    std::vector< Geometry::Reduced_vector > start_points;
-   
-   start_points.push_back(Geometry::Reduced_vector(100,-70));
-   start_points.push_back(Geometry::Reduced_vector(-70,100));
+
+   for (int i=0; i < 20; ++i)
+      start_points.push_back(Geometry::Reduced_vector(i*5,-3*i));
+   for (int i=0; i < 20; ++i)
+      start_points.push_back(Geometry::Reduced_vector(-i*4,3*i));
   
    for(std::vector< Geometry::Reduced_vector >::iterator it = start_points.begin();
          it != start_points.end(); ++it)
    {
-      drowVector ( *it, Geometry::Point2f(200,200), &image, cv::Scalar(50), 1 );
+      drowVector ( *it, Geometry::Point2f(100,100), &image, cv::Scalar(50), 1 );
    }
    
    try

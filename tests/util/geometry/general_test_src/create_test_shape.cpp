@@ -18,7 +18,7 @@ Geometry::Convex_contour createCircleContour( const Geometry::Point2f& center,
 {
    Geometry::Convex_contour ret(center);
    
-   ret.push_back(Geometry::Reduced_vector(radius, 0));
+   //ret.push_back(Geometry::Reduced_vector(radius, 0));
    
    Geometry::Reduced_vector discr(6*radius/detalisation,0);
    

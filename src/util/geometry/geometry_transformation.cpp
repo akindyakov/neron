@@ -24,10 +24,6 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
                                 G::Reduced_vector* shadow_v,
                                 G::Reduced_vector* result_finite_vector )
 {
-   std::cout << " ----------------------------------------------------\n";
-   std::cout << " src_v    ( " << src_v.x << "  ;  " << src_v.y << " )\n";
-   std::cout << " start_v  ( " << start_v.x << "  ;  " << start_v.y << " )\n";
-   std::cout << " finite_v ( " << finite_v.x << "  ;  " << finite_v.y << " )\n";
    /*      {  start.x + shadow.x - k*B = src.x
     *     {   start.y + shadow.y - k*A = src.y
     *      {  shadow.x * src.y = shadow.y * src.x
@@ -52,22 +48,24 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
    
    float commonPartOfNumerator = finite_v.x*(start_v.y - src_v.y) - finite_v.y*(start_v.x - src_v.x);
    
-   float k = src_v.y * start_v.x - src_v.x * start_v.y;
+   float k = - src_v.y * start_v.x + src_v.x * start_v.y;
    if ( denominator == 0 )
       throw(G::Geometry_error("in get paralel finite vector and src vector must not be paralel\n"));
    
    shadow_v->x = src_v.x * commonPartOfNumerator / denominator;
    shadow_v->y = src_v.y * commonPartOfNumerator / denominator;
    
-   std::cout << "         k  = " << k/denominator << "\n";
-   std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
-   
    result_finite_vector->x = finite_v.x * k / denominator;
    result_finite_vector->y = finite_v.y * k / denominator;
-   std::cout << "finite    ( " << result_finite_vector->x << "  ;  " << result_finite_vector->y << " )\n";
-   
-   std::cout << " x: " << start_v.x-result_finite_vector->x+start_v.x << "\n";
-   std::cout << " y: " << start_v.y-result_finite_vector->y+start_v.y << "\n";
+//std::cout << " ----------------------------------------------------\n";
+//std::cout << " src_v    ( " << src_v.x << "  ;  " << src_v.y << " )\n";
+//std::cout << " start_v  ( " << start_v.x << "  ;  " << start_v.y << " )\n";
+//std::cout << " finite_v ( " << finite_v.x << "  ;  " << finite_v.y << " )\n";
+//std::cout << "         k  = " << k/denominator << "\n";
+//std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
+//std::cout << "finite    ( " << result_finite_vector->x << "  ;  " << result_finite_vector->y << " )\n";
+//std::cout << " x: " << start_v.x - result_finite_vector->x + shadow_v->x << "\n";
+//std::cout << " y: " << start_v.y - result_finite_vector->y + shadow_v->y << "\n";
 }
 
 void G::createShadow  ( const Convex_contour& src_contour, 
@@ -106,9 +104,8 @@ void G::createShadow  ( const Convex_contour& src_contour,
    {
       nextLenght = nextVectIt->get_lenght();
       
-      Reduced_vector bisector = getBisector( *currVectIt, *nextVectIt,
-                                             currLenght,
-                                             nextLenght );
+      Reduced_vector bisector = getBisector( -(*currVectIt), *nextVectIt,
+                                             currLenght, nextLenght );
       
       for (size_t t=0; t < outSize; ++t) 
       {
@@ -124,9 +121,7 @@ void G::createShadow  ( const Convex_contour& src_contour,
       swap( p_secondShift, p_firstShift );
       swap( currLenght, nextLenght );
    }
-   
    Reduced_vector bisector = src_contour.m_vec.back().get_perpendicular();
-   
    for (size_t t=0; t < outSize; ++t) 
    {
       Reduced_vector shadow_vec;
@@ -135,8 +130,9 @@ void G::createShadow  ( const Convex_contour& src_contour,
                                  bisector,
                                  &shadow_vec,
                                  &p_secondShift->at(t) );
-     #warning carry out it to separate part 
-      outContIt->m_vec.push_back(shadow_vec);
+      out_contour->at(t).m_vec.push_back(shadow_vec);
    }
 
 }
+void addShadowForSrcVector()
+{}
