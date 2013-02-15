@@ -106,7 +106,6 @@ void addShadowForContourVector(const G::Reduced_vector& srcVector,
                               directFinishVector,
                               &shadow_vec,
                               resultFinishVector );
-            
    outContour->m_vec.push_back(shadow_vec);           
 }
 
@@ -149,13 +148,14 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
    
    result_finite_vector->x = finite_v.x * k / denominator;
    result_finite_vector->y = finite_v.y * k / denominator;
-//std::cout << " ----------------------------------------------------\n";
-//std::cout << " src_v    ( " << src_v.x << "  ;  " << src_v.y << " )\n";
-//std::cout << " start_v  ( " << start_v.x << "  ;  " << start_v.y << " )\n";
-//std::cout << " finite_v ( " << finite_v.x << "  ;  " << finite_v.y << " )\n";
-//std::cout << "         k  = " << k/denominator << "\n";
-//std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
-//std::cout << "finite    ( " << result_finite_vector->x << "  ;  " << result_finite_vector->y << " )\n";
-//std::cout << " x: " << start_v.x - result_finite_vector->x + shadow_v->x << "\n";
-//std::cout << " y: " << start_v.y - result_finite_vector->y + shadow_v->y << "\n";
+   
+   //std::cout << " ----------------------------------------------------\n";
+   //std::cout << " src_v    ( " << src_v.x << "  ;  " << src_v.y << " )\n";
+   //std::cout << " start_v  ( " << start_v.x << "  ;  " << start_v.y << " )\n";
+   //std::cout << " finite_v ( " << finite_v.x << "  ;  " << finite_v.y << " )\n";
+   //std::cout << "         k  = " << k/denominator << "\n";
+   //std::cout << "\nshadow_v  ( " << shadow_v->x << "  ;  " << shadow_v->y << " )\n";
+   //std::cout << "finite    ( " << result_finite_vector->x << "  ;  " << result_finite_vector->y << " )\n";
+   //std::cout << " x: " << start_v.x - result_finite_vector->x + shadow_v->x << "\n";
+   //std::cout << " y: " << start_v.y - result_finite_vector->y + shadow_v->y << "\n";
 }
