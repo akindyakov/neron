@@ -18,6 +18,98 @@
 
 namespace G = Geometry;
 
+// create paralel vector for src with start in start and finish on the line
+// which directrd by finite vector and push_back it to out_contour
+void addShadowForContourVector(const G::Reduced_vector& srcVector,
+                               const G::Reduced_vector& startVector,
+                               const G::Reduced_vector& directFinishVector,
+                               G::Convex_contour* outContour,
+                               G::Reduced_vector* resultFinishVector );
+
+// create paralel vector for src with start in start and finish on the line
+// which directrd by finite vector
+void createParalelVectorShadow( const G::Reduced_vector& src_v,
+                                const G::Reduced_vector& start_v,
+                                const G::Reduced_vector& finite_v,
+                                G::Reduced_vector* shadow_v,
+                                G::Reduced_vector* result_finite_vector );
+
+void G::createShadow  ( const Convex_contour& src_contour, 
+                        std::vector< Convex_contour >* out_contour,
+                        const std::vector< Reduced_vector >& start_points )
+{
+   using namespace std;
+   using namespace Geometry;
+   
+   out_contour->resize(0); // correct me if it will be need !
+   size_t outSize = start_points.size();
+   // it are neded to create start points for out contours
+   for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
+         start_pts_it != start_points.end();
+         ++start_pts_it)
+   {
+      out_contour->push_back( Convex_contour(src_contour.m_center+*start_pts_it) );
+   }
+   
+   float currLenght = src_contour.m_vec.front().get_lenght();
+   float nextLenght = 0;
+   
+   vector< Reduced_vector > startShadowShift(start_points);
+   vector< Reduced_vector > nextShift(start_points.size());
+   
+   vector< Reduced_vector >* p_firstShift = &startShadowShift;
+   vector< Reduced_vector >* p_secondShift = &nextShift;
+   
+   list< Reduced_vector >::const_iterator nextVectIt = src_contour.m_vec.begin();
+   list< Reduced_vector >::const_iterator currVectIt = nextVectIt++;
+   
+   for ( ; nextVectIt != src_contour.m_vec.end();
+         ++currVectIt, ++nextVectIt             )
+   {
+      nextLenght = nextVectIt->get_lenght();
+      
+      Reduced_vector bisector = getBisector( -(*currVectIt), *nextVectIt,
+                                             currLenght, nextLenght );
+      
+      for (size_t t=0; t < outSize; ++t) 
+      {
+         addShadowForContourVector( *currVectIt,
+                                    p_firstShift->at(t),
+                                    bisector,
+                                    &out_contour->at(t),
+                                    &p_secondShift->at(t));
+      }
+      swap( p_secondShift, p_firstShift );
+      swap( currLenght, nextLenght );
+   }
+   Reduced_vector bisector = src_contour.m_vec.back().get_perpendicular();
+   for (size_t t=0; t < outSize; ++t) 
+   {
+      addShadowForContourVector( *currVectIt,
+                                 p_firstShift->at(t),
+                                 bisector,
+                                 &out_contour->at(t),
+                                 &p_secondShift->at(t));
+   }
+
+}
+
+void addShadowForContourVector(const G::Reduced_vector& srcVector,
+                               const G::Reduced_vector& startVector,
+                               const G::Reduced_vector& directFinishVector,
+                               G::Convex_contour* outContour,
+                               G::Reduced_vector* resultFinishVector )
+{
+   G::Reduced_vector shadow_vec;
+   createParalelVectorShadow( srcVector,
+                              startVector,
+                              directFinishVector,
+                              &shadow_vec,
+                              resultFinishVector );
+            
+   outContour->m_vec.push_back(shadow_vec);           
+}
+
 void createParalelVectorShadow( const G::Reduced_vector& src_v,
                                 const G::Reduced_vector& start_v,
                                 const G::Reduced_vector& finite_v,
@@ -67,72 +159,3 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
 //std::cout << " x: " << start_v.x - result_finite_vector->x + shadow_v->x << "\n";
 //std::cout << " y: " << start_v.y - result_finite_vector->y + shadow_v->y << "\n";
 }
-
-void G::createShadow  ( const Convex_contour& src_contour, 
-                        std::vector< Convex_contour >* out_contour,
-                        const std::vector< Reduced_vector >& start_points )
-{
-   using namespace std;
-   using namespace Geometry;
-   
-   out_contour->resize(0); // correct me if it will be need !
-   
-   size_t outSize = start_points.size();
-   
-   // it are neded to create start points for out contours
-   for ( vector< Reduced_vector >::const_iterator start_pts_it = start_points.begin();
-         start_pts_it != start_points.end();
-         ++start_pts_it)
-   {
-      out_contour->push_back( Convex_contour(src_contour.m_center+*start_pts_it) );
-   }
-   
-   float currLenght = src_contour.m_vec.front().get_lenght();
-   float nextLenght = 0;
-   
-   vector< Reduced_vector > startShadowShift(start_points);
-   vector< Reduced_vector > nextShift(start_points.size());
-   
-   vector< Reduced_vector >* p_firstShift = &startShadowShift;
-   vector< Reduced_vector >* p_secondShift = &nextShift;
-   
-   list< Reduced_vector >::const_iterator nextVectIt = src_contour.m_vec.begin();
-   list< Reduced_vector >::const_iterator currVectIt = nextVectIt++;
-   
-   for ( ; nextVectIt != src_contour.m_vec.end();
-         ++currVectIt, ++nextVectIt             )
-   {
-      nextLenght = nextVectIt->get_lenght();
-      
-      Reduced_vector bisector = getBisector( -(*currVectIt), *nextVectIt,
-                                             currLenght, nextLenght );
-      
-      for (size_t t=0; t < outSize; ++t) 
-      {
-         Reduced_vector shadow_vec;
-         createParalelVectorShadow( *currVectIt,
-                                     p_firstShift->at(t),
-                                     bisector,
-                                     &shadow_vec,
-                                     &p_secondShift->at(t) );
-         
-         out_contour->at(t).m_vec.push_back(shadow_vec);
-      }
-      swap( p_secondShift, p_firstShift );
-      swap( currLenght, nextLenght );
-   }
-   Reduced_vector bisector = src_contour.m_vec.back().get_perpendicular();
-   for (size_t t=0; t < outSize; ++t) 
-   {
-      Reduced_vector shadow_vec;
-      createParalelVectorShadow( *currVectIt,
-                                 p_firstShift->at(t),
-                                 bisector,
-                                 &shadow_vec,
-                                 &p_secondShift->at(t) );
-      out_contour->at(t).m_vec.push_back(shadow_vec);
-   }
-
-}
-void addShadowForSrcVector()
-{}
