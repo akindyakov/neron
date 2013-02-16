@@ -87,6 +87,8 @@ void G::Contour::getX(float y, std::vector<float>* x)const
 void G::Contour::getY(float x, std::vector<float>* y)const
 {}
 
+
+// TODO: it needed to remake it with list specific functions !
 void G::Contour::toSegments()
 {
    std::list<G::Reduced_vector>::const_iterator secondIt = m_vec.begin();
@@ -132,8 +134,8 @@ void G::Contour::toSegments()
    m_contours.push_back(curr_cont); // write last convex_contour
 }
 
-int G::Contour::isSegmented()
+bool G::Contour::isSegmented()
 {
-   return m_status;
+   return (m_vec.size() == 0);
 }
 
