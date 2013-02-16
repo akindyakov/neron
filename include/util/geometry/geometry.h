@@ -197,13 +197,14 @@ namespace Geometry
       bool belongingPoint(const Point2f& point)const;
       bool shapeIntersection(const I_Shape& inputShape,
                              std::list<Point2f>* genPoint=NULL);
-
+      
       float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
       
-      void convertToContour();
-      int  is_converted();
+      void toSegments();
+      int  isSegmented();
+      
       // --- data ---
       std::list<Reduced_vector> m_vec;
       std::list<Convex_contour> m_contours;

@@ -20,7 +20,7 @@ G::Contour::Contour(const G::Point2f& center,
    : m_vec(polinom)
 {
    m_center = center;
-   this->convertToContour();
+   this->toSegments();
 }
 
 G::Contour::Contour(const std::list<G::Point2f>& polinom)
@@ -38,7 +38,7 @@ G::Contour::Contour(const std::list<G::Point2f>& polinom)
       //std::cout << "pt: " << polIt->x - prevPolIt->x << " "
       //                    << polIt->y - prevPolIt->y << std::endl;
    }
-   this->convertToContour();
+   this->toSegments();
 }
 
 void G::Contour::push_back(float x, float y)
@@ -87,12 +87,11 @@ void G::Contour::getX(float y, std::vector<float>* x)const
 void G::Contour::getY(float x, std::vector<float>* y)const
 {}
 
-void G::Contour::convertToContour()
+void G::Contour::toSegments()
 {
-   std::list<G::Reduced_vector>::const_iterator firstIt = m_vec.begin();
    std::list<G::Reduced_vector>::const_iterator secondIt = m_vec.begin();
-   ++secondIt;
-
+   std::list<G::Reduced_vector>::const_iterator firstIt = secondIt++;
+   
    /*
     * If prev pair of vectours and current pair of vectors turn
     * to the equal directions (clockwise or conterclockwise)
@@ -100,7 +99,7 @@ void G::Contour::convertToContour()
     * If sign chege we will write current convex_contour to contours list
     * and crete new convex_contour and start to fiil one.
     */
-
+   
    float last_vector_proud = firstIt->vector_proud(*secondIt);
    float now_vector_proud = 0;
 
@@ -129,12 +128,11 @@ void G::Contour::convertToContour()
          last_vector_proud = 0;
       }
       runingStartPt = runingStartPt + *secondIt;
-
    }
    m_contours.push_back(curr_cont); // write last convex_contour
 }
 
-int G::Contour::is_converted()
+int G::Contour::isSegmented()
 {
    return m_status;
 }
