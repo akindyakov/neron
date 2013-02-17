@@ -48,13 +48,16 @@ namespace Geometry
       friend Point2f        operator + (const Point2f& pt, const Reduced_vector& vec);
       Reduced_vector operator - ()const;
    };
-
+   
+   typedef std::list< Reduced_vector >::iterator reducedVectorIterator;
+   typedef std::list< Reduced_vector >::const_iterator   constReducedVectorIterator;
+   
    class I_Shape
    {
    public:
       I_Shape(){};
       I_Shape(const Point2f& center) : m_center(center){};
-
+      
       //virtual int get_type()const = 0;
       // turning shape about m_center point
       virtual void turn(float angle)=0;
@@ -150,7 +153,7 @@ namespace Geometry
    
       Reduced_vector m_direct_vector;
    };
-
+   
    class Convex_contour : public I_Shape
    {
    public:
@@ -173,6 +176,11 @@ namespace Geometry
       float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
       
       Point2f getEnd();
+      
+      constReducedVectorIterator cbeginIt()const;
+      reducedVectorIterator      beginIt();
+      constReducedVectorIterator cendIt()const;
+      reducedVectorIterator      endIt();
       
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
@@ -199,7 +207,7 @@ namespace Geometry
       float getDistance(const Point2f& pt, Point2f* close_pt=NULL)const;
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
-      
+       
       void toSegments();
       void oldToSegments();
       bool isSegmented();
@@ -225,6 +233,10 @@ namespace Geometry
    
    void getHorizontalBorderPoint(const std::list<Point2f>& points,
                                  Point2f* pt_min, Point2f* pt_max);
+   
+   void getLine2dBorderPoint ( const Convex_contour& srcContour,
+                               Reduced_vector lineDirect,
+                               Point2f* minPt, Point2f* maxPt);
    
    void contourToConvexContour(Contour* cont);
    

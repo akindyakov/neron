@@ -88,6 +88,26 @@ G::Point2f G::Convex_contour::getEnd()
    return endPt;
 }
 
+G::constReducedVectorIterator G::Convex_contour::cbeginIt()const
+{
+   return this->m_vec.begin();
+}
+
+G::reducedVectorIterator G::Convex_contour::beginIt()
+{
+   return this->m_vec.begin();
+}
+
+G::constReducedVectorIterator G::Convex_contour::cendIt()const
+{
+   return this->m_vec.end();
+}
+
+G::reducedVectorIterator G::Convex_contour::endIt()
+{
+   return this->m_vec.end();
+}
+
 bool G::Convex_contour::shapeIntersection(const G::I_Shape& inputShape,
                                          std::list<G::Point2f>* genPoint)
 {

@@ -59,8 +59,34 @@ void Geometry::getVerticalBorderPoint(const std::list<Geometry::Point2f>&points,
    }
 }
 
-void Geometry::getHorizontalBorderPoint(const std::list<Geometry::Point2f>& points,
-                          Geometry::Point2f* pt_min, Geometry::Point2f* pt_max)
+void G::getLine2dBorderPoint ( const Convex_contour& srcContour,
+                               Reduced_vector lineDirect,
+                               Point2f* minPt, Point2f* maxPt)
+{
+   float scalarMin = 0;
+   float scalerMax = 0;
+   float accumulator = 0; 
+   Point2f pt_accumulator = srcContour.m_center;
+   for ( constReducedVectorIterator vecIt = srcContour.cbeginIt();
+         vecIt != srcContour.cendIt(); ++vecIt )
+   {
+      accumulator += lineDirect * *vecIt;
+      pt_accumulator = pt_accumulator + *vecIt;
+      if ( accumulator > scalerMax )
+      {
+         scalerMax = accumulator;
+         *minPt = pt_accumulator;
+      }
+      else  if ( accumulator < scalarMin )
+            {
+               scalarMin = accumulator;
+               *maxPt = pt_accumulator;
+            }
+   }
+}
+
+void G::getHorizontalBorderPoint(const std::list< G::Point2f >& points,
+                          G::Point2f* pt_min, G::Point2f* pt_max)
 {
    pt_min->y = FLT_MAX ;
    pt_max->y = -FLT_MAX ;
@@ -74,21 +100,18 @@ void Geometry::getHorizontalBorderPoint(const std::list<Geometry::Point2f>& poin
    }
 }
 
-void Geometry::contourToConvexContour(Geometry::Contour* cont)
-{}
-
 std::list<Geometry::Point2f> pointToConvex(const std::list<Geometry::Point2f>& points,
                                 const float sizeStep)
 {
    Geometry::Point2f pt_min, pt_max;
    Geometry::getVerticalBorderPoint(points, &pt_min, &pt_max);
-
+   
    float f_n_step = (pt_max.x - pt_min.x)/sizeStep;
    int n_step = static_cast<int>(f_n_step);
    if ( f_n_step-n_step > 0 )
       ++n_step;
    std::vector< std::list<Geometry::Point2f> > boxes(n_step);
-
+   
    // sort to boxes
    for ( std::list<Geometry::Point2f>::const_iterator ptIt = points.begin();
          ptIt != points.end(); ++ptIt )
