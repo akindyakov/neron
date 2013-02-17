@@ -146,7 +146,7 @@ void G::drowShape(const G::Line_2d& line,
    {
       G::drowPoint(line.m_center, image,
                    second_color, second_intence);
-      G::drowVector(line.m_direct_vector, line.m_center, image,
+      G::drowVector(line.m_vector, line.m_center, image,
                     second_color, second_intence);
    }
 }

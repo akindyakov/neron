@@ -151,7 +151,7 @@ namespace Geometry
       void getX(float y, std::vector<float>* x)const;
       void getY(float x, std::vector<float>* y)const;
    
-      Reduced_vector m_direct_vector;
+      Reduced_vector m_vector;
    };
    
    class Convex_contour : public I_Shape
@@ -249,12 +249,6 @@ namespace Geometry
                                           Point2f lowBorder,
                                           Point2f upBorder);
    
-   bool fastCriterionIntersection ( const Interval&,
-                                    const Convex_contour& );
-   
-   bool fastCriterionIntersection ( const Line2d&,
-                                    const Convex_contour& );
-   
    const int SHAPE_NOT_INTERSECTION = 0;
    const int SHAPE_INTERSECTION     = 1;
    const int SHAPE_MATCH            = 2;
@@ -347,7 +341,7 @@ namespace Geometry
                          const Convex_contour&,
                          std::list<Point2f>* genPoint=NULL);
    
-   int fastShapeIntersection ( const Line2d& line,
+   int fastShapeIntersection ( const Line_2d& line,
                                const Convex_contour& conv_cont);
    
    Point2f searchCenterCloud(const std::list< Point2i >& cloud);

@@ -60,13 +60,13 @@ int G::shapeIntersection(const G::Line_2d& line1,
                          const G::Line_2d& line2,
                          std::list<G::Point2f>* genPoint)
 {
-   float determ = line1.m_direct_vector.y * line2.m_direct_vector.x -
-                  line1.m_direct_vector.x * line2.m_direct_vector.y;
+   float determ = line1.m_vector.y * line2.m_vector.x -
+                  line1.m_vector.x * line2.m_vector.y;
    if ( Math::equal(determ,0) )
    {
       float vect_proud =
-            (line1.m_center.x-line2.m_center.x)*line1.m_direct_vector.y -
-            (line1.m_center.y-line2.m_center.y)*line1.m_direct_vector.x;
+            (line1.m_center.x-line2.m_center.x)*line1.m_vector.y -
+            (line1.m_center.y-line2.m_center.y)*line1.m_vector.x;
    
       if ( Math::equal(vect_proud,0) )
       {
@@ -77,22 +77,22 @@ int G::shapeIntersection(const G::Line_2d& line1,
    
    if ( genPoint != NULL )
    {
-      float determ1 = line1.m_direct_vector.x
-                           * (line2.m_direct_vector.x * line2.m_center.y
-                              - line2.m_direct_vector.y * line2.m_center.x
-                              - line2.m_direct_vector.x * line1.m_center.y)
-                      + line1.m_direct_vector.y
-                        * line2.m_direct_vector.x
+      float determ1 = line1.m_vector.x
+                           * (line2.m_vector.x * line2.m_center.y
+                              - line2.m_vector.y * line2.m_center.x
+                              - line2.m_vector.x * line1.m_center.y)
+                      + line1.m_vector.y
+                        * line2.m_vector.x
                         * line1.m_center.x;
       
-      float determ2 = - line1.m_direct_vector.y
-                           * (line2.m_direct_vector.y * line2.m_center.x
-                              - line2.m_direct_vector.x * line2.m_center.y)
-                      - line1.m_direct_vector.x
-                           * line2.m_direct_vector.y
+      float determ2 = - line1.m_vector.y
+                           * (line2.m_vector.y * line2.m_center.x
+                              - line2.m_vector.x * line2.m_center.y)
+                      - line1.m_vector.x
+                           * line2.m_vector.y
                            * line1.m_center.y
-                      + line1.m_direct_vector.y
-                           * line2.m_direct_vector.y
+                      + line1.m_vector.y
+                           * line2.m_vector.y
                            * line1.m_center.x;
       float x_cross = determ1/determ;
       float y_cross = determ2/determ;
@@ -100,12 +100,12 @@ int G::shapeIntersection(const G::Line_2d& line1,
       /*
       std::cout << "  line1.m_center.x: " << line1.m_center.x
                 << "  line1.m_center.y: " << line1.m_center.y
-                << "\n  line1.m_direct_vector.x: " << line1.m_direct_vector.x
-                << "  line1.m_direct_vector.y: " << line1.m_direct_vector.y
+                << "\n  line1.m_vector.x: " << line1.m_vector.x
+                << "  line1.m_vector.y: " << line1.m_vector.y
                 << "\n  line2.m_center.x: " << line2.m_center.x
                 << "  line2.m_center.y: " << line2.m_center.y
-                << "\n  line2.m_direct_vector.x: " << line2.m_direct_vector.x
-                << "  line2.m_direct_vector.y: " << line2.m_direct_vector.y
+                << "\n  line2.m_vector.x: " << line2.m_vector.x
+                << "  line2.m_vector.y: " << line2.m_vector.y
                 <<"\n";
       std::cout << "x: " << x_cross << "y: " << y_cross << "\n";
       std::cout << "determ: " << determ << "\n";
@@ -265,7 +265,7 @@ int G::shapeIntersection(const G::Circle& circ,
          return ret;
    }
    float half_hord = std::sqrt(circ.m_radius*circ.m_radius - dist*dist);
-   G::Reduced_vector line_direct(line.m_direct_vector);
+   G::Reduced_vector line_direct(line.m_vector);
    line_direct.set_lenght(half_hord);
    genPoint->push_back(half_hord_pt + line_direct);
    genPoint->push_back(half_hord_pt + (-line_direct));
@@ -373,44 +373,6 @@ int G::shapeIntersection(const G::Line_2d&,
    return G::SHAPE_NOT_INTERSECTION;
 }
 
-int G::shapeIntersection(const G::Line_2d& line,
-                         const G::Convex_contour& conv_cont,
-                         std::list<G::Point2f>* genPoint)
-{
-   G::Point2f pt = conv_cont.m_center;
-   if ( genPoint != NULL )
-   {
-      // if need to find points of intersection
-      // we must check all over intervals
-      for (std::list<G::Reduced_vector>::const_iterator ptIt = conv_cont.m_vec.begin();
-            ptIt != conv_cont.m_vec.end();
-            ++ptIt)
-      {
-         G::shapeIntersection(line, G::Interval(pt, *ptIt), genPoint);
-         pt = pt + *ptIt;
-      }
-      if ( genPoint->size() > 0 )
-         return G::SHAPE_INTERSECTION;
-      else
-         return G::SHAPE_NOT_INTERSECTION;
-   }
-   else
-   {
-      // if not need to find intersection points
-      // it is enought to find at list one intersection point
-
-      int rez = G::SHAPE_NOT_INTERSECTION;
-      for (std::list<G::Reduced_vector>::const_iterator ptIt = conv_cont.m_vec.begin();
-            ( rez == G::SHAPE_NOT_INTERSECTION && ptIt != conv_cont.m_vec.end() );
-            ++ptIt)
-      {
-         rez = G::shapeIntersection(line, G::Interval(pt, *ptIt), genPoint);
-         pt = pt + *ptIt;
-      }
-      return rez;
-   }
-}
-
 int G::shapeIntersection(const G::Interval&,
                          const G::Contour&,
                          std::list<G::Point2f>* genPoint)
@@ -418,26 +380,26 @@ int G::shapeIntersection(const G::Interval&,
    return G::SHAPE_NOT_INTERSECTION;
 }
 
-int G::fastShapeIntersection ( const Line2d& line,
+int G::fastShapeIntersection ( const Line_2d& line,
                                const Convex_contour& conv_cont)
 {
    Point2f minPt, maxPt;
-   getLine2dBorderPoint ( conv_cont, line.m_vec, &minPt, &maxPt);
+   getLine2dBorderPoint ( conv_cont, line.m_vector, &minPt, &maxPt);
    
    Reduced_vector vec1(line.m_center, minPt);
    Reduced_vector vec2(line.m_center, maxPt);
    
-   float vec1Proud = vec1.vectorProud(line.m_vec);
-   float vec2Proud = vec2.vectorProud(line.m_vec);
+   float vec1Proud = vec1.vector_proud(line.m_vector);
+   float vec2Proud = vec2.vector_proud(line.m_vector);
    
    return (vec1Proud*vec2Proud > 0);
 }
 
-int G::shapeIntersection ( const Line2d& line,
-                               const Convex_contour& conv_cont,
-                               std::list<G::Point2f>* genPoint )
+int G::shapeIntersection ( const Line_2d& line,
+                           const Convex_contour& conv_cont,
+                           std::list<G::Point2f>* genPoint )
 {
-   Reduced_vector perpend = line.m_vec.get_perpendicular();
+   Reduced_vector perpend = line.m_vector.get_perpendicular();
    perpend.set_lenght(1);
    Reduced_vector contStartPointVector(line.m_center, conv_cont.m_center);
    float scalarBorder = perpend * contStartPointVector;
@@ -445,15 +407,15 @@ int G::shapeIntersection ( const Line2d& line,
    float accumulator = scalarBorder;
    float old_accum = 0;
    
-   Point2f pt_accumulator = srcContour.m_center;
+   Point2f pt_accumulator = conv_cont.m_center;
    Point2f pt_delay_accum;
    
    size_t startGenSize = genPoint->size();
-   for ( constReducedVectorIterator vecIt = srcContour.cbeginIt();
-         vecIt != srcContour.cendIt(); ++vecIt )
+   for ( constReducedVectorIterator vecIt = conv_cont.cbeginIt();
+         vecIt != conv_cont.cendIt(); ++vecIt )
    {
       old_accum = accumulator;
-      accumulator += lineDirect * *vecIt;
+      accumulator += perpend * *vecIt;
       
       pt_delay_accum = pt_accumulator;
       pt_accumulator = pt_accumulator + *vecIt;
@@ -475,7 +437,7 @@ int G::shapeIntersection ( const Interval& interval,
                            const Convex_contour& conv_cont,
                            std::list<G::Point2f>* genPoint )
 {
-   Reduced_vector perpend = interval.m_vec.get_perpendicular();
+   Reduced_vector perpend = interval.m_vector.get_perpendicular();
    perpend.set_lenght(1);
    Reduced_vector contStartPointVector(interval.m_center, conv_cont.m_center);
    float scalarBorder = perpend * contStartPointVector;
@@ -483,15 +445,15 @@ int G::shapeIntersection ( const Interval& interval,
    float accumulator = scalarBorder;
    float old_accum = 0;
    
-   Point2f pt_accumulator = srcContour.m_center;
+   Point2f pt_accumulator = conv_cont.m_center;
    Point2f pt_delay_accum;
    
    size_t startGenSize = genPoint->size();
-   for ( constReducedVectorIterator vecIt = srcContour.cbeginIt();
-         vecIt != srcContour.cendIt(); ++vecIt )
+   for ( constReducedVectorIterator vecIt = conv_cont.cbeginIt();
+         vecIt != conv_cont.cendIt(); ++vecIt )
    {
       old_accum = accumulator;
-      accumulator += intervalDirect * *vecIt;
+      accumulator += perpend * *vecIt;
       
       pt_delay_accum = pt_accumulator;
       pt_accumulator = pt_accumulator + *vecIt;
