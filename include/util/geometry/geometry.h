@@ -249,6 +249,12 @@ namespace Geometry
                                           Point2f lowBorder,
                                           Point2f upBorder);
    
+   bool fastCriterionIntersection ( const Interval&,
+                                    const Convex_contour& );
+   
+   bool fastCriterionIntersection ( const Line2d&,
+                                    const Convex_contour& );
+   
    const int SHAPE_NOT_INTERSECTION = 0;
    const int SHAPE_INTERSECTION     = 1;
    const int SHAPE_MATCH            = 2;
@@ -340,7 +346,10 @@ namespace Geometry
    int shapeIntersection(const Contour&,
                          const Convex_contour&,
                          std::list<Point2f>* genPoint=NULL);
-
+   
+   int fastShapeIntersection ( const Line2d& line,
+                               const Convex_contour& conv_cont);
+   
    Point2f searchCenterCloud(const std::list< Point2i >& cloud);
    Point2f searchCenterCloud(const std::list< Point2f >& cloud);
 

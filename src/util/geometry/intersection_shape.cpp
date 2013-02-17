@@ -67,14 +67,14 @@ int G::shapeIntersection(const G::Line_2d& line1,
       float vect_proud =
             (line1.m_center.x-line2.m_center.x)*line1.m_direct_vector.y -
             (line1.m_center.y-line2.m_center.y)*line1.m_direct_vector.x;
-
+   
       if ( Math::equal(vect_proud,0) )
       {
          return Geometry::SHAPE_MATCH;
       }
       return Geometry::SHAPE_NOT_INTERSECTION;
    }
-
+   
    if ( genPoint != NULL )
    {
       float determ1 = line1.m_direct_vector.x
@@ -84,7 +84,7 @@ int G::shapeIntersection(const G::Line_2d& line1,
                       + line1.m_direct_vector.y
                         * line2.m_direct_vector.x
                         * line1.m_center.x;
-
+      
       float determ2 = - line1.m_direct_vector.y
                            * (line2.m_direct_vector.y * line2.m_center.x
                               - line2.m_direct_vector.x * line2.m_center.y)
@@ -418,42 +418,95 @@ int G::shapeIntersection(const G::Interval&,
    return G::SHAPE_NOT_INTERSECTION;
 }
 
-int G::shapeIntersection(const G::Interval& interval,
-                         const G::Convex_contour& conv_cont,
-                         std::list<G::Point2f>* genPoint)
+int G::fastShapeIntersection ( const Line2d& line,
+                               const Convex_contour& conv_cont)
 {
-   G::Point2f pt = conv_cont.m_center;
-   if ( genPoint != NULL )
-   {
-      // if need to find points of intersection
-      // we must check all over intervals
-      for (std::list<G::Reduced_vector>::const_iterator ptIt = conv_cont.m_vec.begin();
-            ptIt != conv_cont.m_vec.end();
-            ++ptIt)
-      {
-         G::shapeIntersection(G::Interval(pt, *ptIt), interval, genPoint);
-         pt = pt + *ptIt;
-      }
-      if ( genPoint->size() > 0 )
-         return G::SHAPE_INTERSECTION;
-      else
-         return G::SHAPE_NOT_INTERSECTION;
-   }
-   else
-   {
-      // if not need to find intersection points
-      // it is enought to find at list one intersection point
+   Point2f minPt, maxPt;
+   getLine2dBorderPoint ( conv_cont, line.m_vec, &minPt, &maxPt);
+   
+   Reduced_vector vec1(line.m_center, minPt);
+   Reduced_vector vec2(line.m_center, maxPt);
+   
+   float vec1Proud = vec1.vectorProud(line.m_vec);
+   float vec2Proud = vec2.vectorProud(line.m_vec);
+   
+   return (vec1Proud*vec2Proud > 0);
+}
 
-      int rez = G::SHAPE_NOT_INTERSECTION;
-      for (std::list<G::Reduced_vector>::const_iterator ptIt = conv_cont.m_vec.begin();
-            ( rez == G::SHAPE_NOT_INTERSECTION && ptIt != conv_cont.m_vec.end() );
-            ++ptIt)
+int G::shapeIntersection ( const Line2d& line,
+                               const Convex_contour& conv_cont,
+                               std::list<G::Point2f>* genPoint )
+{
+   Reduced_vector perpend = line.m_vec.get_perpendicular();
+   perpend.set_lenght(1);
+   Reduced_vector contStartPointVector(line.m_center, conv_cont.m_center);
+   float scalarBorder = perpend * contStartPointVector;
+   
+   float accumulator = scalarBorder;
+   float old_accum = 0;
+   
+   Point2f pt_accumulator = srcContour.m_center;
+   Point2f pt_delay_accum;
+   
+   size_t startGenSize = genPoint->size();
+   for ( constReducedVectorIterator vecIt = srcContour.cbeginIt();
+         vecIt != srcContour.cendIt(); ++vecIt )
+   {
+      old_accum = accumulator;
+      accumulator += lineDirect * *vecIt;
+      
+      pt_delay_accum = pt_accumulator;
+      pt_accumulator = pt_accumulator + *vecIt;
+      
+      if ( old_accum*accumulator < 1 && genPoint != NULL ) // happend sign change
       {
-         rez = G::shapeIntersection(G::Interval(pt, *ptIt), interval, genPoint);
-         pt = pt + *ptIt;
+         shapeIntersection(line, Interval(pt_delay_accum, pt_accumulator),
+                           genPoint );
       }
-      return rez;
    }
+   
+   if (genPoint->size() != startGenSize)
+      return G::SHAPE_INTERSECTION;
+   else
+      return G::SHAPE_NOT_INTERSECTION;
+}
+
+int G::shapeIntersection ( const Interval& interval,
+                           const Convex_contour& conv_cont,
+                           std::list<G::Point2f>* genPoint )
+{
+   Reduced_vector perpend = interval.m_vec.get_perpendicular();
+   perpend.set_lenght(1);
+   Reduced_vector contStartPointVector(interval.m_center, conv_cont.m_center);
+   float scalarBorder = perpend * contStartPointVector;
+   
+   float accumulator = scalarBorder;
+   float old_accum = 0;
+   
+   Point2f pt_accumulator = srcContour.m_center;
+   Point2f pt_delay_accum;
+   
+   size_t startGenSize = genPoint->size();
+   for ( constReducedVectorIterator vecIt = srcContour.cbeginIt();
+         vecIt != srcContour.cendIt(); ++vecIt )
+   {
+      old_accum = accumulator;
+      accumulator += intervalDirect * *vecIt;
+      
+      pt_delay_accum = pt_accumulator;
+      pt_accumulator = pt_accumulator + *vecIt;
+      
+      if ( old_accum*accumulator < 1 && genPoint != NULL ) // happend sign change
+      {
+         shapeIntersection(interval, Interval(pt_delay_accum, pt_accumulator),
+                           genPoint );
+      }
+   }
+   
+   if (genPoint->size() != startGenSize)
+      return G::SHAPE_INTERSECTION;
+   else
+      return G::SHAPE_NOT_INTERSECTION;
 }
 
 int G::shapeIntersection(const G::Contour&,
