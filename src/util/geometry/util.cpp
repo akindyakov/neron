@@ -140,16 +140,6 @@ Geometry::Point<T> Geometry::operator + (Point<T>& vec1, Point<T>& vec2)
    return Geometry::Point<T> (vec1.x+vec2.x, vec1.y+vec2.y);
 }
 
-/*
-Geometry::Point2f::Point2f(const float _x, const float _y)
-                    : x(_x), y(_y) {}
-
-Geometry::Point2f::Point2f()
-                    : x(0), y(0) {}
-
-Geometry::Point2f::Point2f(const Geometry::Point2f& pt)
-                    : x(pt.x), y(pt.y) {}
-*/
 Geometry::Reduced_vector::Reduced_vector()
 {
     x = y = 0;

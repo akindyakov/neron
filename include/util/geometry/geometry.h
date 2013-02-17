@@ -9,6 +9,7 @@
 //=============================================================================
 #include <vector>
 #include <list>
+#include <iterator>
 //=============================================================================
 //=============================================================================
 
@@ -188,9 +189,6 @@ namespace Geometry
       
       virtual ~Contour(){};
       
-      // const Point2f& getCenter();
-      // const std::list<Reduced_vector>& getVectorList();
-      
       void push_back(float x, float y);
       void push_back(const Reduced_vector& pt);
       void turn(float angle);
@@ -203,14 +201,14 @@ namespace Geometry
       void getY(float x, std::vector<float>* y)const;
       
       void toSegments();
-      int  isSegmented();
+      void oldToSegments();
+      bool isSegmented();
       
       // --- data ---
       std::list<Reduced_vector> m_vec;
       std::list<Convex_contour> m_contours;
-      int m_status;
    };
-
+   
    Reduced_vector getBisector( const Reduced_vector& vect1,
                                const Reduced_vector& vect2 );
    
@@ -221,34 +219,34 @@ namespace Geometry
    
    void getBorder( const std::list<Point2f>& points,
                    Point2f* minPt, Point2f* maxPt );
-
+   
    void getVerticalBorderPoint(const std::list<Point2f>&points,
                                Point2f* pt_min, Point2f* pt_max);
-
+   
    void getHorizontalBorderPoint(const std::list<Point2f>& points,
                                  Point2f* pt_min, Point2f* pt_max);
-
+   
    void contourToConvexContour(Contour* cont);
-
+   
    Contour pointsToConvex( const std::list<Point2f>& points,
                            const float sizeStep );
-
+   
    float distance(const Point2f& pt1, const  Point2f& pt2);
-
+   
    std::list<Point2f> getRandomPointCloud(int n,
                                           Point2f lowBorder,
                                           Point2f upBorder);
-
+   
    const int SHAPE_NOT_INTERSECTION = 0;
    const int SHAPE_INTERSECTION     = 1;
    const int SHAPE_MATCH            = 2;
    //const int SHAPE_LINE_PARALLEL    = 3;
-
+   
    // --- with dynamic cast ---
    int shapeIntersection(const I_Shape&,
                          const I_Shape&,
                          std::list<Point2f>* genPoinut=NULL);
-
+   
    int shapeIntersection(const Circle&,
                          const I_Shape&,
                          std::list<Point2f>* genPoint=NULL);
@@ -348,7 +346,14 @@ namespace Geometry
    void uniqPoint( std::list< Point2f >* cloud );
    
    void turnShape( I_Shape* shape, float angle, Point2f basePt);
-   //void turnShape( I_Shape* src, I_Shape* dst, Point2f basePt);
+   
+   
+   std::list< Reduced_vector >::iterator findFirstConvexContour (
+                           Contour* srcContour,
+                           std::list< Reduced_vector >::iterator startIt,
+                           Point2f startPt,
+                           Convex_contour* outContour,
+                           Point2f* finishPt );
    
    struct Geometry_error
    {

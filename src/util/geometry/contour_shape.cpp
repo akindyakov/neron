@@ -6,6 +6,7 @@
 
 //==============================================================================
 #include <iostream>
+#include <list>
 #include <iterator>
 #include <cmath>
 //==============================================================================
@@ -87,9 +88,7 @@ void G::Contour::getX(float y, std::vector<float>* x)const
 void G::Contour::getY(float x, std::vector<float>* y)const
 {}
 
-
-// TODO: it needed to remake it with list specific functions !
-void G::Contour::toSegments()
+void G::Contour::oldToSegments()
 {
    std::list<G::Reduced_vector>::const_iterator secondIt = m_vec.begin();
    std::list<G::Reduced_vector>::const_iterator firstIt = secondIt++;
@@ -132,6 +131,55 @@ void G::Contour::toSegments()
       runingStartPt = runingStartPt + *secondIt;
    }
    m_contours.push_back(curr_cont); // write last convex_contour
+}
+
+void G::Contour::toSegments()
+{
+   using std::list;
+   
+   list< Reduced_vector >::iterator firstIt = this->m_vec.begin();
+   Point2f startPt(this->m_center);
+   
+   while ( firstIt != this->m_vec.end() )
+   {
+      Convex_contour added(startPt);
+      Point2f finishPt;
+      firstIt = findFirstConvexContour(this, firstIt, startPt, &added, &startPt);
+   }
+}
+
+std::list< G::Reduced_vector >::iterator G::findFirstConvexContour (
+                        Contour* srcContour,
+                        std::list< Reduced_vector >::iterator startIt,
+                        Point2f startPt,
+                        Convex_contour* outVector,
+                        Point2f* finishPt )
+{
+   using std::list;
+   *finishPt = startPt;
+   
+   list< Reduced_vector>::iterator secondIt = startIt;
+   list< Reduced_vector >::iterator firstIt = secondIt++;
+   
+   float signVectorProud = firstIt->vector_proud(*secondIt);
+   float nowVectorProud;
+   
+   Point2f runingStartPt(startPt);
+   *finishPt = *finishPt + *( firstIt++ );
+   *finishPt = *finishPt + *( secondIt++ );
+   
+   for ( ; secondIt != srcContour->m_vec.end(); ++firstIt, ++secondIt )
+   {
+      nowVectorProud = firstIt->vector_proud(*secondIt);
+      if ( nowVectorProud * nowVectorProud < 0)
+         break;
+      
+      *finishPt = *finishPt + *secondIt;
+   }
+   
+   outVector->m_vec.splice(outVector->m_vec.begin(), srcContour->m_vec,
+                           startIt, secondIt );
+   return secondIt;
 }
 
 bool G::Contour::isSegmented()
