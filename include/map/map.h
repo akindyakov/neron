@@ -29,22 +29,16 @@ namespace Map
    public:
       
    private:
-      boost::shared_ptr<I_MapCell> m_out;
-      boost::shared_ptr<Geometry::I_Shape> m_firstDoorPost;
-      boost::shared_ptr<Geometry::I_Shape> m_secondDoorPost;
+      boost::shared_ptr<I_MapCell> m_firstOut;
+      boost::shared_ptr<I_MapCell> m_secondOut;
+      Geometry::Reduced_vector m_halfWideVector;
+      Geometry::Point2f m_gateCenter;
    };
-   
-   class Cell_portal
-   {
-   public:
-   private:
-      std::list< Portal_gate > m_gates;
-   };  
    
    class VectorMapCell: public I_MapCell
    {
    public:
-      VectorMapCell(int lenght, int width);
+      //VectorMapCell(int lenght, int width);
       
       void addPortal();
       

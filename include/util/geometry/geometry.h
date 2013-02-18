@@ -20,7 +20,7 @@ namespace Geometry
       Point();
       Point(T _x, T _y);
       Point(const Point& pt);
-
+      ostream operator << ();
       T x;
       T y;
    };
