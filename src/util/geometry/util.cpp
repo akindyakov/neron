@@ -156,6 +156,11 @@ template <class T>
 Geometry::Point<T>::Point(const Point<T>& pt)
    : x(pt.x), y(pt.y)
 {}
+template <class T>
+std::ostream& Geometry::Point<T>::put (std::ostream& s)const
+{
+   return s << "( " << x << " ; " << y << " )";
+}
 
 template <class T>
 Geometry::Point<T> Geometry::operator + (Point<T>& vec1, Point<T>& vec2)

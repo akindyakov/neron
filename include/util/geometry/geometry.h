@@ -7,6 +7,7 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 //=============================================================================
+#include <ostream>
 #include <vector>
 #include <list>
 #include <iterator>
@@ -20,14 +21,22 @@ namespace Geometry
       Point();
       Point(T _x, T _y);
       Point(const Point& pt);
-      ostream operator << ();
+      
+      virtual std::ostream& put (std::ostream&)const;
+      
       T x;
       T y;
    };
-
+   
+   template<class T>
+   std::ostream& operator << ( std::ostream& s, const Point<T>& pt)
+   {
+      return pt.put(s);
+   }
+   
    typedef Point<int> Point2i;
    typedef Point<float> Point2f;
-
+   
    class Reduced_vector: public Point2f
    {
    public:
@@ -44,7 +53,6 @@ namespace Geometry
       friend Reduced_vector operator * (const Reduced_vector&, float);
       friend Reduced_vector operator * (float, const Reduced_vector&);
       friend Reduced_vector operator + (const Reduced_vector& vec1, const Reduced_vector& vec2);
-      //friend Reduced_vector operator - (const Reduced_vector& vec1, const Reduced_vector& vec2);
       friend Point2f        operator + (const Point2f& pt, const Reduced_vector& vec);
       Reduced_vector operator - ()const;
    };

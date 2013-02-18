@@ -20,8 +20,6 @@ namespace Map
    public:
       virtual void addPortal();
    private:
-      int m_width;
-      int m_lenght;
    };
    
    class Portal_gate
@@ -43,8 +41,6 @@ namespace Map
       void addPortal();
       
    private:
-      std::vector<Map::Cell_portal> m_input_output;
-      std::vector<Geometry::I_Shape*> m_obstacles;
    };
    
    class RasterMapCell: public I_MapCell
@@ -55,9 +51,6 @@ namespace Map
       void addPortal();
    private:
       std::vector< std::vector< int > > m_map;
-      std::vector<Map::Cell_portal> m_input_output;
-      int m_width;
-      int m_lenght;
    };
 
 
