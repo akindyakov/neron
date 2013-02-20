@@ -21,14 +21,21 @@ namespace Map
       virtual void addPortal();
    private:
    };
+  
+   class I_Portal
+   {
+   public:
+      boost::shared_ptr<I_MapCell> getOut();
+      
+   private:
+      boost::shared_ptr<I_MapCell> m_outCell;
+   };
    
-   class Portal_gate
+   class vectorGate: public I_Portal
    {
    public:
       
    private:
-      boost::shared_ptr<I_MapCell> m_firstOut;
-      boost::shared_ptr<I_MapCell> m_secondOut;
       Geometry::Reduced_vector m_halfWideVector;
       Geometry::Point2f m_gateCenter;
    };
@@ -36,11 +43,11 @@ namespace Map
    class VectorMapCell: public I_MapCell
    {
    public:
-      //VectorMapCell(int lenght, int width);
       
       void addPortal();
       
    private:
+      std::list< boost::shared_ptr < I_Portal > > m_portals;
    };
    
    class RasterMapCell: public I_MapCell
@@ -50,7 +57,7 @@ namespace Map
       
       void addPortal();
    private:
-      std::vector< std::vector< int > > m_map;
+      cv::Map m_location;
    };
 
 
