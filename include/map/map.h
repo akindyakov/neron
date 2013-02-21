@@ -53,12 +53,20 @@ namespace Map
    class MapPath
    {
    public:
+      int getWeight();
+      int setWeight();
+      
+      int getFrequency();
+      int incrementFrequency();
+      
    private:
       int m_weight;
       int m_usingFrequensy;
-      Geometry::Contour m_;
+      Geometry::Contour m_path;
+      Geometry::Reduced_vector m_width;
    };
-   class FindedPathHash
+   
+   class PathHash
    {
    public:
       std::vector< MapPath > getPath(int,int);
@@ -69,26 +77,21 @@ namespace Map
    {
    public:
       
-      void addPortal();
-      
    private:
       std::list< boost::shared_ptr < Portal > > m_portals;
       std::list< Geometry::Contour > m_borders;
-      std::multimap< , >
+      PathHash m_paths;
    };
    
    class RasterMapCell: public I_MapCell
    {
    public:
       RasterMapCell(int lenght, int width);
-      
-      void addPortal();
    private:
       std::list< boost::shared_ptr < Portal > > m_portals;
       cv::Map m_location;
    };
-
-
+   
    class MapContainer: public I_MapCell
    {
    public:
