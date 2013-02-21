@@ -22,22 +22,47 @@ namespace Map
    private:
    };
   
-   class I_Portal
+   class I_Gate
    {
    public:
       boost::shared_ptr<I_MapCell> getOut();
-      
+      int getKey();
    private:
+      int m_outMapKey;
       boost::shared_ptr<I_MapCell> m_outCell;
    };
    
-   class vectorGate: public I_Portal
+   class vectorGate: public I_Gate
    {
    public:
       
    private:
       Geometry::Reduced_vector m_halfWideVector;
       Geometry::Point2f m_gateCenter;
+   };
+   
+   class Portal
+   {
+   public:
+      
+   private:
+      boost::shared_ptr< I_Gate > m_firstGate;
+      boost::shared_ptr< I_Gate > m_secondGate;
+   };
+   
+   class MapPath
+   {
+   public:
+   private:
+      int m_weight;
+      int m_usingFrequensy;
+      Geometry::Contour m_;
+   };
+   class FindedPathHash
+   {
+   public:
+      std::vector< MapPath > getPath(int,int);
+   private:
    };
    
    class VectorMapCell: public I_MapCell
@@ -47,7 +72,9 @@ namespace Map
       void addPortal();
       
    private:
-      std::list< boost::shared_ptr < I_Portal > > m_portals;
+      std::list< boost::shared_ptr < Portal > > m_portals;
+      std::list< Geometry::Contour > m_borders;
+      std::multimap< , >
    };
    
    class RasterMapCell: public I_MapCell
@@ -57,6 +84,7 @@ namespace Map
       
       void addPortal();
    private:
+      std::list< boost::shared_ptr < Portal > > m_portals;
       cv::Map m_location;
    };
 
