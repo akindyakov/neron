@@ -159,3 +159,10 @@ void createParalelVectorShadow( const G::Reduced_vector& src_v,
    //std::cout << " x: " << start_v.x - result_finite_vector->x + shadow_v->x << "\n";
    //std::cout << " y: " << start_v.y - result_finite_vector->y + shadow_v->y << "\n";
 }
+
+void G::createShadow  ( const Contour& src_contour, 
+                        std::vector< Contour >* out_contour,
+                        const std::vector< Reduced_vector >& start_points )
+{
+   
+}

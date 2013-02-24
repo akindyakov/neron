@@ -60,6 +60,9 @@ namespace Geometry
    typedef std::list< Reduced_vector >::iterator reducedVectorIterator;
    typedef std::list< Reduced_vector >::const_iterator   constReducedVectorIterator;
    
+   typedef std::list< Convex_contour >::iterator convexContourIterator;
+   typedef std::list< Convex_contour >::const_iterator constConvexContourIterator;
+   
    class I_Shape
    {
    public:
@@ -220,6 +223,11 @@ namespace Geometry
       void oldToSegments();
       bool isSegmented();
       
+      constConvexContourIterator cbeginIt()const;
+      convexContourIterator      beginIt();
+      constConvexContourIterator cendIt()const;
+      convexContourIterator      endIt();
+
       // --- data ---
       std::list<Reduced_vector> m_vec;
       std::list<Convex_contour> m_contours;

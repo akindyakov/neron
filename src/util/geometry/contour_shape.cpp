@@ -187,3 +187,19 @@ bool G::Contour::isSegmented()
    return (m_vec.size() == 0);
 }
 
+G::constConvexContourIterator G::Contour::cbeginIt()const
+{
+   return m_contours.begin();
+}
+G::convexContourIterator G::Contour::beginIt()
+{
+   return m_contours.begin();
+}
+G::constConvexContourIterator G::Contour::cendIt()const
+{
+   return m_contours.end();
+}
+G::convexContourIterator G::Contour::endIt()
+{
+   return m_contours.end();
+}
