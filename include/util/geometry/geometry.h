@@ -60,9 +60,6 @@ namespace Geometry
    typedef std::list< Reduced_vector >::iterator reducedVectorIterator;
    typedef std::list< Reduced_vector >::const_iterator   constReducedVectorIterator;
    
-   typedef std::list< Convex_contour >::iterator convexContourIterator;
-   typedef std::list< Convex_contour >::const_iterator constConvexContourIterator;
-   
    class I_Shape
    {
    public:
@@ -200,6 +197,9 @@ namespace Geometry
       std::list<Reduced_vector> m_vec;
    };
 
+   typedef std::list< Convex_contour >::iterator convexContourIterator;
+   typedef std::list< Convex_contour >::const_iterator constConvexContourIterator;
+   
    class Contour : public I_Shape
    {
    public:
