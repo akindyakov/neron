@@ -17,6 +17,10 @@ namespace Geometry
    void createShadow  ( const Convex_contour& src_contour, 
                         std::vector< Convex_contour >* out_contour,
                         const std::vector< Reduced_vector >& start_points );
+   
+   void createShadow  ( const Contour& src_contour, 
+                        std::vector< Contour >* out_contour,
+                        const std::vector< Reduced_vector >& start_points );
 }
 
 #endif //GEOMETRY_TRANSFORMATION_H

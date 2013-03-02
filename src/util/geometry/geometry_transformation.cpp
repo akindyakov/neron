@@ -164,5 +164,14 @@ void G::createShadow  ( const Contour& src_contour,
                         std::vector< Contour >* out_contour,
                         const std::vector< Reduced_vector >& start_points )
 {
+  // if ( src_contour.isSegmented() )
+  //    src_contour.toSegments();
    
+   for ( constConvexContourIterator contIt = src_contour.cbeginIt();
+         contIt != src_contour.cendIt(); ++contIt )
+   {
+ //     createShadow( const Convex_contour& src_contour, 
+ //                std::vector< Convex_contour >* out_contour,
+ //                start_points );
+   }
 }
