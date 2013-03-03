@@ -18,6 +18,7 @@ namespace Map
    class MapPath
    {
    public:
+      MapPath();
       int getWeight();
       int setWeight();
       
@@ -34,11 +35,12 @@ namespace Map
    class PathHash
    {
    public:
+      PathHash();
       std::vector< MapPath > getPath(int,int);
    private:
    };
    
-   //transformPathFor dual separate wheels
+   //transformPathForDifferentialDrive ( const MapPath& srcPath );
 }
 
 #endif //MAP_PATH_UTIL_H
