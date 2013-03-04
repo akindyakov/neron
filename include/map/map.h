@@ -73,9 +73,10 @@ namespace Map
    class MapContainer: public I_MapCell
    {
    public:
-      
+      MapContainer(std::vector<double> _test) :m_test(_test) {};
    private:
-      std::vector< boost::shared_ptr<I_MapCell> > m_parts;
+      //std::vector< boost::shared_ptr<I_MapCell> > m_parts;
+      std::vector<double> m_test;
    };
    
    void splitRawVectorMap( const VectorMapCell& srcRawMap);

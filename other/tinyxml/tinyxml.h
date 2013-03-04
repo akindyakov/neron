@@ -43,15 +43,10 @@ distribution.
 #define DEBUG
 #endif
 
-#ifdef TIXML_USE_STL
-	#include <string>
- 	#include <iostream>
-	#include <sstream>
-	#define TIXML_STRING		std::string
-#else
-	#include "tinystr.h"
-	#define TIXML_STRING		TiXmlString
-#endif
+#include <string>
+#include <iostream>
+#include <sstream>
+#define TIXML_STRING		std::string
 
 // Deprecated library function hell. Compilers want to use the
 // new safe versions. This probably doesn't fully address the problem,
