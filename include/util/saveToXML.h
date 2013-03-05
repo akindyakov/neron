@@ -12,25 +12,27 @@
 #include <string>
 #include <vector>
 #include <list>
-#include "other/inyxml/tinyxml.h"
+#include "other/tinyxml/tinyxml.h"
 //=============================================================================
+#include "include/util/geometry/geometry.h"
+#include "include/map/map.h"
 //=============================================================================
 
-namespace NeronXml
+namespace NeronXML
 {
-   TiXmlElement* saveToXmlElement(const Reduced_vector&);
-   TiXmlElement* saveToXmlElement(const Point2f&);
-   TiXmlElement* saveToXmlElement(const Reduced_vector&);
-   TiXmlElement* saveToXmlElement(const Circle&);
-   TiXmlElement* saveToXmlElement(const Interval&);
-   TiXmlElement* saveToXmlElement(const Line_2d&);
-   TiXmlElement* saveToXmlElement(const Convex_contour&);
-   TiXmlElement* saveToXmlElement(const Contour&);
+   TiXmlElement* saveToXmlElement(const Geometry::Reduced_vector&);
+   TiXmlElement* saveToXmlElement(const Geometry::Point2f&);
+   TiXmlElement* saveToXmlElement(const Geometry::Reduced_vector&);
+   TiXmlElement* saveToXmlElement(const Geometry::Circle&);
+   TiXmlElement* saveToXmlElement(const Geometry::Interval&);
+   TiXmlElement* saveToXmlElement(const Geometry::Line_2d&);
+   TiXmlElement* saveToXmlElement(const Geometry::Convex_contour&);
+   TiXmlElement* saveToXmlElement(const Geometry::Contour&);
 
-   TiXmlElement* saveToXmlElement(const vectorGate&);
-   TiXmlElement* saveToXmlElement(const Portal&);
-   TiXmlElement* saveToXmlElement(const VectorMapCell&);
-   TiXmlElement* saveToXmlElement(const MapContainer&);
+   TiXmlElement* saveToXmlElement(const Map::vectorGate&);
+   TiXmlElement* saveToXmlElement(const Map::Portal&);
+   TiXmlElement* saveToXmlElement(const Map::VectorMapCell&);
+   TiXmlElement* saveToXmlElement(const Map::MapContainer&);
 }
 
-#endif SAVE_TO_TINYXML_H
+#endif //SAVE_TO_TINYXML_H

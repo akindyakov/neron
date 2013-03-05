@@ -43,6 +43,7 @@ set(OTHER_LIB ${CMAKE_SOURCE_DIR}/other)
 include_directories(${HEADERS})
 
 aux_source_directory( ${SOURCE_ROOT}/map SOURCES )
+aux_source_directory( ${SOURCE_ROOT}/util SOURCES )
 aux_source_directory( ${SOURCE_ROOT}/util/geometry SOURCES )
 aux_source_directory( ${SOURCE_ROOT}/util/math SOURCES )
 
