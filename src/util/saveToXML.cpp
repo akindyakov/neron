@@ -36,22 +36,40 @@ TiXmlElement* NeronXML::saveToXmlElement(const Geometry::Circle& circ)
 
 TiXmlElement* NeronXML::saveToXmlElement(const Geometry::Interval& interval)
 {
-   return new TiXmlElement("Interval");
+   TiXmlElement* saveInterval = new TiXmlElement("Interval");
+   saveInterval->LinkEndChild( saveToXmlElement(interval.m_center) );
+   saveInterval->LinkEndChild( saveToXmlElement(interval.m_vector) );
+   return saveInterval;
 }
 
 TiXmlElement* NeronXML::saveToXmlElement(const Geometry::Line_2d& line)
 {
-   return new TiXmlElement("Line_2d");
+   TiXmlElement* saveLine = new TiXmlElement("Line_2d");
+   saveLine->LinkEndChild( saveToXmlElement(line.m_center) );
+   saveLine->LinkEndChild( saveToXmlElement(line.m_vector) );
+   return saveLine;
 }
 
 TiXmlElement* NeronXML::saveToXmlElement(const Geometry::Convex_contour& cCont)
 {
-   return new TiXmlElement("Convex_contour");
+   TiXmlElement* sv_cont = new TiXmlElement("Convex_contour");
+   for ( Geometry::constReducedVectorIterator vecIt = cCont.cbeginIt();
+         vecIt != cCont.cendIt(); ++vecIt)
+   {
+      sv_cont->LinkEndChild( saveToXmlElement(*vecIt) );
+   }
+   return sv_cont;
 }
 
 TiXmlElement* NeronXML::saveToXmlElement(const Geometry::Contour& cont)
 {
-   return new TiXmlElement("Contour");
+   TiXmlElement* sv_cont = new TiXmlElement("Contour");
+   for ( Geometry::constConvexContourIterator ccontIt = cont.cbeginIt();
+         ccontIt != cont.cendIt(); ++ccontIt)
+   {
+      sv_cont->LinkEndChild( saveToXmlElement(*ccontIt) );
+   }
+   return sv_cont;
 }
 
 TiXmlElement* NeronXML::saveToXmlElement(const Map::vectorGate& vgate)
