@@ -1,9 +1,11 @@
-project(neron_tiny_xml_lib)
+project( tiny_xml_lib )
 
-set( NERON_TINY_XML_LIB_ROOT ${OTHER_LIB}/tinyxml )
-include_directories(${NERON_TINY_XML_LIB_ROOT})
+set( _LOCAL_TINY_XML_LIB_ROOT ${OTHER_LIB}/tinyxml )
+include_directories(${_LOCAL_TINY_XML_LIB_ROOT})
 
-set( neron_tinyxml_include_dir ${NERON_TINY_XML_LIB_ROOT} )
-aux_source_directory( ${NERON_TINY_XML_LIB_ROOT}  NERON_TINYXML_SRC )
+aux_source_directory( ${_LOCAL_TINY_XML_LIB_ROOT}  _LOCAL_TINYXML_SRC )
 
-add_library( neron_tiny_xml_lib STATIC ${NERON_TINYXML_SRC} )
+add_library( tiny_xml_lib STATIC ${_LOCAL_TINYXML_SRC} )
+
+set( TINY_XML_LIB_HEADERS ${_LOCAL_TINY_XML_LIB_ROOT} PARENT_SCOPE )
+set( TINY_XML_LIB ${tiny_xml_lib} PARENT_SCOPE ) 

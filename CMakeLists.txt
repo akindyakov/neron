@@ -34,13 +34,10 @@ set(OTHER_LIB ${CMAKE_SOURCE_DIR}/other)
 
 #lib included in neron sources
    
-   # tiny xml lib 
-   # www.sourceforge.net/projects/tinyxml
    add_subdirectory( ${OTHER_LIB} )
-   #include( ${OTHER_LIB} )
-   list( APPEND HEADERS ${neron_tinyxml_include_dir} )
-   list( APPEND REQUIRED_LIBRARIES ${neron_tiny_xml_lib} ) 
-   message( STATUS ${neron_tinyxml_include_dir} )
+   message( ${OTHER_LIB_HEADERS} )
+   list( APPEND HEADERS ${OTHER_LIB_HEADERS} )
+   list( APPEND REQUIRED_LIBRARIES ${OTHER_LIB_LIST} ) 
 
 include_directories(${HEADERS})
 
