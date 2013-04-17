@@ -52,7 +52,5 @@ target_link_libraries( Neron ${REQUIRED_LIBRARIES} )
 file( COPY ${CMAKE_SOURCE_DIR}/include DESTINATION ${CMAKE_BINARY_DIR} )
 file( COPY ${CMAKE_SOURCE_DIR}/README DESTINATION ${CMAKE_BINARY_DIR}/README )
 
-#add_subdirectory( tests/util/geometry/turn_test ${EXECUTABLE_OUTPUT_PATH} )
-#add_subdirectory( tests/util/geometry/shadow_test ${EXECUTABLE_OUTPUT_PATH}/shadow )
 add_subdirectory( tests/util/geometry/turn_test )
 add_subdirectory( tests/util/geometry/shadow_test )
